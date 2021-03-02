@@ -7,9 +7,9 @@ import by.epamtc.final_task.entity.UserAuthorizationData;
 
 public class SqlUserDao implements UserDAO {
 
-    static {
+    /*static {
         MYSQLDriverLoader.getInstance();
-    }
+    }*/
 
     @Override
     public User authorization(String login, String password) throws DAOException {
