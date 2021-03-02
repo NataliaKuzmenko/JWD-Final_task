@@ -33,6 +33,12 @@
 
     <input type="submit" value="Log in"/>
 </form>
+        <br />
+        <form action="controller" method="post">
+            <input type="hidden" name="command" value="gotoindexpage" />
+
+            <input type="submit" value="Back" />
+        </form>
     </div>
             <div class="col-sm-4"></div>
 </div>
