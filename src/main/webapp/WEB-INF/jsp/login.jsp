@@ -1,0 +1,42 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css" integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" crossorigin="anonymous">
+
+<body>
+<div class="login">
+    <div class="container-sm">
+        <div class="row">
+            <div class="col-sm-4"></div>
+
+    <div class = "col-sm-4">
+        <br/>
+        ${messageRegistration}
+        ${nullPage}
+
+
+<form name="loginForm" method="POST" action="controller">
+    <input type="hidden" name="command" value="login" />
+
+    Login:<br/>
+    <input type="text" name="login" value=""/>
+    <br/>Password:<br/>
+    <input type="password" name="password" value=""/>
+    <br/>
+    ${errorLoginPassMessage}
+    <br/>
+    ${wrongAction}
+    <br/>
+    ${nullPage}
+
+    <input type="submit" value="Log in"/>
+</form>
+    </div>
+            <div class="col-sm-4"></div>
+</div>
+    </div>
+</div>
+</body>
+</html>
