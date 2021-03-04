@@ -1,22 +1,22 @@
 package by.epamtc.final_task.dao.exception;
 
-public class DAOException extends Exception {
+public class DaoException extends Exception {
 
     private static final long serialVersionUID = -1889104346339773302L;
 
-    public DAOException() {
+    public DaoException() {
         super();
     }
 
-    public DAOException(String message) {
+    public DaoException(String message) {
         super(message);
     }
 
-    public DAOException(Exception e) {
+    public DaoException(Exception e) {
         super(e);
     }
 
-    public DAOException(String message, Exception e) {
+    public DaoException(String message, Exception e) {
         super(message, e);
     }
 

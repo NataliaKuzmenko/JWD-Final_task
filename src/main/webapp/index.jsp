@@ -31,7 +31,7 @@
                 <hr/>
                 <br />
                 <form action="controller" method="post">
-                    <input type="hidden" name="command" value="registration" />
+                    <input type="hidden" name="command" value="gotoregistrationpage" />
 
                     <input type="submit" value="Registration" />
                 </form>

@@ -17,27 +17,20 @@
 ${nullData}
     <br />
 <form action="controller" method="post">
-    <input type="hidden" name="command" value="savenewuser" />
-    Enter login:<br />
-    <input type="text" name="login" value="" /><br />
-
-    Enter password:<br />
-    <input type="password" name="password" value="" /><br />
+    <input type="hidden" name="command" value="registration" />
 
     Enter email:<br />
     <input type="email" name="email" value="" /><br />
 
-    Enter first name:<br />
-    <input type="text" name="firstname" value="" /><br />
+    Enter password:<br />
+    <input type="text" name="password" value="" /><br />
 
-    Enter last name:<br />
-    <input type="text" name="lastname" value="" /><br />
+    Enter repeat password:<br />
+    <input type="text" name="repeat password"value="" /><br />
 
-    Enter role:<br />
-    <input type="text" name="role" value="" /><br />
 
     <br/>
-    ${errorData}
+    ${error}
 
     <input type="submit" value="Create an account" /><br />
 </form>

@@ -1,14 +1,18 @@
 package by.epamtc.final_task.controller;
 
 import by.epamtc.final_task.constant.PageName;
+import by.epamtc.final_task.constant.ParameterName;
 import by.epamtc.final_task.controller.command.Command;
 import by.epamtc.final_task.controller.command.CommandProvider;
+import by.epamtc.final_task.controller.command.exception.CommandException;
 
-import java.io.*;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @WebServlet(urlPatterns = "/controller")
 public class Controller extends HttpServlet {
@@ -28,25 +32,34 @@ public class Controller extends HttpServlet {
     private void processRequest(HttpServletRequest request,
                                 HttpServletResponse response)
             throws ServletException, IOException {
-        String page = null;
-        String name;
-        Command command;
+        try {
+            String page = null;
+            String name;
+            Command command;
 
-        name = request.getParameter("command");
-        command = provider.takeCommand(name);
+            name = request.getParameter("command");
+            command = provider.takeCommand(name);
 
-        page = command.execute(request);
 
-        if (page != null) {
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
+            page = command.execute(request);
 
+
+            if (page != null) {
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
+
+                dispatcher.forward(request, response);
+            } else {
+
+                page = PageName.INDEX_PAGE;
+                request.getSession().setAttribute("nullPage",
+                        " Page not found. Business logic error.");
+                response.sendRedirect(request.getContextPath() + page);
+            }
+        } catch (CommandException e) {
+            //logger
+            request.setAttribute(ParameterName.ERROR, e.getMessage());
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(PageName.ERROR_PAGE);
             dispatcher.forward(request, response);
-        } else {
-
-            page = PageName.INDEX_PAGE;
-            request.getSession().setAttribute("nullPage",
-                    " Page not found. Business logic error.");
-            response.sendRedirect(request.getContextPath() + page);
         }
     }
 }

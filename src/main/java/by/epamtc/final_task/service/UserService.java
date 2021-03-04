@@ -8,6 +8,13 @@ public interface UserService {
 
     User authorization(String login, String passport) throws ServiceException;
 
+    boolean create(String enteredLogin, String enteredPassword) throws ServiceException;
+
+    boolean isLoginAndPasswordValid(String enteredLogin, String enteredPassword) throws
+            ServiceException;
+
+    boolean isLoginExistsForCreationUser(String enteredLogin) throws ServiceException;
+
     void register(UserAuthorizationData user) throws ServiceException;
 
 }

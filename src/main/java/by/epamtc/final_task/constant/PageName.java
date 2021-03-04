@@ -9,6 +9,8 @@ public class PageName {
 
     public static final String REGISTRATION_PAGE = "/WEB-INF/jsp/registration.jsp";
 
+    public static final String ERROR_PAGE = "/WEB-INF/jsp/error.jsp";
+
     private PageName() {
     }
 }

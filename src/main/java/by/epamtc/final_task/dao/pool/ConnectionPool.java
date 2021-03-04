@@ -13,6 +13,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 
 public class ConnectionPool {
+    //ДОПИСАТЬ!!!
 
     public static final Logger LOGGER = LogManager.getLogger();
     private static ConnectionPool instance;
@@ -33,6 +34,17 @@ public class ConnectionPool {
             }
         }
         return instance;
+    }
+    public Connection getConnection() throws PoolException {
+        ProxyConnection connection;
+        try {
+            connection = freeConnections.take();
+            givenAwayConnections.put(connection);
+        } catch (InterruptedException e) {
+            LOGGER.log(Level.ERROR, "Impossible to create Connection", e);
+            throw new PoolException("Can not get the connection", e);
+        }
+        return connection;
     }
     public void releaseConnection(Connection connection) throws PoolException {
         if (connection != null) {

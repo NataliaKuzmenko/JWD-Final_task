@@ -1,12 +1,12 @@
 package by.epamtc.final_task.dao;
 
-import by.epamtc.final_task.dao.impl.SqlUserDao;
+import by.epamtc.final_task.dao.impl.UserDaoImpl;
 
 public final class DAOProvider {
 
     private static final DAOProvider instance = new DAOProvider();
 
-    private final UserDAO userdao = new SqlUserDao();
+   // private final UserDao userdao = new UserDaoImpl();
 
 
     private DAOProvider() {}
@@ -15,9 +15,9 @@ public final class DAOProvider {
         return instance;
     }
 
-    public UserDAO getUserdao() {
+    /*public UserDao getUserdao() {
         return userdao;
-    }
+    }*/
 
 
 }

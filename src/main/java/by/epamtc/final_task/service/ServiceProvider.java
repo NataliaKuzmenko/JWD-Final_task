@@ -8,16 +8,16 @@ public final class ServiceProvider {
 
     private ServiceProvider() {}
 
-    private final UserService userService = new UserServiceImpl();
+  //  private final UserService userService = new UserServiceImpl();
 
 
     public static ServiceProvider getInstance() {
         return instance;
     }
 
-    public UserService getUserService() {
+    /*public UserService getUserService() {
         return userService;
-    }
+    }*/
 
 
 

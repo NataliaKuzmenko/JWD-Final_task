@@ -12,8 +12,8 @@ import java.util.Map;
 
         public CommandProvider() {
             commands.put(CommandName.LOGIN, new Login());
-            commands.put(CommandName.REGISTRATION, new GoToRegistrationPage());
-            commands.put(CommandName.SAVENEWUSER, new SaveNewUser());
+            commands.put(CommandName.GOTOREGISTRATIONPAGE, new GoToRegistrationPage());
+            commands.put(CommandName.REGISTRATION, new RegistrationCommand());
             commands.put(CommandName.GOTOINDEXPAGE, new GoToIndexPage());
             commands.put(CommandName.GOTOWELCOMPAGE, new GoToWelcomPage());
             commands.put(CommandName.LOGOUT, new Logout());
