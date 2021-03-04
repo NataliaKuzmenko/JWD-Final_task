@@ -14,7 +14,7 @@ public class UserValidator {
         return instance;
     }
 
-    public boolean isRightLogin(String enteredLogin) {
+    public boolean isRightEmail(String enteredLogin) {
         return enteredLogin.matches(EMAIL_PATTERN);
     }
 

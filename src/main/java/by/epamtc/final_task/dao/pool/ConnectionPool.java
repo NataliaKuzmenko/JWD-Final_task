@@ -6,14 +6,15 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 
 public class ConnectionPool {
-    //ДОПИСАТЬ!!!
 
     public static final Logger LOGGER = LogManager.getLogger();
     private static ConnectionPool instance;
@@ -21,6 +22,29 @@ public class ConnectionPool {
     private static AtomicBoolean instanceWasCreated = new AtomicBoolean();
     private BlockingQueue<ProxyConnection> freeConnections;
     private BlockingQueue<ProxyConnection> givenAwayConnections;
+    private static final int DEFAULT_POOL_SIZE = 32;
+
+
+    private ConnectionPool() {
+        freeConnections = init();
+        givenAwayConnections = new LinkedBlockingDeque<>(DEFAULT_POOL_SIZE);
+    }
+
+    private BlockingQueue<ProxyConnection> init() {
+        freeConnections = new LinkedBlockingDeque<>(DEFAULT_POOL_SIZE);
+        Connection connection;
+        try {
+            for (int i = 0; i < DEFAULT_POOL_SIZE; i++) {
+                connection = ConnectionCreator.getInstance().createConnection();
+                freeConnections.offer(new ProxyConnection(connection));
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.FATAL, "ConnectionPool was not initialized", e);
+            throw new RuntimeException("ConnectionPool was not initialized", e);
+        }
+        return freeConnections;
+    }
+
     public static ConnectionPool getInstance() {
         if (!instanceWasCreated.get()) {
             lock.lock();
@@ -35,6 +59,7 @@ public class ConnectionPool {
         }
         return instance;
     }
+
     public Connection getConnection() throws PoolException {
         ProxyConnection connection;
         try {
@@ -46,6 +71,7 @@ public class ConnectionPool {
         }
         return connection;
     }
+
     public void releaseConnection(Connection connection) throws PoolException {
         if (connection != null) {
             if (connection instanceof ProxyConnection && givenAwayConnections.remove(connection)) {
@@ -57,5 +83,20 @@ public class ConnectionPool {
                 }
             }
         }
+    }
+
+    public void destroyPool() throws PoolException {
+        try {
+            for (int i = 0; i < DEFAULT_POOL_SIZE; i++) {
+                if (!freeConnections.isEmpty()) {
+                    ProxyConnection connection = freeConnections.take();
+                    connection.trueClose();
+                }
+            }
+        } catch (InterruptedException e) {
+            LOGGER.log(Level.ERROR, "Impossible to destroy pool", e);
+            throw new PoolException("Impossible to destroy pool", e);
+        }
+        ConnectionCreator.getInstance().deregisterDrivers();
     }
 }

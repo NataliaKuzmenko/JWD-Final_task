@@ -29,7 +29,7 @@ public class RegistrationCommand implements Command {
             page = PageName.REGISTRATION_PAGE;
             return page;
         }
-        if (!validationUser.isRightLogin(email) || !validationUser.isRightPassword(password)) {
+        if (!validationUser.isRightEmail(email) || !validationUser.isRightPassword(password)) {
             request.setAttribute(ParameterName.INCORRECT_ERROR_SYMBOLS, true);
             page = PageName.REGISTRATION_PAGE;
             return page;
