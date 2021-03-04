@@ -9,4 +9,6 @@ public class ParameterName {
     public static final String REGISTRATION_ERROR = "registrationError";
     public static final String REPEAT_PASSWORD = "repeat password";
 
+    private ParameterName() {
+    }
 }
