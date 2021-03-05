@@ -24,24 +24,28 @@ public class RegistrationCommand implements Command {
         String email = request.getParameter(ParameterName.EMAIL);
         String password = request.getParameter(ParameterName.PASSWORD);
         String repeatPassword = request.getParameter(ParameterName.REPEAT_PASSWORD);
-        if (!password.equals(repeatPassword)) {
-            request.setAttribute(ParameterName.INCORRECT_ERROR_PASSWORDS, true);
-            page = PageName.REGISTRATION_PAGE;
-            return page;
-        }
-        if (!validationUser.isRightEmail(email) || !validationUser.isRightPassword(password)) {
-            request.setAttribute(ParameterName.INCORRECT_ERROR_SYMBOLS, true);
-            page = PageName.REGISTRATION_PAGE;
-            return page;
-        }
-        try {
 
+        if (!password.equals(repeatPassword)) {
+            request.setAttribute(ParameterName.INCORRECT_ERROR_PASSWORDS, "incorrect repeat password");
+            page = PageName.REGISTRATION_PAGE;
+            return page;
+        }
+
+        if (!validationUser.isRightEmail(email) || !validationUser.isRightPassword(password)) {
+            System.out.println(3.1);
+            request.setAttribute(ParameterName.INCORRECT_ERROR_SYMBOLS, "check email or password");
+            page = PageName.REGISTRATION_PAGE;
+            return page;
+        }
+
+        try {
             if (userService.create(email, password)) {
                 page = PageName.LOGIN_PAGE;
 
             } else {
-                request.setAttribute(ParameterName.REGISTRATION_ERROR, true);
+                request.setAttribute(ParameterName.REGISTRATION_ERROR, "registration error");
                 page = PageName.REGISTRATION_PAGE;
+
             }
             return page;
         } catch (ServiceException e) {

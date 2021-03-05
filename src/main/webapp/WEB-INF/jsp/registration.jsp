@@ -15,6 +15,10 @@
             <div class="col-sm-4"></div>
             <div class = "col-sm-4">
 ${nullData}
+                ${registrationError}
+    ${registrationErrorPasswords}
+    ${registrationErrorSymbols}
+    ${registrationError}
     <br />
 <form action="controller" method="post">
     <input type="hidden" name="command" value="registration" />

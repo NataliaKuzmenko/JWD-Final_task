@@ -1,9 +1,11 @@
 package by.epamtc.final_task.service.validation;
 
 public class UserValidator {
+
     private static UserValidator instance = new UserValidator();
 
-    private static final String EMAIL_PATTERN = "\\w{3,15}@[A-Za-z]{3,15}\\.[A-Za-z]{1,4}";
+    private static final String EMAIL_PATTERN = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w]{2,4}$";
+
     private static final String PASSWORD_PATTERN = "\\w{3,15}";
 
 

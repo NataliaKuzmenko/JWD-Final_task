@@ -33,10 +33,14 @@ public class ConnectionPool {
     private BlockingQueue<ProxyConnection> init() {
         freeConnections = new LinkedBlockingDeque<>(DEFAULT_POOL_SIZE);
         Connection connection;
+
         try {
             for (int i = 0; i < DEFAULT_POOL_SIZE; i++) {
+
                 connection = ConnectionCreator.getInstance().createConnection();
+                
                 freeConnections.offer(new ProxyConnection(connection));
+
             }
         } catch (SQLException e) {
             LOGGER.log(Level.FATAL, "ConnectionPool was not initialized", e);
