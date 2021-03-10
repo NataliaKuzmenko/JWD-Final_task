@@ -31,13 +31,13 @@ public class Login implements Command {
 
                 User user = userService.findUserWithTheAllInfoByLogin(email);
 
-               // request.getSession().setAttribute(ParameterName.ROLE, user.getRole().name());
+                // request.getSession().setAttribute(ParameterName.ROLE, user.getRole().name());
                 //request.getSession().setAttribute(ParameterName.EMAIL, user.getEmail());
                 request.setAttribute(ParameterName.USER_ID, user.getUserId());
                 request.setAttribute(ParameterName.EMAIL, user.getEmail());
                 request.setAttribute(ParameterName.FIRST_NAME, user.getFirstName());
-              request.setAttribute(ParameterName.LAST_NAME, user.getLastName());
-              request.setAttribute(ParameterName.PHOTO_PATH, user.getPhotoPath());
+                request.setAttribute(ParameterName.LAST_NAME, user.getLastName());
+                request.setAttribute(ParameterName.PHOTO_PATH, user.getPhotoPath());
                 page = PageName.PROFILE_PAGE;
             } else {
                 request.setAttribute(ParameterName.INCORRECT_LOGIN_AND_PASSWORD, "Incorrect login or password.");

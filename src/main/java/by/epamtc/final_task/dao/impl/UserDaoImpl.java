@@ -8,8 +8,10 @@ import by.epamtc.final_task.dao.pool.exception.PoolException;
 import by.epamtc.final_task.entity.user.User;
 import by.epamtc.final_task.entity.user.UserRole;
 
-import javax.print.attribute.standard.PresentationDirection;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class UserDaoImpl implements UserDao {
 
@@ -59,12 +61,10 @@ public class UserDaoImpl implements UserDao {
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     userEmail = resultSet.getString(ColumnName.EMAIL);
-
                     userPassword = resultSet.getString(ColumnName.PASSWORD);
                 }
                 if (userEmail != null && userPassword != null) {
                     if (userEmail.equals(email) && userPassword.equals(password)) {
-                        System.out.println(458);
                         result = true;
                     }
                 }
@@ -107,28 +107,27 @@ public class UserDaoImpl implements UserDao {
 
             statement.setString(1, email);
             resultSet = statement.executeQuery();
-                while (resultSet.next()) {
-                    user = new User();
-                    System.out.println(11);
+            while (resultSet.next()) {
+                user = new User();
 
-                    user.setUserId(resultSet.getInt(ColumnName.USER_ID));
-                    user.setEmail(resultSet.getString(ColumnName.EMAIL));
-                    user.setFirstName(resultSet.getString(ColumnName.FIRST_NAME));
-                    user.setLastName(resultSet.getString(ColumnName.LAST_NAME));
-                    user.setPhotoPath(resultSet.getString(ColumnName.PHOTO_PATH));
-                    user.setRole(UserRole.valueOf(resultSet.getString(ColumnName.ROLE_ID)));
-                }
-    } catch (SQLException | PoolException e) {
-            throw new DaoException("User not found", e);
-        }finally {
-        try {
-            if (resultSet != null) {
-                resultSet.close();
+                user.setUserId(resultSet.getInt(ColumnName.USER_ID));
+                user.setEmail(resultSet.getString(ColumnName.EMAIL));
+                user.setFirstName(resultSet.getString(ColumnName.FIRST_NAME));
+                user.setLastName(resultSet.getString(ColumnName.LAST_NAME));
+                user.setPhotoPath(resultSet.getString(ColumnName.PHOTO_PATH));
+                user.setRole(UserRole.valueOf(resultSet.getString(ColumnName.ROLE_ID)));
             }
-        } catch(SQLException e){
+        } catch (SQLException | PoolException e) {
             throw new DaoException("User not found", e);
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+            } catch (SQLException e) {
+                throw new DaoException("User not found", e);
+            }
+            return user;
+        }
     }
-        return user;
-    }
-}
 }
