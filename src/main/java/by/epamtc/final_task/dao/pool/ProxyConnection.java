@@ -11,11 +11,13 @@ import java.util.Properties;
 import java.util.concurrent.Executor;
 
 public class ProxyConnection implements Connection {
-    public static final Logger LOGGER = LogManager.getLogger();
+
     private Connection connection;
 
-    ProxyConnection(Connection connection) {
+    public static final Logger LOGGER = LogManager.getLogger();
 
+    ProxyConnection(Connection connection) {
+        this.connection = connection;
     }
 
     @Override
@@ -59,7 +61,7 @@ public class ProxyConnection implements Connection {
     }
 
     @Override
-    public void close() throws SQLException {
+    public void close() {
         try {
             ConnectionPool.getInstance().releaseConnection(this);
         } catch (PoolException e) {

@@ -27,38 +27,30 @@ class ConnectionCreator {
     static {
         try (InputStream inputStream =
                      ConnectionCreator.class.getClassLoader().getResourceAsStream(PROPERTIES_FILE)) {
-
             properties.load(inputStream);
-
             String driverName = (String) properties.get(DRIVER_NAME);
-
             Class.forName(driverName);
-
         } catch (IOException | ClassNotFoundException e) {
             LOGGER.log(Level.FATAL, "ConnectionCreator was not initialized", e);
             throw new ExceptionInInitializerError("ConnectionCreator was not initialized");
         }
         DATABASE_URL = (String) properties.get(URL);
-
     }
 
     private ConnectionCreator() {
     }
 
     static ConnectionCreator getInstance() {
-
         if (instance == null) {
             instance = new ConnectionCreator();
         }
         return instance;
     }
 
+
     Connection createConnection() throws SQLException {
-
         return DriverManager.getConnection(DATABASE_URL, properties);
-
     }
-
 
     void deregisterDrivers() throws PoolException {
         Enumeration<Driver> drivers = DriverManager.getDrivers();

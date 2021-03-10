@@ -13,9 +13,7 @@ public class Logout implements Command {
 
     public String execute(HttpServletRequest request) {
         String page = PageName.INDEX_PAGE;
-
         request.getSession().invalidate();
         return page;
     }
-
 }

@@ -21,7 +21,7 @@
     <input type="hidden" name="command" value="login" />
 
     Login:<br/>
-    <input type="text" name="login" value=""/>
+    <input type="text" name="email" value=""/>
     <br/>Password:<br/>
     <input type="password" name="password" value=""/>
     <br/>

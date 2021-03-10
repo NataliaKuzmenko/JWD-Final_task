@@ -1,31 +1,51 @@
 package by.epamtc.final_task.controller.command.impl;
 
-import by.epamtc.final_task.LoginLogic;
 import by.epamtc.final_task.constant.PageName;
+import by.epamtc.final_task.constant.ParameterName;
 import by.epamtc.final_task.controller.command.Command;
+import by.epamtc.final_task.controller.command.exception.CommandException;
+import by.epamtc.final_task.entity.user.User;
+import by.epamtc.final_task.service.UserService;
+import by.epamtc.final_task.service.exception.ServiceException;
+import by.epamtc.final_task.service.impl.UserServiceImpl;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
 public class Login implements Command {
 
-    private static final String PARAM_NAME_LOGIN = "login";
-    private static final String PARAM_NAME_PASSWORD = "password";
+    public static final Logger LOGGER = LogManager.getLogger();
+    private UserService userService = UserServiceImpl.getInstance();
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public String execute(HttpServletRequest request) throws CommandException {
         String page = null;
 
-        String login = request.getParameter(PARAM_NAME_LOGIN);
-        String pass = request.getParameter(PARAM_NAME_PASSWORD);
+        String email = request.getParameter(ParameterName.EMAIL);
+        String password = request.getParameter(ParameterName.PASSWORD);
 
-        if (LoginLogic.checkLogin(login, pass)) {
-            request.setAttribute("user", login);
+        try {
+            if (userService.isLoginAndPasswordValid(email, password)) {
 
-            page = PageName.WELCOM_PAGE;
-        } else {
-            request.setAttribute("errorLoginPassMessage",
-                    "Incorrect login or password.");
-            page = PageName.LOGIN_PAGE;
+                User user = userService.findUserWithTheAllInfoByLogin(email);
+
+               // request.getSession().setAttribute(ParameterName.ROLE, user.getRole().name());
+                //request.getSession().setAttribute(ParameterName.EMAIL, user.getEmail());
+                request.setAttribute(ParameterName.USER_ID, user.getUserId());
+                request.setAttribute(ParameterName.EMAIL, user.getEmail());
+                request.setAttribute(ParameterName.FIRST_NAME, user.getFirstName());
+              request.setAttribute(ParameterName.LAST_NAME, user.getLastName());
+              request.setAttribute(ParameterName.PHOTO_PATH, user.getPhotoPath());
+                page = PageName.PROFILE_PAGE;
+            } else {
+                request.setAttribute(ParameterName.INCORRECT_LOGIN_AND_PASSWORD, "Incorrect login or password.");
+                page = PageName.LOGIN_PAGE;
+            }
+        } catch (ServiceException e) {
+            LOGGER.log(Level.ERROR, "User is not exist", e);
+            throw new CommandException("User is not exist", e);
         }
         return page;
     }

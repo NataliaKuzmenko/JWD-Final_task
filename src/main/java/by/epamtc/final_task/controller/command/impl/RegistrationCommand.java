@@ -8,12 +8,16 @@ import by.epamtc.final_task.service.UserService;
 import by.epamtc.final_task.service.exception.ServiceException;
 import by.epamtc.final_task.service.impl.UserServiceImpl;
 import by.epamtc.final_task.service.validation.UserValidator;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 public class RegistrationCommand implements Command {
+    public static final Logger LOGGER = LogManager.getLogger();
 
     private final UserValidator validationUser = UserValidator.getInstance();
     private final UserService userService = UserServiceImpl.getInstance();
@@ -32,7 +36,6 @@ public class RegistrationCommand implements Command {
         }
 
         if (!validationUser.isRightEmail(email) || !validationUser.isRightPassword(password)) {
-            System.out.println(3.1);
             request.setAttribute(ParameterName.INCORRECT_ERROR_SYMBOLS, "check email or password");
             page = PageName.REGISTRATION_PAGE;
             return page;
@@ -41,17 +44,14 @@ public class RegistrationCommand implements Command {
         try {
             if (userService.create(email, password)) {
                 page = PageName.LOGIN_PAGE;
-
             } else {
-                request.setAttribute(ParameterName.REGISTRATION_ERROR, "registration error");
+                request.setAttribute(ParameterName.REGISTRATION_ERROR, "user exists or registration error");
                 page = PageName.REGISTRATION_PAGE;
-
             }
             return page;
         } catch (ServiceException e) {
-            //logger
+            LOGGER.log(Level.ERROR, "Registration failed", e);
             throw new CommandException("Registration failed", e);
-
         }
     }
 }

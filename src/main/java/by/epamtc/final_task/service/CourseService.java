@@ -1,7 +1,7 @@
 package by.epamtc.final_task.service;
 
-import by.epamtc.final_task.entity.Course;
-import by.epamtc.final_task.entity.StatusCourse;
+import by.epamtc.final_task.entity.course.Course;
+import by.epamtc.final_task.entity.course.StatusCourse;
 import by.epamtc.final_task.service.exception.ServiceException;
 
 public interface CourseService {

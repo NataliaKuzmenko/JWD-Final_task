@@ -6,28 +6,36 @@ import java.security.NoSuchAlgorithmException;
 
 public class HashPassword {
 
-    private static final String ALGORITHM_FOR_HASH = "SHA-512";
-    private static final int MAX_LENGTH_PASSWORD = 32;
-    private static final int DEFAULT_LENGTH_HASH_PASSWORD = 16;
-    private static final String SALT = "0";
+    private static final String ALGORITHM_NAME = "MD5";
 
     private HashPassword() {
     }
 
-    public static String hash(String password) {
-        String hashPassword = null;
+
+
+
+    public static String hashPassword(String password) {
+        byte[] digest;
+
         try {
-            MessageDigest md = MessageDigest.getInstance(ALGORITHM_FOR_HASH);
-            byte[] messageDigest = md.digest(password.getBytes());
-            BigInteger no = new BigInteger(1, messageDigest);
-            hashPassword = no.toString(DEFAULT_LENGTH_HASH_PASSWORD);
-            while (hashPassword.length() < MAX_LENGTH_PASSWORD) {
-                hashPassword = SALT.concat(hashPassword);
-            }
+            MessageDigest messageDigest = MessageDigest.getInstance(ALGORITHM_NAME);
+            messageDigest.reset();
+            messageDigest.update(password.getBytes());
+            digest = messageDigest.digest();
         } catch (NoSuchAlgorithmException e) {
-            //logger
+           // logger.error("Wrong hash algorithm.");
+            return null;
         }
-        return hashPassword;
+
+        BigInteger bigInt = new BigInteger(1, digest);
+        StringBuilder md5Hex = new StringBuilder(bigInt.toString(16));
+
+        while (md5Hex.length() < 32) {
+            md5Hex.insert(0, "0");
+        }
+
+        return md5Hex.toString();
     }
 }
+
 

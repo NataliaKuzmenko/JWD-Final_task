@@ -5,6 +5,11 @@ import by.epamtc.final_task.constant.ParameterName;
 import by.epamtc.final_task.controller.command.Command;
 import by.epamtc.final_task.controller.command.CommandProvider;
 import by.epamtc.final_task.controller.command.exception.CommandException;
+import by.epamtc.final_task.dao.pool.ConnectionPool;
+import by.epamtc.final_task.dao.pool.exception.PoolException;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,7 +21,7 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = "/controller")
 public class Controller extends HttpServlet {
-
+    public static final Logger LOGGER = LogManager.getLogger();
     private final CommandProvider provider = new CommandProvider();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -40,9 +45,7 @@ public class Controller extends HttpServlet {
             name = request.getParameter("command");
             command = provider.takeCommand(name);
 
-
             page = command.execute(request);
-
 
             if (page != null) {
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
@@ -60,6 +63,15 @@ public class Controller extends HttpServlet {
             request.setAttribute(ParameterName.ERROR, e.getMessage());
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(PageName.ERROR_PAGE);
             dispatcher.forward(request, response);
+        }
+    }
+
+    @Override
+    public void destroy() {
+        try {
+            ConnectionPool.getInstance().destroyPool();
+        } catch (PoolException e) {
+            LOGGER.log(Level.ERROR, e);
         }
     }
 }
