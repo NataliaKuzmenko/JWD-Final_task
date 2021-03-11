@@ -1,8 +1,18 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Index</title>
+    <fmt:setLocale value="ru" scope="session"/>
+    <fmt:setBundle basename="localization.pagecontent" var="locale"/>
+
+    <fmt:message bundle="${locale}" key="label.Index" var="namePage"/>
+    <fmt:message bundle="${locale}" key="label.Title" var="title"/>
+    <fmt:message bundle="${locale}" key="label.Login" var="login"/>
+    <fmt:message bundle="${locale}" key="label.Registration" var="registration"/>
+
+    <title>${namePage} </title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css"
           integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" crossorigin="anonymous">
     <style>
@@ -16,7 +26,7 @@
             <div class="col-sm-4"></div>
             <div class = "col-sm-4">
 <div class="jumbotron">
-    <h1>English courses</h1>
+    <h1>${title}</h1>
 </div>
                 <hr/>
                 <br />
@@ -26,14 +36,15 @@
             <div class="col-4">
                 <form action="controller" method="post">
                     <input type="hidden" name="command" value="gotologinpage" />
-                    <input type="submit" value="Login" /><br />
+
+                    <input type="submit" value="${login}"/><br />
                 </form>
                 <hr/>
                 <br />
                 <form action="controller" method="post">
                     <input type="hidden" name="command" value="gotoregistrationpage" />
 
-                    <input type="submit" value="Registration" />
+                    <input type="submit" value="${registration}"/>
                 </form>
             </div>
             <div class="col-sm-4"></div>

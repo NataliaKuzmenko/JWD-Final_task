@@ -1,3 +1,4 @@
+/*
 package by.epamtc.final_task.controller.filter;
 
 import by.epamtc.final_task.constant.ErrorCode;
@@ -81,3 +82,4 @@ public class SecurityFilter implements Filter {
     }
 }
 
+*/

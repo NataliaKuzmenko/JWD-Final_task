@@ -49,7 +49,6 @@ public class Controller extends HttpServlet {
 
             if (page != null) {
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
-
                 dispatcher.forward(request, response);
             } else {
 

@@ -19,6 +19,8 @@ import java.util.Map;
             commands.put(CommandName.LOGOUT, new Logout());
             commands.put(CommandName.GOTOLOGINPAGE, new GoToLoginPage());
 
+            commands.put(CommandName.LOCALE, new LanguageCommand());
+
         }
 
         public Command takeCommand(String name) {
