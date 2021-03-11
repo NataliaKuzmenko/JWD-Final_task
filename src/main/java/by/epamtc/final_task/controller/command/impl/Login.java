@@ -12,7 +12,10 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public class Login implements Command {
 
@@ -20,12 +23,9 @@ public class Login implements Command {
     private UserService userService = UserServiceImpl.getInstance();
 
     @Override
-    public String execute(HttpServletRequest request) throws CommandException {
-        String page = null;
-
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, CommandException {
         String email = request.getParameter(ParameterName.EMAIL);
         String password = request.getParameter(ParameterName.PASSWORD);
-
         try {
             if (userService.isLoginAndPasswordValid(email, password)) {
 
@@ -38,16 +38,16 @@ public class Login implements Command {
                 request.setAttribute(ParameterName.FIRST_NAME, user.getFirstName());
                 request.setAttribute(ParameterName.LAST_NAME, user.getLastName());
                 request.setAttribute(ParameterName.PHOTO_PATH, user.getPhotoPath());
-                page = PageName.PROFILE_PAGE;
+
+                request.getRequestDispatcher(PageName.PROFILE_PAGE).forward(request, response);
             } else {
                 request.setAttribute(ParameterName.INCORRECT_LOGIN_AND_PASSWORD, "Incorrect login or password.");
-                page = PageName.LOGIN_PAGE;
+                request.getRequestDispatcher(PageName.LOGIN_PAGE).forward(request, response);
             }
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "User is not exist", e);
             throw new CommandException("User is not exist", e);
         }
-        return page;
     }
 }
 

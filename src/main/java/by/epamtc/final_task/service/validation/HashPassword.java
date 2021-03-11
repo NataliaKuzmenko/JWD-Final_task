@@ -11,9 +11,6 @@ public class HashPassword {
     private HashPassword() {
     }
 
-
-
-
     public static String hashPassword(String password) {
         byte[] digest;
 
@@ -23,7 +20,7 @@ public class HashPassword {
             messageDigest.update(password.getBytes());
             digest = messageDigest.digest();
         } catch (NoSuchAlgorithmException e) {
-           // logger.error("Wrong hash algorithm.");
+            // logger.error("Wrong hash algorithm.");
             return null;
         }
 

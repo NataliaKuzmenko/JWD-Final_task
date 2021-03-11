@@ -14,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class RegistrationCommand implements Command {
@@ -23,32 +24,26 @@ public class RegistrationCommand implements Command {
     private final UserService userService = UserServiceImpl.getInstance();
 
     @Override
-    public String execute(HttpServletRequest request) throws ServletException, IOException, CommandException {
-        String page;
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, CommandException {
         String email = request.getParameter(ParameterName.EMAIL);
         String password = request.getParameter(ParameterName.PASSWORD);
         String repeatPassword = request.getParameter(ParameterName.REPEAT_PASSWORD);
 
         if (!password.equals(repeatPassword)) {
             request.setAttribute(ParameterName.INCORRECT_ERROR_PASSWORDS, "incorrect repeat password");
-            page = PageName.REGISTRATION_PAGE;
-            return page;
+            request.getRequestDispatcher(PageName.REGISTRATION_PAGE).forward(request, response);
         }
-
         if (!validationUser.isRightEmail(email) || !validationUser.isRightPassword(password)) {
             request.setAttribute(ParameterName.INCORRECT_ERROR_SYMBOLS, "check email or password");
-            page = PageName.REGISTRATION_PAGE;
-            return page;
+            request.getRequestDispatcher(PageName.REGISTRATION_PAGE).forward(request, response);
         }
-
         try {
             if (userService.create(email, password)) {
-                page = PageName.LOGIN_PAGE;
+                response.sendRedirect("controller?command=gotologinpage&"+ParameterName.REGISTRATION_OK+"="+true);
             } else {
                 request.setAttribute(ParameterName.REGISTRATION_ERROR, "user exists or registration error");
-                page = PageName.REGISTRATION_PAGE;
+                request.getRequestDispatcher(PageName.REGISTRATION_PAGE).forward(request, response);
             }
-            return page;
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Registration failed", e);
             throw new CommandException("Registration failed", e);

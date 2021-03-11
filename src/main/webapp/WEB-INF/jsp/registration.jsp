@@ -13,38 +13,38 @@
     <div class="container-sm">
         <div class="row">
             <div class="col-sm-4"></div>
-            <div class = "col-sm-4">
-${nullData}
+            <div class="col-sm-4">
+                ${nullData}
 
-    ${registrationErrorPasswords}
-    ${registrationErrorSymbols}
-    ${registrationError}
-    <br />
-<form action="controller" method="post">
-    <input type="hidden" name="command" value="registration" />
+                ${registrationErrorPasswords}
+                ${registrationErrorSymbols}
+                ${registrationError}
+                <br/>
+                <form action="controller" method="post">
+                    <input type="hidden" name="command" value="registration"/>
 
-    Enter email:<br />
-    <input type="email" name="email" value="" /><br />
+                    Enter email:<br/>
+                    <input type="email" name="email" value=""/><br/>
 
-    Enter password:<br />
-    <input type="text" name="password" value="" /><br />
+                    Enter password:<br/>
+                    <input type="text" name="password" value=""/><br/>
 
-    Enter repeat password:<br />
-    <input type="text" name="repeat password"value="" /><br />
+                    Enter repeat password:<br/>
+                    <input type="text" name="repeat password" value=""/><br/>
 
 
-    <br/>
-    ${error}
+                    <br/>
+                    ${error}
 
-    <input type="submit" value="Create an account" /><br />
-</form>
-    <br />
-    <form action="controller" method="post">
-        <input type="hidden" name="command" value="gotoindexpage" />
+                    <input type="submit" value="Create an account"/><br/>
+                </form>
+                <br/>
+                <form action="controller" method="post">
+                    <input type="hidden" name="command" value="gotoindexpage"/>
 
-        <input type="submit" value="Back" />
-    </form>
-</div>
+                    <input type="submit" value="Back"/>
+                </form>
+            </div>
             <div class="col-sm-4"></div>
         </div>
     </div>

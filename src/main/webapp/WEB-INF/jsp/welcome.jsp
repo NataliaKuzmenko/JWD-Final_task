@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Title</title>
@@ -12,13 +12,13 @@
     <div class="container-sm">
         <div class="row">
             <div class="col-sm-4"></div>
-            <div class = "col-sm-4">
-<h3>Welcome</h3>
-<c:out value="Login successful!"/>
-<hr/>
-${user}, hello!
-<hr/>
-<a href="controller?command=logout">Logout</a>
+            <div class="col-sm-4">
+                <h3>Welcome</h3>
+                <c:out value="Login successful!"/>
+                <hr/>
+                ${user}, hello!
+                <hr/>
+                <a href="controller?command=logout">Logout</a>
             </div>
             <div class="col-sm-4"></div>
         </div>

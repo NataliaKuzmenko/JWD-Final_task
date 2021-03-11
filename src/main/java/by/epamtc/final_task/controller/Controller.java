@@ -34,32 +34,16 @@ public class Controller extends HttpServlet {
         processRequest(request, response);
     }
 
-    private void processRequest(HttpServletRequest request,
-                                HttpServletResponse response)
-            throws ServletException, IOException {
+    private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String commandName = request.getParameter(ParameterName.COMMAND);
         try {
-            String page = null;
-            String name;
-            Command command;
 
-            name = request.getParameter("command");
-            command = provider.takeCommand(name);
+            Command command = provider.takeCommand(commandName);
+            command.execute(request, response);
 
-            page = command.execute(request);
-
-            if (page != null) {
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
-                dispatcher.forward(request, response);
-            } else {
-
-                page = PageName.INDEX_PAGE;
-                request.getSession().setAttribute("nullPage",
-                        " Page not found. Business logic error.");
-                response.sendRedirect(request.getContextPath() + page);
-            }
         } catch (CommandException e) {
-            //logger
-            request.setAttribute(ParameterName.ERROR, e.getMessage());
+            LOGGER.log(Level.ERROR, "Error command");
+            request.setAttribute(ParameterName.ERROR,"Such command is not found");
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(PageName.ERROR_PAGE);
             dispatcher.forward(request, response);
         }
@@ -70,7 +54,7 @@ public class Controller extends HttpServlet {
         try {
             ConnectionPool.getInstance().destroyPool();
         } catch (PoolException e) {
-            LOGGER.log(Level.ERROR, e);
+            LOGGER.log(Level.ERROR, "Error destroy connection pool");
         }
     }
 }
