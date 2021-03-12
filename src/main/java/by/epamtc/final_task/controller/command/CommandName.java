@@ -5,8 +5,8 @@ public enum CommandName {
     GOTOLOGINPAGE,
     GOTOREGISTRATIONPAGE,
     GOTOWELCOMPAGE,
+    FORWARD,
     LANGUAGE,
-    LOCALE,
     LOGIN,
     LOGOUT,
     REGISTRATION;

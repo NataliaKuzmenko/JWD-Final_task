@@ -11,7 +11,8 @@ import java.io.IOException;
 public interface Command {
 
   //  String execute(HttpServletRequest request) throws ServletException, IOException, CommandException;
+   // void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, CommandException;
 
-    void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, CommandException;
+    Router execute(HttpServletRequest request) throws CommandException;
 
 }

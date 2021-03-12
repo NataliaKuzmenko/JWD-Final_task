@@ -4,6 +4,7 @@ import by.epamtc.final_task.constant.PageName;
 import by.epamtc.final_task.constant.ParameterName;
 import by.epamtc.final_task.controller.command.Command;
 import by.epamtc.final_task.controller.command.CommandProvider;
+import by.epamtc.final_task.controller.command.Router;
 import by.epamtc.final_task.controller.command.exception.CommandException;
 import by.epamtc.final_task.dao.pool.ConnectionPool;
 import by.epamtc.final_task.dao.pool.exception.PoolException;
@@ -39,10 +40,22 @@ public class Controller extends HttpServlet {
         try {
 
             Command command = provider.takeCommand(commandName);
-            command.execute(request, response);
-
+            Router router= command.execute(request);
+            String currentPage = router.getPage();
+            if (currentPage == null) {
+                router.setPage(PageName.ERROR_PAGE);
+                response.sendRedirect(request.getContextPath() + router.getPage());
+            }
+            if (Router.Type.FORWARD == router.getType()) {
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(router.getPage());
+                dispatcher.forward(request, response);
+            } else {
+                request.getSession().setAttribute(ParameterName.REDIRECTED_PAGE, router.getPage());
+                response.sendRedirect(request.getContextPath() + router.getPage());
+            }
+           request.getSession().setAttribute(ParameterName.CURRENT_PAGE, currentPage);
         } catch (CommandException e) {
-            LOGGER.log(Level.ERROR, "Error command");
+            LOGGER.log(Level.ERROR, e);
             request.setAttribute(ParameterName.ERROR,"Such command is not found");
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(PageName.ERROR_PAGE);
             dispatcher.forward(request, response);

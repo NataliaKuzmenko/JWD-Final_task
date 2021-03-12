@@ -3,6 +3,7 @@ package by.epamtc.final_task.controller.command.impl;
 import by.epamtc.final_task.constant.PageName;
 import by.epamtc.final_task.constant.ParameterName;
 import by.epamtc.final_task.controller.command.Command;
+import by.epamtc.final_task.controller.command.Router;
 import by.epamtc.final_task.controller.command.exception.CommandException;
 import by.epamtc.final_task.service.UserService;
 import by.epamtc.final_task.service.exception.ServiceException;
@@ -24,6 +25,43 @@ public class RegistrationCommand implements Command {
     private final UserService userService = UserServiceImpl.getInstance();
 
     @Override
+    public Router execute(HttpServletRequest request) throws CommandException {
+        String page;
+        String email = request.getParameter(ParameterName.EMAIL);
+        String password = request.getParameter(ParameterName.PASSWORD);
+        String repeatPassword = request.getParameter(ParameterName.REPEAT_PASSWORD);
+        if (!password.equals(repeatPassword)) {
+            request.setAttribute(ParameterName.INCORRECT_ERROR_PASSWORDS, "incorrect repeat password");
+            //request.setAttribute(RequestAttribute.PASSWORDS_DO_NOT_MATCH, true);
+            page = PageName.REGISTRATION_PAGE;
+            return new Router(page);
+        }
+        if (!validationUser.isRightEmail(email) || !validationUser.isRightPassword(password)) {
+            request.setAttribute(ParameterName.INCORRECT_ERROR_SYMBOLS, "check email or password");
+           // request.setAttribute(RequestAttribute.INCORRECT_ERROR_SYMBOLS, true);
+            page = PageName.REGISTRATION_PAGE;
+            return new Router(page);
+        }
+        try {
+            Router router;
+            if (userService.create(email, password)) {
+                router = new Router(PageName.LOGIN_PAGE);
+                router.useRedirect();
+            } else {
+                request.setAttribute(ParameterName.REGISTRATION_ERROR, "user exists or registration error");
+               // request.setAttribute(RequestAttribute.REGISTRATION_ERROR, true);
+                router = new Router(PageName.REGISTRATION_PAGE);
+            }
+            return router;
+        } catch (ServiceException e) {
+            LOGGER.log(Level.ERROR, "Registration failed", e);
+            throw new CommandException("Registration failed", e);
+        }
+    }
+}
+
+
+    /*@Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, CommandException {
         String email = request.getParameter(ParameterName.EMAIL);
         String password = request.getParameter(ParameterName.PASSWORD);
@@ -48,5 +86,5 @@ public class RegistrationCommand implements Command {
             LOGGER.log(Level.ERROR, "Registration failed", e);
             throw new CommandException("Registration failed", e);
         }
-    }
-}
+    }*/
+

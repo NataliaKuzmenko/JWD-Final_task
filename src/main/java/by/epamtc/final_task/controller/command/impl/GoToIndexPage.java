@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
+/*
 public class GoToIndexPage implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, CommandException {
         request.getRequestDispatcher(PageName.INDEX_PAGE).forward(request, response);
     }
-}
+}*/

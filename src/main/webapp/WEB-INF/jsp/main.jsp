@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
@@ -11,6 +12,7 @@
     <fmt:message bundle="${locale}" key="label.Title" var="title"/>
     <fmt:message bundle="${locale}" key="label.Login" var="login"/>
     <fmt:message bundle="${locale}" key="label.Registration" var="registration"/>
+    <fmt:message bundle="${locale}" key="label.language" var="changeLanguage"/>
 
     <title>${namePage} </title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css"
@@ -19,6 +21,7 @@
         <%@include file="/css/style.css" %>
     </style>
 </head>
+<c:import url="/WEB-INF/jsp/common/header.jsp"/>
 <body>
 <div class="main">
     <div class="container-sm">
@@ -35,21 +38,21 @@
                     </div>
                     <div class="col-4">
                         <form action="controller" method="post">
-                            <input type="hidden" name="command" value="gotologinpage"/>
-
+                            <input type="hidden" name="command" value="forward"/>
+                            <input type="hidden" name="page" value="/WEB-INF/jsp/login.jsp"/>
                             <input type="submit" value="${login}"/><br/>
                         </form>
                         <hr/>
 
-                        <form action="controller" method="post">
-                            <input type="hidden" name="command" value="gotoregistrationpage"/>
-
+                        <form method="post" action="controller">
+                            <input type="hidden" name="command" value="forward"/>
+                            <input type="hidden" name="page" value="/WEB-INF/jsp/registration.jsp"/>
                             <input type="submit" value="${registration}"/>
                         </form>
                         <br/>
                         <form method="post" action="controller">
                             <input type="hidden" name="command" value="language"/>
-                            <input type="submit" value="${language}">
+                            <input type="submit" value="${changeLanguage}">
                         </form>
                     </div>
                     <div class="col-sm-4"></div>

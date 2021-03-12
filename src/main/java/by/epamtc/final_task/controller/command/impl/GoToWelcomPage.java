@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-public class GoToWelcomPage implements Command {
+/*public class GoToWelcomPage implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, CommandException {
@@ -28,4 +28,4 @@ public class GoToWelcomPage implements Command {
         }
         request.getRequestDispatcher(PageName.WELCOM_PAGE).forward(request, response);
     }
-}
+}*/

@@ -3,6 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <fmt:setLocale value="${language}" scope="session"/>
+    <fmt:setBundle basename="localization.pagecontent" var="locale"/>
+
+    <fmt:message bundle="${locale}" key="label.language" var="changeLanguage"/>
     <title>Index</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css"
           integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" crossorigin="anonymous">
@@ -21,5 +25,16 @@ ${first_name}
 ${last_name}
 <br/>
 ${photo_path}
+<br/>
+<form action="controller" method="post">
+    <input type="hidden" name="command" value="logout"/>
+    <input type="submit" value="Logout"/>
+
+</form>
+<br/>
+<form method="post" action="controller">
+    <input type="hidden" name="command" value="language"/>
+    <input type="submit" value="${changeLanguage}">
+</form>
 </body>
 </html>

@@ -8,7 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
+/*
 public class GoToLoginPage implements Command {
 
     @Override
@@ -17,4 +17,4 @@ public class GoToLoginPage implements Command {
         request.getRequestDispatcher(PageName.LOGIN_PAGE).forward(request, response);
 
     }
-}
+}*/
