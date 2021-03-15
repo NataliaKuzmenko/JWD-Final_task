@@ -47,6 +47,7 @@ public class UserServiceImpl implements UserService {
             String hashPassword = HashPassword.hashPassword(enteredPassword);
             try {
                 result = userDao.create(enteredLogin, hashPassword);
+
             } catch (DaoException e) {
                 throw new ServiceException("Creation failed", e);
             }

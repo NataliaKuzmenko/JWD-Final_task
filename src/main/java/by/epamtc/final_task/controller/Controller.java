@@ -40,7 +40,7 @@ public class Controller extends HttpServlet {
         try {
 
             Command command = provider.takeCommand(commandName);
-            Router router= command.execute(request);
+            Router router = command.execute(request);
             String currentPage = router.getPage();
             if (currentPage == null) {
                 router.setPage(PageName.ERROR_PAGE);
@@ -50,13 +50,14 @@ public class Controller extends HttpServlet {
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(router.getPage());
                 dispatcher.forward(request, response);
             } else {
-                request.getSession().setAttribute(ParameterName.REDIRECTED_PAGE, router.getPage());
-                response.sendRedirect(request.getContextPath() + router.getPage());
+             request.getSession().setAttribute(ParameterName.REDIRECTED_PAGE, router.getPage());
+             response.sendRedirect(request.getContextPath() + router.getPage());
             }
-           request.getSession().setAttribute(ParameterName.CURRENT_PAGE, currentPage);
+            request.getSession().setAttribute(ParameterName.CURRENT_PAGE, currentPage);
+
         } catch (CommandException e) {
             LOGGER.log(Level.ERROR, e);
-            request.setAttribute(ParameterName.ERROR,"Such command is not found");
+            request.setAttribute(ParameterName.ERROR, "Such command is not found");
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(PageName.ERROR_PAGE);
             dispatcher.forward(request, response);
         }

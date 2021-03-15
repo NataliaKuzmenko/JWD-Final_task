@@ -11,13 +11,13 @@
     <fmt:setBundle basename="localization.pagecontent" var="locale"/>
 
     <fmt:message bundle="${locale}" key="label.Index" var="namePage"/>
-    <fmt:message bundle="${locale}" key="label.Login" var="login"/>
-    <fmt:message bundle="${locale}" key="label.CreateAnAccount" var="CreateAnAccount"/>
+
 
     <title>${namePage} </title>
 </head>
-<c:import url="/WEB-INF/jsp/common/header.jsp"/>
+<c:import url="/jsp/common/header.jsp"/>
 <body>
+<div class="container"></div>
 <hr/>
 <br/>
 Курсы английского языка.
@@ -30,19 +30,9 @@
 <br/>
 поддержание высокого уровня владения иностранным языком.
 <br/>
-<form action="controller" method="post">
-    <input type="hidden" name="command" value="forward"/>
-    <input type="hidden" name="page" value="/WEB-INF/jsp/login.jsp"/>
-    <input type="submit" value="${login}"/><br/>
-</form>
-<hr/>
-<form method="post" action="controller">
-    <input type="hidden" name="command" value="forward"/>
-    <input type="hidden" name="page" value="/WEB-INF/jsp/registration.jsp"/>
-    <input type="submit" value="${CreateAnAccount}"/>
-</form>
+
 <br/>
 
 </body>
-<c:import url="/WEB-INF/jsp/common/footer.jsp"/>
+<c:import url="/jsp/common/footer.jsp"/>
 </html>

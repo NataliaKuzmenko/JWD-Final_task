@@ -18,7 +18,7 @@
     <title>${registration}</title>
 
 </head>
-<c:import url="/WEB-INF/jsp/common/header.jsp"/>
+<c:import url="/jsp/common/header.jsp"/>
 <body>
 
                 ${nullData}
@@ -49,5 +49,5 @@
     </div>
 </div>
 </body>
-<c:import url="/WEB-INF/jsp/common/footer.jsp"/>
+<c:import url="/jsp/common/footer.jsp"/>
 </html>

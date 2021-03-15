@@ -16,7 +16,7 @@
 
     <title>${namePage}</title>
 </head>
-<c:import url="/WEB-INF/jsp/common/header.jsp"/>
+<c:import url="/jsp/common/header.jsp"/>
 <body>
 
 <br/>
@@ -28,12 +28,10 @@
     <br/>${password}:<br/>
     <input type="password" name="password" value=""/>
     <br/>
-    ${errorLoginPassMessage}
-    <br/>
-    <input type="submit" value="${login}"/>
+     <input type="submit" value="${login}"/>
 </form>
 <br/>
 
 </body>
-<c:import url="/WEB-INF/jsp/common/footer.jsp"/>
+<c:import url="/jsp/common/footer.jsp"/>
 </html>

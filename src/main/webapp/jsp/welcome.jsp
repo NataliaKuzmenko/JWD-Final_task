@@ -15,23 +15,13 @@
 
     <title>${welcome}</title>
 </head>
-<c:import url="/WEB-INF/jsp/common/header.jsp"/>
+<c:import url="/jsp/common/header.jsp"/>
 <body>
 
 <h3>${welcome}</h3>
 <hr/>
 ${email}
-<form action="controller" method="post">
-    <input type="hidden" name="command" value="forward"/>
-    <input type="hidden" name="page" value="/WEB-INF/jsp/profile.jsp"/>
-    <input type="submit" value="${profile}"/>
-</form>
-<hr/>
-<form name="logout" method="POST" action="controller">
-    <input type="hidden" name="command" value="logout"/>
-        <input type="submit" value="${logout}"/>
-</form>
-
+${first_name}
 </body>
-<c:import url="/WEB-INF/jsp/common/footer.jsp"/>
+<c:import url="/jsp/common/footer.jsp"/>
 </html>

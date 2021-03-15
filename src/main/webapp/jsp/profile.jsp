@@ -14,9 +14,9 @@
     <title>${profile}</title>
 
 </head>
-<c:import url="/WEB-INF/jsp/common/header.jsp"/>
+<c:import url="/jsp/common/header.jsp"/>
 <body>
-<h3>${profile}</h3>
+${profile}
 
 <form name="logout" method="POST" action="controller">
     <input type="hidden" name="command" value="logout"/>
@@ -25,5 +25,5 @@
 <br/>
 
 </body>
-<c:import url="/WEB-INF/jsp/common/footer.jsp"/>
+<c:import url="/jsp/common/footer.jsp"/>
 </html>

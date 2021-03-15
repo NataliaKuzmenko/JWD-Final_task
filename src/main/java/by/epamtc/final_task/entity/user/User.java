@@ -58,8 +58,8 @@ public class User implements Serializable {
         return role;
     }
 
-    public void setRole(UserRole role) {
-        this.role = role;
+    public void setRole(String role) {
+        this.role = UserRole.valueOf(role);
     }
 
     public String getPhotoPath() {
@@ -96,5 +96,10 @@ public class User implements Serializable {
                 ", role=" + role +
                 ", photoPath='" + photoPath + '\'' +
                 '}';
+    }
+    public enum UserRole {
+        STUDENT,
+        LECTURER,
+        ADMIN;
     }
 }

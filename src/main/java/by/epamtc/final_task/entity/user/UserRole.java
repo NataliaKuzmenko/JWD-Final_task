@@ -1,6 +1,6 @@
 package by.epamtc.final_task.entity.user;
 
-public enum UserRole {
+/*public enum UserRole {
 
     STUDENT(1),
 
@@ -19,4 +19,4 @@ public enum UserRole {
     public int getId() {
         return id;
     }
-}
+}*/

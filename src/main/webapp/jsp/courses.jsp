@@ -8,24 +8,14 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
       integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 <head>
-    <fmt:message bundle="${locale}" key="label.contacts" var="contacts"/>
+    <fmt:message bundle="${locale}" key="label.Courses" var="courses"/>
 
-    <title>${contacts}</title>
+    <title>${courses}</title>
 </head>
-<c:import url="/WEB-INF/jsp/common/header.jsp"/>
+<c:import url="/jsp/common/header.jsp"/>
 <body>
 <br/>
-пр. Независимости, 95
-<br/>
-1ый этаж, пом.7
-<br/>
-г. Минск
-<br/>
-Время работы:
-<br/>
-пн-пт: 9.00-19.00
-<br/>
-сб-вс: 10.00-17.00
+Список курсов
 <br/>
 </body>
-<c:import url="/WEB-INF/jsp/common/footer.jsp"/>
+<c:import url="/jsp/common/footer.jsp"/>

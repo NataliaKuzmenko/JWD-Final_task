@@ -30,6 +30,7 @@ public class RegistrationCommand implements Command {
         String email = request.getParameter(ParameterName.EMAIL);
         String password = request.getParameter(ParameterName.PASSWORD);
         String repeatPassword = request.getParameter(ParameterName.REPEAT_PASSWORD);
+
         if (!password.equals(repeatPassword)) {
             request.setAttribute(ParameterName.INCORRECT_ERROR_PASSWORDS, "incorrect repeat password");
             //request.setAttribute(RequestAttribute.PASSWORDS_DO_NOT_MATCH, true);
@@ -47,6 +48,7 @@ public class RegistrationCommand implements Command {
             if (userService.create(email, password)) {
                 router = new Router(PageName.LOGIN_PAGE);
                 router.useRedirect();
+
             } else {
                 request.setAttribute(ParameterName.REGISTRATION_ERROR, "user exists or registration error");
                // request.setAttribute(RequestAttribute.REGISTRATION_ERROR, true);

@@ -21,7 +21,7 @@ public class LanguageCommand implements Command {
             request.getSession().setAttribute(ParameterName.LANGUAGE, ParameterName.LOCALE_EN);
         }
 
-        request.setAttribute(ParameterName.LANGUAGE_CHANGED, true);
+       // request.setAttribute(ParameterName.LANGUAGE_CHANGED, true);
         String sessionCurrentPage = (String) request.getSession().getAttribute(ParameterName.CURRENT_PAGE);
         String currentPage = sessionCurrentPage == null ? PageName.MAIN_PAGE : sessionCurrentPage;
 
