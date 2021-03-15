@@ -61,30 +61,3 @@ public class RegistrationCommand implements Command {
 }
 
 
-    /*@Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, CommandException {
-        String email = request.getParameter(ParameterName.EMAIL);
-        String password = request.getParameter(ParameterName.PASSWORD);
-        String repeatPassword = request.getParameter(ParameterName.REPEAT_PASSWORD);
-
-        if (!password.equals(repeatPassword)) {
-            request.setAttribute(ParameterName.INCORRECT_ERROR_PASSWORDS, "incorrect repeat password");
-            request.getRequestDispatcher(PageName.REGISTRATION_PAGE).forward(request, response);
-        }
-        if (!validationUser.isRightEmail(email) || !validationUser.isRightPassword(password)) {
-            request.setAttribute(ParameterName.INCORRECT_ERROR_SYMBOLS, "check email or password");
-            request.getRequestDispatcher(PageName.REGISTRATION_PAGE).forward(request, response);
-        }
-        try {
-            if (userService.create(email, password)) {
-                response.sendRedirect("controller?command=gotologinpage&"+ParameterName.REGISTRATION_OK+"="+true);
-            } else {
-                request.setAttribute(ParameterName.REGISTRATION_ERROR, "user exists or registration error");
-                request.getRequestDispatcher(PageName.REGISTRATION_PAGE).forward(request, response);
-            }
-        } catch (ServiceException e) {
-            LOGGER.log(Level.ERROR, "Registration failed", e);
-            throw new CommandException("Registration failed", e);
-        }
-    }*/
-

@@ -1,5 +1,6 @@
 package by.epamtc.final_task.dao.pool;
 
+import by.epamtc.final_task.dao.exception.DaoException;
 import by.epamtc.final_task.dao.pool.exception.PoolException;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -69,12 +70,9 @@ public class ProxyConnection implements Connection {
         }
     }
 
-    void trueClose() {
-        try {
-            connection.close();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+    void trueClose() throws SQLException {
+        connection.close();
+
     }
 
     @Override

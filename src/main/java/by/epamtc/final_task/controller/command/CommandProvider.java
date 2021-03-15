@@ -16,11 +16,7 @@ public class CommandProvider {
         commands.put(CommandName.REGISTRATION, new RegistrationCommand());
         commands.put(CommandName.LOGOUT, new Logout());
         commands.put(CommandName.LANGUAGE, new LanguageCommand());
-        //  commands.put(CommandName.GOTOREGISTRATIONPAGE, new GoToRegistrationPage());
-        //  commands.put(CommandName.GOTOINDEXPAGE, new GoToIndexPage());
-        // commands.put(CommandName.GOTOWELCOMPAGE, new GoToWelcomPage());
-        // commands.put(CommandName.GOTOLOGINPAGE, new GoToLoginPage());
-    }
+      }
 
     public Command takeCommand(String name) {
         CommandName commandName;

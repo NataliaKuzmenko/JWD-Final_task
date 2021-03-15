@@ -22,10 +22,4 @@ public class Logout implements Command {
         request.getSession().setAttribute(ParameterName.LANGUAGE, language);
         return new Router(page);
     }
-
-    /*@Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, CommandException {
-        request.getSession().invalidate();
-        request.getRequestDispatcher(PageName.INDEX_PAGE).forward(request, response);
-    }*/
 }

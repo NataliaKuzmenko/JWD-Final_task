@@ -94,7 +94,7 @@ public class ConnectionPool {
                         connection.trueClose();
                     }
                 }
-            } catch (InterruptedException e) {
+            } catch (InterruptedException | SQLException e) {
                 LOGGER.log(Level.ERROR, "Impossible to destroy pool", e);
                 throw new PoolException("Impossible to destroy pool", e);
             }
