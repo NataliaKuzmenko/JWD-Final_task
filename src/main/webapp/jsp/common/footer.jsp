@@ -10,6 +10,7 @@
     <fmt:message bundle="${locale}" key="label.FooterCopyright" var="FooterCopyright"/>
     <title>${footer}</title>
 </head>
+<body>
 <footer class="mt-5 pt-2 text-muted text-center text-small">
         <div class="footer-copyright text-center py-3">${FooterCopyright}</div>
     </footer>

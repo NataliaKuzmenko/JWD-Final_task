@@ -1,7 +1,7 @@
 package by.epamtc.final_task.dao;
 
 import by.epamtc.final_task.dao.exception.DaoException;
-import by.epamtc.final_task.entity.user.User;
+import by.epamtc.final_task.entity.User;
 
 public interface UserDao {
 
@@ -12,7 +12,5 @@ public interface UserDao {
     boolean isUserExist(String email) throws DaoException;
 
     User findUserWithTheAllInfoByLogin(String email) throws DaoException;
-
-
 }
 

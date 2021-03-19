@@ -51,8 +51,7 @@
                     <a class="nav-link">
                         <form class="form-inline my-2 my-lg-0" method="post" action="controller">
                             <input class="btn btn-outline-secondary" type="submit" value="${courses}">
-                            <input type="hidden" name="command" value="forward"/>
-                            <input type="hidden" name="page" value="/jsp/courses.jsp"/>
+                            <input type="hidden" name="command" value="courseRunCommand"/>
                         </form>
                     </a>
                 </li>
@@ -73,9 +72,9 @@
 
         <c:choose>
             <c:when test="${role != null}">
-        <li class="nav-item">
+
             <a class="nav-link">
-                <form class="form-inline my-2 my-lg-0" id="profileForm" method="post"
+                <form class="form-inline my-2 my-lg-0" method="post"
                       action="controller">
                     <input class="btn btn-outline-secondary" type="submit"
                            value="${profile}">
@@ -83,15 +82,17 @@
                     <input type="hidden" name="page" value="/jsp/profile.jsp"/>
                 </form>
             </a>
-        </li>
-        <li class="nav-item">
+
+
             <a class="nav-link">
-                <div class="logout">
-                    <a href="controller?command=Logout" class="btn btn-outline-secondary" role="button"
-                       aria-pressed="true">${logout}</a>
-                </div>
+                <form class="form-inline my-2 my-lg-0" method="post"
+                      action="controller">
+                    <input class="btn btn-outline-secondary" type="submit"
+                           value="${logout}">
+                    <input type="hidden" name="command" value="logout"/>
+                </form>
             </a>
-        </li>
+
             </c:when>
             <c:otherwise>
 

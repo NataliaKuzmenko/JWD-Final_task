@@ -5,7 +5,7 @@ import by.epamtc.final_task.dao.UserDao;
 import by.epamtc.final_task.dao.exception.DaoException;
 import by.epamtc.final_task.dao.pool.ConnectionPool;
 import by.epamtc.final_task.dao.pool.exception.PoolException;
-import by.epamtc.final_task.entity.user.User;
+import by.epamtc.final_task.entity.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -111,11 +111,11 @@ public class UserDaoImpl implements UserDao {
 
                 user.setUserId(resultSet.getInt(ColumnName.USER_ID));
                 user.setEmail(resultSet.getString(ColumnName.EMAIL));
-               // user.setFirstName(resultSet.getString(ColumnName.FIRST_NAME));
-              //  user.setLastName(resultSet.getString(ColumnName.LAST_NAME));
+                // user.setFirstName(resultSet.getString(ColumnName.FIRST_NAME));
+                //  user.setLastName(resultSet.getString(ColumnName.LAST_NAME));
                 user.setPhotoPath(resultSet.getString(ColumnName.PHOTO_PATH));
                 user.setRole(resultSet.getString(ColumnName.ROLE));
-             }
+            }
         } catch (SQLException | PoolException e) {
             throw new DaoException("User not found", e);
         } finally {

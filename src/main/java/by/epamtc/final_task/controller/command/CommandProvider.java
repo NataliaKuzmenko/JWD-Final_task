@@ -2,6 +2,9 @@ package by.epamtc.final_task.controller.command;
 
 import by.epamtc.final_task.controller.command.impl.*;
 
+import by.epamtc.final_task.controller.command.impl.course.CourseRunCommand;
+import by.epamtc.final_task.controller.command.impl.course.DetailsCourseCommand;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,7 +19,10 @@ public class CommandProvider {
         commands.put(CommandName.REGISTRATION, new RegistrationCommand());
         commands.put(CommandName.LOGOUT, new Logout());
         commands.put(CommandName.LANGUAGE, new LanguageCommand());
-      }
+      //  commands.put(CommandName.COURSECOMMAND, new CourseCommand());
+        commands.put(CommandName.DETAILSCOURSE, new DetailsCourseCommand());
+        commands.put(CommandName.COURSERUNCOMMAND, new CourseRunCommand());
+    }
 
     public Command takeCommand(String name) {
         CommandName commandName;

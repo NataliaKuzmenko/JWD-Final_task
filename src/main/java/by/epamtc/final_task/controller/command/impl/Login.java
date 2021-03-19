@@ -5,7 +5,7 @@ import by.epamtc.final_task.constant.ParameterName;
 import by.epamtc.final_task.controller.command.Command;
 import by.epamtc.final_task.controller.command.Router;
 import by.epamtc.final_task.controller.command.exception.CommandException;
-import by.epamtc.final_task.entity.user.User;
+import by.epamtc.final_task.entity.User;
 import by.epamtc.final_task.service.UserService;
 import by.epamtc.final_task.service.exception.ServiceException;
 import by.epamtc.final_task.service.impl.UserServiceImpl;
@@ -30,7 +30,7 @@ public class Login implements Command {
 
                 User user = userService.findUserWithTheAllInfoByLogin(email);
 
-                request.getSession().setAttribute(ParameterName.ROLE, user.getRole().name());
+                request.getSession().setAttribute(ParameterName.ROLE, user.getRole());
                 request.getSession().setAttribute(ParameterName.FIRST_NAME, user.getFirstName());
                 request.getSession().setAttribute(ParameterName.EMAIL, user.getEmail());
 

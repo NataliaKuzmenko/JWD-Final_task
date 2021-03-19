@@ -3,7 +3,7 @@ package by.epamtc.final_task.service.impl;
 import by.epamtc.final_task.dao.UserDao;
 import by.epamtc.final_task.dao.exception.DaoException;
 import by.epamtc.final_task.dao.impl.UserDaoImpl;
-import by.epamtc.final_task.entity.user.User;
+import by.epamtc.final_task.entity.User;
 import by.epamtc.final_task.service.UserService;
 import by.epamtc.final_task.service.exception.ServiceException;
 import by.epamtc.final_task.service.validation.HashPassword;
@@ -11,7 +11,7 @@ import by.epamtc.final_task.service.validation.HashPassword;
 public class UserServiceImpl implements UserService {
 
     private static final UserServiceImpl instance = new UserServiceImpl();
-    private UserDao userDao = UserDaoImpl.getInstance();
+    private final UserDao userDao = UserDaoImpl.getInstance();
 
     private UserServiceImpl() {
     }

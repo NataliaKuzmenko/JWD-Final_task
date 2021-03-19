@@ -1,4 +1,4 @@
-package by.epamtc.final_task.entity.user;
+package by.epamtc.final_task.entity;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -11,6 +11,7 @@ public class User implements Serializable {
     private String lastName;
     private UserRole role;
     private String photoPath;
+
     public User() {
     }
     public User(User user) {
@@ -102,4 +103,10 @@ public class User implements Serializable {
         LECTURER,
         ADMIN;
     }
+    public enum UserCourseStatus {
+        APPLIED,
+        ENTERED,
+        NOT_ENTERED;
+    }
+
 }

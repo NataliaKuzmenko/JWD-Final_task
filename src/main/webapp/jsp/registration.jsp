@@ -43,11 +43,11 @@
 
                     <input type="submit" value="${createAnAccount}"/><br/>
                 </form>
-                       </div>
+
             <div class="col-sm-4"></div>
         </div>
-    </div>
-</div>
+
+
 </body>
 <c:import url="/jsp/common/footer.jsp"/>
 </html>
