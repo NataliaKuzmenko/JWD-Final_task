@@ -4,6 +4,7 @@ import by.epamtc.final_task.dao.CourseDao;
 import by.epamtc.final_task.dao.exception.DaoException;
 import by.epamtc.final_task.dao.impl.CourseDaoImpl;
 import by.epamtc.final_task.entity.Course;
+import by.epamtc.final_task.entity.User;
 import by.epamtc.final_task.service.CourseService;
 import by.epamtc.final_task.service.exception.ServiceException;
 
@@ -13,8 +14,8 @@ public class CourseServiceImpl implements CourseService {
 
     private static final int PAGE_ITEMS_COUNT = 5;
 
-
     private static final CourseServiceImpl instance = new CourseServiceImpl();
+
     private CourseDao courseDao = CourseDaoImpl.getInstance();
 
     private CourseServiceImpl() {
@@ -23,21 +24,6 @@ public class CourseServiceImpl implements CourseService {
     public static CourseServiceImpl getInstance() {
         return instance;
     }
-
-
-/*    @Override
-    public List<Course> findTitlesOfCourses(int count) throws ServiceException {
-        try {
-            int offset = PAGE_ITEMS_COUNT * count;
-            List<Course> titleList = courseDao.findTitlesOfCourses(PAGE_ITEMS_COUNT, offset);
-            if (titleList.isEmpty()) {
-                throw new ServiceException("Courses not found.");
-            }
-            return titleList;
-        } catch (DaoException e) {
-            throw new ServiceException("Courses not found", e);
-        }
-    }*/
 
     @Override
     public List<Course> findCoursesAvailableForRegistration(int count) throws ServiceException {
@@ -54,7 +40,21 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public Course findInfoAboutCourse(int courseId) throws ServiceException {
+    public List<Course> findAllCourses(int count) throws ServiceException {
+        try {
+            int offset = PAGE_ITEMS_COUNT * count;
+            List<Course> titleList = courseDao.findAllCourses(PAGE_ITEMS_COUNT, offset);
+            if (titleList.isEmpty()) {
+                throw new ServiceException("Courses not found.");
+            }
+            return titleList;
+        } catch (DaoException e) {
+            throw new ServiceException("Courses not found", e);
+        }
+    }
+
+    @Override
+    public Course findInfoAboutCourse(long courseId) throws ServiceException {
 
         try {
             Course course = courseDao.findInfoAboutCourse(courseId);
@@ -75,4 +75,26 @@ public class CourseServiceImpl implements CourseService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public int countAllCourses() throws ServiceException {
+        try {
+            return courseDao.countAllCourses();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public List<Course> findCoursesUser(long userId) throws ServiceException {
+
+        List<Course> courseList= null;
+        try {
+            courseList = courseDao.findCoursesUser(userId);
+        } catch (DaoException e) {
+            throw new ServiceException("Courses not found", e);
+        }
+        return courseList;
+    }
+
 }

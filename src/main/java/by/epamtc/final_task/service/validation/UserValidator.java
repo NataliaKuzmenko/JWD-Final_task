@@ -4,6 +4,7 @@ public class UserValidator {
 
     private static final String EMAIL_PATTERN = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w]{2,4}$";
     private static final String PASSWORD_PATTERN = "\\w{3,15}";
+    private static final String NAME_EXPRESSION = "[A-Za-zА-Яа-яЁё]+(\\s+[A-Za-zА-Яа-яЁё]+)?";
     private static final UserValidator instance = new UserValidator();
 
 
@@ -20,6 +21,10 @@ public class UserValidator {
 
     public boolean isRightPassword(String enteredPassword) {
         return enteredPassword.matches(PASSWORD_PATTERN);
+    }
+
+    public boolean isRightName(String name) {
+        return name.matches(NAME_EXPRESSION);
     }
 
 }

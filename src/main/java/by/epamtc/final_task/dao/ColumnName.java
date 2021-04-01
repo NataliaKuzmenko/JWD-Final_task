@@ -12,13 +12,20 @@ public class ColumnName {
     public static final String COURSE_TITLE= "course_title";
 
     //courses
-    public static final String COURSE_ID="course_id";
+    public static final String COURSE_ID="course_run_id";
     public static final String DESCRIPTION="description";
     public static final String MATERIALS_PATH="materials_path";
     public static final String START_COURSE="start_course";
     public static final String END_COURSE="end_course";
     public static final String LIMIT_STUDENTS="limit_students";
-    public static final String TEACHER_ID="teacher_id";
+    public static final String LECTURER_ID="lecturer_id";
     public static final String STATUS="status";
     public static final String FORMAT="format";
+
+    //
+    public static final String RESULT_COURSE_ID = "result_course_id";
+    public static final String MARK = "mark";
+    public static final String COMMENT = "comment";
+    public static final String STATUS_STUDENT = "status_student_id";
+
 }

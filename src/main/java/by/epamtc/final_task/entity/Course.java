@@ -4,15 +4,15 @@ import java.time.LocalDate;
 
 public class Course {
     private static final long serialVersionUID = 6025254276834738707L;
-    private int id;
+    private long id;
     private String title;
     private String descripton;
     private String materialsPath;
-   // private int authorId;
+  // private long authorId;
     private LocalDate startDate;
     private LocalDate endDate;
-    private int studentsLimit;
-    private int lecturerId;
+
+    private long lecturerId;
     private StatusCourse status;
     private FormatCourse format;
     private int limitStudents;
@@ -20,25 +20,24 @@ public class Course {
     public Course() {
     }
 
-    public Course(int id, String title, String descripton, String materialsPath, LocalDate startDate, LocalDate endDate, int studentsLimit, int lecturerId, StatusCourse status, FormatCourse format, int limitStudents) {
+    public Course(long id, String title, String descripton, String materialsPath, LocalDate startDate, LocalDate endDate, long lecturerId, StatusCourse status, FormatCourse format, int limitStudents) {
         this.id = id;
         this.title = title;
         this.descripton = descripton;
         this.materialsPath = materialsPath;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.studentsLimit = studentsLimit;
         this.lecturerId = lecturerId;
         this.status = status;
         this.format = format;
         this.limitStudents = limitStudents;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -66,11 +65,11 @@ public class Course {
         this.materialsPath = materialsPath;
     }
 
-  /*  public int getAuthorId() {
+   /* public int getAuthorId() {
         return authorId;
-    }*/
+    }
 
-   /* public void setAuthorId(int authorId) {
+    public void setAuthorId(int authorId) {
         this.authorId = authorId;
     }*/
 
@@ -90,19 +89,11 @@ public class Course {
         this.endDate = endDate;
     }
 
-    public int getStudentsLimit() {
-        return studentsLimit;
-    }
-
-    public void setStudentsLimit(int studentsLimit) {
-        this.studentsLimit = studentsLimit;
-    }
-
-    public int getLecturerId() {
+    public long getLecturerId() {
         return lecturerId;
     }
 
-    public void setLecturerId(int lecturerId) {
+    public void setLecturerId(long lecturerId) {
         this.lecturerId = lecturerId;
     }
 
@@ -141,7 +132,7 @@ public class Course {
                 ", materialsPath='" + materialsPath + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
-                ", studentsLimit=" + studentsLimit +
+                ", studentsLimit=" + limitStudents +
                 ", lecturerId=" + lecturerId +
                 ", status=" + status +
                 ", format=" + format +

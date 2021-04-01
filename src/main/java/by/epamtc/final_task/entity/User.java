@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class User implements Serializable {
     private static final long serialVersionUID = -3435818998116239919L;
-    private int userId;
+    private long userId;
     private String email;
     private String firstName;
     private String lastName;
@@ -14,20 +14,21 @@ public class User implements Serializable {
 
     public User() {
     }
-    public User(User user) {
-        this.userId = user.userId;
-        this.email = user.email;
-        this.firstName = user.firstName;
-        this.lastName = user.lastName;
-        this.role = user.role;
-        this.photoPath = user.photoPath;
+
+    public User(long userId, String email, String firstName, String lastName, UserRole role, String photoPath) {
+        this.userId = userId;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.role = role;
+        this.photoPath = photoPath;
     }
 
-    public int getUserId() {
+    public long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 
@@ -102,11 +103,6 @@ public class User implements Serializable {
         STUDENT,
         LECTURER,
         ADMIN;
-    }
-    public enum UserCourseStatus {
-        APPLIED,
-        ENTERED,
-        NOT_ENTERED;
     }
 
 }
