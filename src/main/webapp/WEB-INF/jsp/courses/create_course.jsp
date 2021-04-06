@@ -17,35 +17,51 @@
     <fmt:message bundle="${locale}" key="course.End" var="courseEnd"/>
     <fmt:message bundle="${locale}" key="course.Format" var="courseFormat"/>
     <fmt:message bundle="${locale}" key="course.CreateMessage" var="courseCreateMesssage"/>
+    <fmt:message bundle="${locale}" key="message.EditProfileError" var="checkData"/>
 
     <title>${createCourse}</title>
 </head>
 <c:import url="/WEB-INF/jsp/common/header.jsp"/>
 <body>
+<c:if test="${param.get('createMessage')}">
+<div class="alert alert-success" role="alert">
+    ${courseCreateMesssage}
+</div>
+</c:if>
+<c:if test="${errorData == true}">
+    <div class="alert alert-warning" role="alert">
+            ${checkData}
+    </div>
+</c:if>
+<br/>
+<jsp:useBean id="currentDate" class="java.util.Date"/>
 <form action="${request.getContextPath()}/final_task_war_exploded/controller" method="post">
     <input type="hidden" name="command" value="createCourse"/>
-    <input type="hidden" name="lecturerId" value="user_id"/>
-    <input type="hidden" name="statusCourse" value="NOT_STARTED"/>
 
     ${courseTitle}:<br/>
     <input type="text" name="title" value=""/><br/>
     ${courseDescription}:<br/>
     <input type="text" name="description" value=""/><br/>
-    ${courseLimitStudents}:<br/>
-    <input type="text" name="limitStudents" value=""/><br/>
     ${courseStart}:<br/>
-    <input type="text" name="start" value=""/><br/>
+    <input type="date" class="form-control form-control-sm"
+           id="startDate" name="start" required      value=""
+           min="<fmt:formatDate value="${currentDate}" pattern="yyyy-MM-dd"/>"
+           max="2099-12-31"/>
     ${courseEnd}:<br/>
-    <input type="text" name="end" value=""/><br/>
+    <input type="date" class="form-control form-control-sm"
+           id="endDate" name="end"
+           value=""
+           required max="2099-12-31"
+           min="<fmt:formatDate value="${currentDate}" pattern="yyyy-MM-dd"/>"/><br/>
     ${courseFormat}:<br/>
-    <input type="text" name="format" value=""/><br/>
+    <select name="format">
+        <option>ONLINE</option>
+        <option>OFFLINE</option>
+    </select>
+    <br/>
     <input class="btn btn-outline-secondary" type="submit" value="${createCourse}"/>
 </form>
 <br/>
-<c:if test="${createMessage == true}">
-    ${courseCreateMesssage}
-</c:if>
-
 
 </body>
 <c:import url="/WEB-INF/jsp/common/footer.jsp"/>

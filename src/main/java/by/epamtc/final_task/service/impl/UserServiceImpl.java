@@ -45,27 +45,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean create(String enteredLogin, String enteredPassword) throws ServiceException {
         boolean result = false;
-
-        if (!isLoginExistsForCreationUser(enteredLogin)) {
-            String hashPassword = HashPassword.hashPassword(enteredPassword);
-            try {
-                result = userDao.create(enteredLogin, hashPassword);
-
-            } catch (DaoException e) {
-                throw new ServiceException("Creation failed", e);
-            }
-        }
-        return result;
-    }
-
-    @Override
-    public boolean isLoginExistsForCreationUser(String enteredLogin) throws ServiceException {
         try {
-            return userDao.isUserExist(enteredLogin);
+            if (userDao.isUserExist(enteredLogin)) {
+                String hashPassword = HashPassword.hashPassword(enteredPassword);
+
+                result = userDao.create(enteredLogin, hashPassword);
+            }
 
         } catch (DaoException e) {
-            throw new ServiceException("Select operation failed. Please contact your system administrator", e);
+            throw new ServiceException("Creation failed", e);
         }
+        return result;
     }
 
     @Override
@@ -87,12 +77,30 @@ public class UserServiceImpl implements UserService {
         try {
             userDao.updateUser(user);
         } catch (DaoException e) {
-            throw new ServiceException(e);
+            throw new ServiceException("Update user failed", e);
         }
     }
 
     @Override
-    public User updateAvatar(String email, String avatar) throws ServiceException {
+    public void updateEmail(User user) throws ServiceException {
+        try {
+            userDao.updateEmail(user);
+        } catch (DaoException e) {
+            throw new ServiceException("Update email failed", e);
+        }
+    }
+
+    @Override
+    public void updateNameAndSurname(User user) throws ServiceException {
+        try {
+            userDao.updateNameAndSurname(user);
+        } catch (DaoException e) {
+            throw new ServiceException("Update email failed", e);
+        }
+    }
+
+    @Override
+    public void updateAvatar(String email, String avatar) throws ServiceException {
 
         User user = new User();
         if (isLoginExists(email)) {
@@ -100,12 +108,11 @@ public class UserServiceImpl implements UserService {
             user.setPhotoPath(avatar);
             try {
                 userDao.updateAvatar(user);
-                userDao.updateUser(user);
+                // userDao.updateUser(user);
             } catch (DaoException e) {
                 throw new ServiceException("Avatar has not been updated", e);
             }
         }
-        return user;
     }
 
     @Override
@@ -145,32 +152,30 @@ public class UserServiceImpl implements UserService {
         return result;
     }
 
-    /*@Override
-    public boolean isUserOnCourse(long userId, long courseId) throws ServiceException {
-        boolean result;
-        try {
-            result = userDao.isUserOnCourse(userId, courseId);
-            if (result) {
-                throw new ServiceException("User already is on the course");
-            }
-        } catch (DaoException e) {
-            throw new ServiceException("Select operation failed. Please contact your system administrator", e);
-        }
-        return result;
-    }*/
-
     @Override
     public List<User> findAllUsers(int count) throws ServiceException {
         try {
             int offset = PAGE_ITEMS_COUNT * count;
-            List<User> titleList = userDao.findAllUsers(PAGE_ITEMS_COUNT, offset);
-            if (titleList.isEmpty()) {
+            List<User> userList = userDao.findAllUsers(PAGE_ITEMS_COUNT, offset);
+            if (userList.isEmpty()) {
                 throw new ServiceException("Users not found.");
             }
-            return titleList;
+            return userList;
         } catch (DaoException e) {
             throw new ServiceException("Users not found", e);
         }
+    }
+
+    @Override
+    public List<User> findAllUsersOnCourse(long courseId) throws ServiceException {
+        List<User> userList = null;
+        try {
+            userList = userDao.findAllUsersOnCourse(courseId);
+
+        } catch (DaoException e) {
+            throw new ServiceException("Users not found", e);
+        }
+        return userList;
     }
 
     @Override

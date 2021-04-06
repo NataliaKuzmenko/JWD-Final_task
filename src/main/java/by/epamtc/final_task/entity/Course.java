@@ -1,17 +1,16 @@
 package by.epamtc.final_task.entity;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Course {
     private static final long serialVersionUID = 6025254276834738707L;
     private long id;
     private String title;
-    private String descripton;
+    private String description;
     private String materialsPath;
-  // private long authorId;
     private LocalDate startDate;
     private LocalDate endDate;
-
     private long lecturerId;
     private StatusCourse status;
     private FormatCourse format;
@@ -20,10 +19,10 @@ public class Course {
     public Course() {
     }
 
-    public Course(long id, String title, String descripton, String materialsPath, LocalDate startDate, LocalDate endDate, long lecturerId, StatusCourse status, FormatCourse format, int limitStudents) {
+    public Course(long id, String title, String description, String materialsPath, LocalDate startDate, LocalDate endDate, long lecturerId, StatusCourse status, FormatCourse format, int limitStudents) {
         this.id = id;
         this.title = title;
-        this.descripton = descripton;
+        this.description = description;
         this.materialsPath = materialsPath;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -49,12 +48,12 @@ public class Course {
         this.title = title;
     }
 
-    public String getDescripton() {
-        return descripton;
+    public String getDescription() {
+        return description;
     }
 
     public void setDescripton(String descripton) {
-        this.descripton = descripton;
+        this.description = descripton;
     }
 
     public String getMaterialsPath() {
@@ -64,14 +63,6 @@ public class Course {
     public void setMaterialsPath(String materialsPath) {
         this.materialsPath = materialsPath;
     }
-
-   /* public int getAuthorId() {
-        return authorId;
-    }
-
-    public void setAuthorId(int authorId) {
-        this.authorId = authorId;
-    }*/
 
     public LocalDate getStartDate() {
         return startDate;
@@ -124,11 +115,29 @@ public class Course {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Course course = (Course) obj;
+        return lecturerId == course.lecturerId &&
+                limitStudents == course.limitStudents &&
+                title.equals(course.title) && description.equals(course.description) &&
+                materialsPath.equals(course.materialsPath) &&
+                startDate.equals(course.startDate) && endDate.equals(course.endDate) &&
+                status == course.status && format == course.format;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, description, materialsPath, startDate, endDate, lecturerId, status, format, limitStudents);
+    }
+
+    @Override
     public String toString() {
         return "Course{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", descripton='" + descripton + '\'' +
+                ", descripton='" + description + '\'' +
                 ", materialsPath='" + materialsPath + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
@@ -139,7 +148,6 @@ public class Course {
                 ", limitStudents=" + limitStudents +
                 '}';
     }
-
 
     public enum FormatCourse {
         ONLINE,

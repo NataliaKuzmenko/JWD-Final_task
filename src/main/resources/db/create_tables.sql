@@ -19,7 +19,7 @@ CREATE TABLE `courses`
     `course_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     `course_title` VARCHAR(500) NOT NULL,
     `description` LONGTEXT NOT NULL,
-    `materials_path` VARCHAR(255) NULL,
+    `materials_path` VARCHAR(255) default 'materials.pdf' NULL,
     `author_id` BIGINT UNSIGNED NULL,
     CONSTRAINT `PK_courses` PRIMARY KEY (`course_id` ASC)
 )

@@ -98,6 +98,6 @@ public class ConnectionPool {
                 LOGGER.log(Level.ERROR, "Impossible to destroy pool", e);
                 throw new PoolException("Impossible to destroy pool", e);
             }
-            ConnectionCreator.getInstance().deregisterDrivers();
+            
         }
     }

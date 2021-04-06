@@ -9,6 +9,9 @@
       integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 <head>
     <fmt:message bundle="${locale}" key="errorPage.Message" var="error"/>
+    <fmt:message bundle="${locale}" key="error.ContactAdmin" var="contactAdmin"/>
+
+    <c:set var="currentPage" value="/WEB-INF/jsp/error.jsp" scope="session"/>
 
     <title>${error}</title></head>
 <c:import url="/WEB-INF/jsp/common/header.jsp"/>
@@ -16,6 +19,11 @@
 
 <br/>
 ${error}
+<br/>
+<c:if test="${viewUsersError == true}">
+    ${contactAdmin}
+</c:if>
+
 <br/>
 </body>
 <c:import url="/WEB-INF/jsp/common/footer.jsp"/>

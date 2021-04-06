@@ -11,13 +11,15 @@ public interface UserService {
 
     boolean isLoginAndPasswordValid(String enteredLogin, String enteredPassword) throws ServiceException;
 
-    boolean isLoginExistsForCreationUser(String enteredLogin) throws ServiceException;
-
     User findUserWithTheAllInfoByLogin(String email) throws ServiceException;
 
     void updateUser(User user) throws ServiceException;
 
-    User updateAvatar(String email, String avatar) throws ServiceException;
+    void updateEmail(User user) throws ServiceException;
+
+    void updateNameAndSurname(User user) throws ServiceException;
+
+    void updateAvatar(String email, String avatar) throws ServiceException;
 
     boolean isLoginExists(String enteredLogin) throws ServiceException;
 
@@ -25,9 +27,9 @@ public interface UserService {
 
     boolean addUserOnCourse(long userId, long courseId) throws ServiceException;
 
-   // boolean isUserOnCourse(long userId, long courseId) throws ServiceException;
-
     List<User> findAllUsers(int count) throws ServiceException;
+
+    List<User> findAllUsersOnCourse(long courseId) throws ServiceException;
 
     int countAllUsers() throws ServiceException;
 

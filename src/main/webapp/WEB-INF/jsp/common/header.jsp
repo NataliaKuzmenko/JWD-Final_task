@@ -56,7 +56,6 @@
                                       action="${request.getContextPath()}/final_task_war_exploded/controller">
                                     <input class="btn btn-outline-secondary" type="submit" value="${courses}">
                                     <input type="hidden" name="command" value="courseRunCommand"/>
-
                                 </form>
                             </c:when>
                             <c:otherwise>
@@ -64,7 +63,7 @@
                                       action="${request.getContextPath()}/final_task_war_exploded/controller">
                                     <input class="btn btn-outline-secondary" type="submit" value="${courses}">
                                     <input type="hidden" name="command" value="coursesPage"/>
-                                    </form>
+                                </form>
                             </c:otherwise>
                         </c:choose>
 

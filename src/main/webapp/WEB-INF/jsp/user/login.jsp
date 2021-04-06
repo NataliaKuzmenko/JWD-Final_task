@@ -30,10 +30,12 @@
     <input type="password" name="password" value=""/>
     <br/>
     <c:if test="${errorLoginPassMessage == true}">
-        ${errorLogin}
+        <div class="alert alert-warning" role="alert">
+                ${errorLogin}
+        </div>
     </c:if>
     <br/>
-     <input type="submit" value="${login}"/>
+    <input type="submit" value="${login}"/>
 </form>
 </body>
 <c:import url="/WEB-INF/jsp/common/footer.jsp"/>

@@ -9,6 +9,7 @@ import by.epamtc.final_task.entity.Course;
 import by.epamtc.final_task.service.CourseService;
 import by.epamtc.final_task.service.exception.ServiceException;
 import by.epamtc.final_task.service.impl.CourseServiceImpl;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -39,6 +40,7 @@ public class CoursesPageCommand implements Command {
 
             pageForRouter = PageName.COURSES_PAGE;
         } catch (ServiceException e) {
+            LOGGER.log(Level.ERROR, "Command  coursesPageCommand invalid", e);
             throw new CommandException("Command  coursesPageCommand invalid", e);
         }
         return new Router(pageForRouter);

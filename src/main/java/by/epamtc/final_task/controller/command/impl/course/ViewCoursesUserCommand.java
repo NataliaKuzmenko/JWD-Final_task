@@ -29,9 +29,20 @@ public class ViewCoursesUserCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
         String page = PageName.USER_COURSES;
-        Long userId = (Long) request.getSession().getAttribute(ParameterName.USER_ID);
+
+        String courseIdStr = request.getParameter(ParameterName.COURSE_ID);
+        long userId = (Long) request.getSession().getAttribute(ParameterName.USER_ID);
 
         try {
+            if (courseIdStr != null) {
+                long courseId = Long.parseLong(courseIdStr);
+                if (resultUserService.updateUserCourseStatus(userId, courseId, ResultUser.UserCourseStatus.DENIED)) {
+                    request.setAttribute(ParameterName.COURSE_CANCEL, true);
+                } else {
+                    request.setAttribute(ParameterName.ERROR_CANCEL_COURSE, true);
+                }
+            }
+
             Map<Course, ResultUser> userCourses = new HashMap<>();
             List<Course> courseList = courseService.findCoursesUser(userId);
             for (Course course : courseList
@@ -39,10 +50,10 @@ public class ViewCoursesUserCommand implements Command {
                 ResultUser resultUser = resultUserService.findResultUser(userId, course.getId());
                 userCourses.put(course, resultUser);
             }
-            if(userCourses.isEmpty()){
-                request.setAttribute(ParameterName.NOT_REGISTER_ON_COURSE,true);
-            }else{
-                request.setAttribute(ParameterName.NOT_REGISTER_ON_COURSE,false);
+            if (userCourses.isEmpty()) {
+                request.setAttribute(ParameterName.NOT_REGISTER_ON_COURSE, true);
+            } else {
+                request.setAttribute(ParameterName.NOT_REGISTER_ON_COURSE, false);
                 request.setAttribute(ParameterName.COURSE_LIST, userCourses);
             }
 

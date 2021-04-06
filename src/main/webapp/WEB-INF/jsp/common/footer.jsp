@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="ctg" uri="/WEB-INF/tld/custom.tld" %>
 
 <fmt:setLocale value="${language}" scope="session"/>
 <fmt:setBundle basename="localization.pagecontent" var="locale"/>
@@ -11,9 +12,11 @@
     <title>${footer}</title>
 </head>
 <body>
-<footer class="mt-5 pt-2 text-muted text-center text-small">
-        <div class="footer-copyright text-center py-3">${FooterCopyright}</div>
+<div class="app-footer">
+    <footer class="page-footer font-small blue">
+        <div class="footer-copyright text-center py-3">${FooterCopyright} <ctg:time/></div>
     </footer>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

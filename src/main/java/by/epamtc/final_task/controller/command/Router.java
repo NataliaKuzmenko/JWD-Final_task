@@ -2,6 +2,16 @@ package by.epamtc.final_task.controller.command;
 
 public class Router {
     private String page;
+    private String message;
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     private Type type = Type.FORWARD;
 
     public Router(String page) {

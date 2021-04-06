@@ -18,6 +18,8 @@
     <fmt:message bundle="${locale}" key="label.CreateAnAccount" var="createAnAccount"/>
     <fmt:message bundle="${locale}" key="label.back" var="back"/>
 
+    <c:set var="currentPage" value="/WEB-INF/jsp/user/registration.jsp" scope="session"/>
+
     <title>${registration}</title>
 
 </head>

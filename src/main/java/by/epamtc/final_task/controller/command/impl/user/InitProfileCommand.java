@@ -23,16 +23,15 @@ public class InitProfileCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
         String page = PageName.PROFILE_PAGE;
+        long userId = (Long) request.getSession().getAttribute(ParameterName.USER_ID);
+        String userRole = (String) request.getSession().getAttribute(ParameterName.ROLE);
+        if (userRole == null) {
+            page = PageName.ERROR_PAGE;
+            request.setAttribute(ParameterName.ERROR, ParameterName.ERROR_MESSAGE_404);
+            return new Router(page);
+        }
         try {
-            String email = (String) request.getSession().getAttribute(ParameterName.EMAIL);
-            String userRole = (String) request.getSession().getAttribute(ParameterName.ROLE);
-            if (userRole == null) {
-                page = PageName.ERROR_PAGE;
-                request.setAttribute(ParameterName.ERROR, ParameterName.ERROR_MESSAGE_404);
-                return new Router(page);
-            }
-            String userEmail = (String) request.getSession().getAttribute(ParameterName.EMAIL);
-            User user = userService.findUserWithTheAllInfoByLogin(userEmail);
+            User user = userService.findUserById(userId);
 
             request.setAttribute(ParameterName.FIRST_NAME, user.getFirstName());
             request.setAttribute(ParameterName.LAST_NAME, user.getLastName());
@@ -40,7 +39,7 @@ public class InitProfileCommand implements Command {
             request.setAttribute(ParameterName.ROLE, user.getRole());
             request.setAttribute(ParameterName.PHOTO_PATH, user.getPhotoPath());
 
-            request.setAttribute(ParameterName.LANG_CHANGE_PROCESS_COMMAND,"initprofilecommand");
+            request.setAttribute(ParameterName.LANG_CHANGE_PROCESS_COMMAND, "initprofilecommand");
 
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "User not found", e);

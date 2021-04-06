@@ -4,7 +4,8 @@ public class UserValidator {
 
     private static final String EMAIL_PATTERN = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w]{2,4}$";
     private static final String PASSWORD_PATTERN = "\\w{3,15}";
-    private static final String NAME_EXPRESSION = "[A-Za-zА-Яа-яЁё]+(\\s+[A-Za-zА-Яа-яЁё]+)?";
+    private static final String NAME_PATTERN = "[A-Za-zА-Яа-яЁё]+(\\s+[A-Za-zА-Яа-яЁё]+)?";
+    private static final String LAST_NAME_PATTERN = "[A-Za-zА-Яа-яЁё]{2,15}";
     private static final UserValidator instance = new UserValidator();
 
 
@@ -24,8 +25,11 @@ public class UserValidator {
     }
 
     public boolean isRightName(String name) {
-        return name.matches(NAME_EXPRESSION);
+        return name.matches(NAME_PATTERN);
     }
 
+    public boolean isRightLastName(String lastName) {
+        return lastName.matches(LAST_NAME_PATTERN);
+    }
 }
 

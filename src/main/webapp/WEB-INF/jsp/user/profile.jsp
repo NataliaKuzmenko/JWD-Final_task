@@ -14,6 +14,7 @@
     <fmt:message bundle="${locale}" key="course.MyCourses" var="study"/>
     <fmt:message bundle="${locale}" key="profile.EditProfile" var="editProfile"/>
 
+    <c:set var="currentPage" value="/WEB-INF/jsp/user/profile.jsp" scope="session"/>
     <title>${profile}</title>
 
 </head>

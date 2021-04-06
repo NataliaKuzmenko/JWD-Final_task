@@ -17,6 +17,7 @@
     <fmt:message bundle="${locale}" key="main.4.Description" var="main_4_Description"/>
     <fmt:message bundle="${locale}" key="main.5.Description" var="main_5_Description"/>
 
+    <c:set var="currentPage" value="/WEB-INF/jsp/main.jsp" scope="session"/>
 
     <title>${namePage} </title>
     <style>

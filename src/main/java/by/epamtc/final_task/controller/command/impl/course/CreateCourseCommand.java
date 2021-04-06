@@ -5,32 +5,55 @@ import by.epamtc.final_task.controller.command.Router;
 import by.epamtc.final_task.controller.command.exception.CommandException;
 import by.epamtc.final_task.controller.constant.PageName;
 import by.epamtc.final_task.controller.constant.ParameterName;
+import by.epamtc.final_task.service.CourseService;
+import by.epamtc.final_task.service.exception.ServiceException;
+import by.epamtc.final_task.service.impl.CourseServiceImpl;
+import by.epamtc.final_task.service.validation.CourseValidator;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDate;
 
 public class CreateCourseCommand implements Command {
     public static final Logger LOGGER = LogManager.getLogger();
+    CourseValidator courseValidator = CourseValidator.getInstance();
+    CourseService courseService = CourseServiceImpl.getInstance();
+
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
-        String page;
-        Long authorId = request.getParameter(ParameterName.USER_ID) == null
-                ? (Long) request.getSession().getAttribute(ParameterName.USER_ID)
-                : Long.valueOf(request.getParameter(ParameterName.USER_ID));
-
-        String statusCourse = request.getParameter(ParameterName.STATUS_COURSE);
+        Router router;
+        long lecturerId = (Long) request.getSession().getAttribute(ParameterName.USER_ID);
         String title = request.getParameter(ParameterName.TITLE);
         String description = request.getParameter(ParameterName.DESCRIPTION);
-        String limitStudents = request.getParameter(ParameterName.LIMIT_STUDENTS);
         String start = request.getParameter(ParameterName.START);
         String end = request.getParameter(ParameterName.END);
         String format = request.getParameter(ParameterName.FORMAT);
+        try {
+            LocalDate startDate = LocalDate.parse(start);
+            LocalDate endDate = LocalDate.parse(end);
 
-        request.setAttribute(ParameterName.CREATE_MESSAGE, true);
-        request.setAttribute(ParameterName.LANG_CHANGE_PROCESS_COMMAND,"createcourse");
+            if (courseValidator.isRightTitle(title) &&
+                    courseValidator.isRightDescription(description) &&
+                    courseValidator.isRightStartDate(startDate) &&
+                    courseValidator.isRightEndDate(startDate, endDate) &&
+                    courseValidator.isRightFormat(format)) {
 
-        page = PageName.CREATE_COURSE;
-        return new Router(page);
+                courseService.create(title, description, lecturerId, startDate, endDate, format);
+
+                router = new Router(PageName.CREATE_COURSE);
+                router.setMessage(ParameterName.CREATE_MESSAGE);
+                router.useRedirect();
+            } else {
+                request.setAttribute(ParameterName.ERROR_DATA, true);
+                router = new Router(PageName.CREATE_COURSE);
+            }
+            request.setAttribute(ParameterName.LANG_CHANGE_PROCESS_COMMAND, "forwardtocreatecourse");
+        } catch (ServiceException e) {
+            LOGGER.log(Level.ERROR, "Create course failed", e);
+            throw new CommandException("Create course failed", e);
+        }
+        return router;
     }
 }

@@ -17,16 +17,24 @@ public interface UserDao {
 
     void updateUser(User user) throws DaoException;
 
+    void updateEmail(User user) throws DaoException;
+
+    void updateNameAndSurname(User user) throws DaoException;
+
     User findUserById(long userId) throws DaoException;
 
-    boolean addUserOnCourse(long studentId, long courseId) throws DaoException;
+    void addUserOnCourse(long studentId, long courseId) throws DaoException;
 
     boolean isUserOnCourse(long userId, long courseId) throws DaoException;
 
-    User updateAvatar(User user) throws DaoException;
+    void updateAvatar(User user) throws DaoException;
 
     List<User> findAllUsers(int count, int offset) throws DaoException;
+
     int countAllCourses() throws DaoException;
+
     void updateUserRole(User user) throws DaoException;
+
+    List<User> findAllUsersOnCourse(long courseId) throws DaoException;
 }
 

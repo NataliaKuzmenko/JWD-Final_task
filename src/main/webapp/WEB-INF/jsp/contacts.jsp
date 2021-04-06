@@ -15,6 +15,7 @@
     <fmt:message bundle="${locale}" key="contacts.2.time" var="time_2"/>
     <fmt:message bundle="${locale}" key="contacts.3.time" var="time_3"/>
 
+    <c:set var="currentPage" value="/WEB-INF/jsp/contacts.jsp" scope="session"/>
     <title>${contacts}</title>
 </head>
 <c:import url="/WEB-INF/jsp/common/header.jsp"/>

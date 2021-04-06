@@ -10,14 +10,25 @@
     <fmt:setBundle basename="localization.pagecontent" var="locale"/>
 
     <fmt:message bundle="${locale}" key="label.Users" var="users"/>
-    <fmt:message bundle="${locale}" key="button.ChangeRole" var="changeRole"/>
+    <fmt:message bundle="${locale}" key="button.ChangeRole" var="change_role"/>
+    <fmt:message bundle="${locale}" key="user.RoleChanged" var="roleChanged"/>
+    <fmt:message bundle="${locale}" key="user.RoleChangedError" var="roleChangeError"/>
+
+    <c:set var="currentPage" value="/WEB-INF/jsp/user/users.jsp" scope="session"/>
 
     <title>${users}</title>
 </head>
 <c:import url="/WEB-INF/jsp/common/header.jsp"/>
 <body>
 Зарегистрироанные пользователи<br/>
-
+<c:if test="${changeRoleError == true}">
+    ${roleChangeError}
+</c:if>
+<br/>
+<c:if test="${changeRole == true}">
+    ${roleChanged}
+</c:if>
+<br/>
 <table class="table table-bordered">
     <thead>
     <tr>
@@ -37,8 +48,8 @@
             <td>
                 <form class="form-inline my-2 my-lg-0" method="post"
                       action="${request.getContextPath()}/final_task_war_exploded/controller">
-                    <input class="btn btn-outline-secondary" type="submit" value="${changeRole}">
-                    <input type="hidden" name="command" value="changerole"/>
+                    <input class="btn btn-outline-secondary" type="submit" value="${change_role}">
+                    <input type="hidden" name="command" value="inittableuserscommand"/>
                     <input type="hidden" name="user_id" value="${user.userId}"/>
                     <input type="hidden" name="role" value="${user.role}"/>
                 </form>

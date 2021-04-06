@@ -39,7 +39,7 @@ public class Login implements Command {
                 request.setAttribute(ParameterName.PHOTO_PATH, user.getPhotoPath());
                 request.setAttribute(ParameterName.WELCOME, true);
                 page = PageName.WELCOME_PAGE;
-                request.setAttribute(ParameterName.LANG_CHANGE_PROCESS_COMMAND,"forwardwelcome");
+                request.setAttribute(ParameterName.LANG_CHANGE_PROCESS_COMMAND, "forwardwelcome");
             } else {
                 request.setAttribute(ParameterName.INCORRECT_LOGIN_AND_PASSWORD, true);
                 page = PageName.LOGIN_PAGE;

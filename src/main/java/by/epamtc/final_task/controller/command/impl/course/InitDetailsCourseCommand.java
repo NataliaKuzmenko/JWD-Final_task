@@ -12,6 +12,7 @@ import by.epamtc.final_task.service.UserService;
 import by.epamtc.final_task.service.exception.ServiceException;
 import by.epamtc.final_task.service.impl.CourseServiceImpl;
 import by.epamtc.final_task.service.impl.UserServiceImpl;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -24,28 +25,56 @@ public class InitDetailsCourseCommand implements Command {
 
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
-        String page;
+
+        String page = PageName.DETAILS_COURSE_PAGE;
         Course course;
         User user;
-        String courseIdStr = request.getParameter(ParameterName.COURSE_ID);
+        String courseIdStr = request.getParameter(ParameterName.COURSE_ID) == null
+                ? (String) request.getSession().getAttribute(ParameterName.COURSE_ID)
+                : request.getParameter(ParameterName.COURSE_ID);
+
+        String statusCourse = request.getParameter(ParameterName.STATUS_COURSE);
+        String register = request.getParameter(ParameterName.REGISTER);
+        String format = request.getParameter(ParameterName.FORMAT);
+
+        /*String courseIdStr = request.getParameter(ParameterName.COURSE_ID);
         if (courseIdStr == null) {
             courseIdStr = (String) request.getSession().getAttribute(ParameterName.COURSE_ID);
         }
-        request.getSession().setAttribute(ParameterName.COURSE_ID, courseIdStr);
+        request.getSession().setAttribute(ParameterName.COURSE_ID, courseIdStr);*/
         try {
             long courseId = Long.parseLong(courseIdStr);
+
+            if (statusCourse != null) {
+                courseService.updateStatusCourse(courseId, Course.StatusCourse.valueOf(statusCourse));
+                request.setAttribute(ParameterName.CHANGE_STATUS_COURSE, true);
+            }
+            if (format != null) {
+                courseService.updateFormat(courseId, Course.FormatCourse.valueOf(format));
+                request.setAttribute(ParameterName.CHANGE_FORMAT_COURSE, true);
+            }
+
+            if (register != null) {
+                Long userIdStr = (Long) request.getSession().getAttribute(ParameterName.USER_ID);
+                //long userId = Long.parseLong(userIdStr);
+                if (userService.addUserOnCourse(userIdStr, courseId)) {
+                    request.setAttribute(ParameterName.REGISTER_COURSE_MESSAGE, true);
+                } else {
+                    request.setAttribute(ParameterName.REGISTER_COURSE_ERROR, true);
+                }
+            }
+
             course = courseService.findInfoAboutCourse(courseId);
             user = userService.findUserById(course.getLecturerId());
+
+            request.setAttribute(ParameterName.COURSE, course);
+            request.setAttribute(ParameterName.USER, user);
+
+            request.setAttribute(ParameterName.LANG_CHANGE_PROCESS_COMMAND, ParameterName.INIT_DETAILS_COURSE_COMMAND);
         } catch (ServiceException e) {
+            LOGGER.log(Level.ERROR, "Course not found", e);
             throw new CommandException("Command  InitDetailsCourseCommand invalid", e);
         }
-        request.getSession().setAttribute(ParameterName.COURSE, course);
-        request.getSession().setAttribute(ParameterName.USER, user);
-
-        request.setAttribute(ParameterName.LANG_CHANGE_PROCESS_COMMAND,
-                ParameterName.INIT_DETAILS_COURSE_COMMAND);
-
-        page = PageName.DETAILS_COURSE_PAGE;
         return new Router(page);
     }
 }

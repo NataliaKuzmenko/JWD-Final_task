@@ -1,5 +1,7 @@
 package by.epamtc.final_task.entity;
 
+import java.util.Objects;
+
 public class ResultUser {
     private static final long serialVersionUID = -128367247802464631L;
     private long resultId;
@@ -47,6 +49,19 @@ public class ResultUser {
 
     public void setStatus(UserCourseStatus status) {
         this.status = status;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        ResultUser that = (ResultUser) obj;
+        return resultId == that.resultId && mark == that.mark && Objects.equals(comment, that.comment) && status == that.status;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(resultId, mark, comment, status);
     }
 
     @Override

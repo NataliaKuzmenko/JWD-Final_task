@@ -13,8 +13,9 @@
     <fmt:message bundle="${locale}" key="course.NotCourses" var="notCourses"/>
     <fmt:message bundle="${locale}" key="course.LeaveCourse" var="leaveCourse"/>
     <fmt:message bundle="${locale}" key="course.ErrorLeaveCourse" var="cancelCourseError"/>
+    <fmt:message bundle="${locale}" key="course.Cancel" var="cancelCourse"/>
 
-
+    <c:set var="currentPage" value="/WEB-INF/jsp/user/user_courses.jsp" scope="session"/>
     <title>${study}</title>
 </head>
 <c:import url="/WEB-INF/jsp/common/header.jsp"/>
@@ -22,6 +23,7 @@
 <c:if test="${errorCancelCourse ==true}">
     ${cancelCourseError}
 </c:if>
+
 <c:if test="${courseCancel == true}">
     ${cancelCourse}
 </c:if>
@@ -65,14 +67,14 @@
                         <c:when test="${result.value.status == 'DENIED'}">
                            Курс отменен
                         </c:when>
-                        <c:when test="${result.value.status == 'FINISHED'}">
+                        <c:when test="${result.value.status == 'FINISHED'|| result.key.status =='FINISHED'}">
                             Курс завершен
                         </c:when>
                         <c:otherwise>
                             <form class="form-inline my-2 my-lg-0" method="post"
                                   action="${request.getContextPath()}/final_task_war_exploded/controller">
                                 <input class="btn btn-outline-secondary" type="submit" value="${leaveCourse}">
-                                <input type="hidden" name="command" value="leavecourse"/>
+                                <input type="hidden" name="command" value="viewcoursesuser"/>
                                 <input type="hidden" name="courseId" value="${result.key.id}"/>
                             </form>
                         </c:otherwise>

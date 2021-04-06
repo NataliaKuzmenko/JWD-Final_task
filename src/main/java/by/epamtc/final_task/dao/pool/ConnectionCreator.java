@@ -47,21 +47,7 @@ class ConnectionCreator {
         return instance;
     }
 
-
     Connection createConnection() throws SQLException {
         return DriverManager.getConnection(DATABASE_URL, properties);
-    }
-
-    void deregisterDrivers() throws PoolException {
-        Enumeration<Driver> drivers = DriverManager.getDrivers();
-        while (drivers.hasMoreElements()) {
-            Driver driver = drivers.nextElement();
-            try {
-                DriverManager.deregisterDriver(driver);
-            } catch (SQLException e) {
-                LOGGER.log(Level.ERROR, "Registered drivers are missing", e);
-                throw new PoolException("Registered drivers are missing", e);
-            }
-        }
     }
 }
