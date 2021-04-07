@@ -64,7 +64,7 @@
 <c:set value="${param.get('page')}" var="currentPage"/>
 
 <c:if test="${usersCount > 5}">
-    <div class="row align-text-bottom justify-content-center">
+    <div class="row align-text-bottom justify-content-start">
         <c:if test="${currentPage > 0}">
             <a class="pr-3 text-info"
                href="${request.getContextPath()}/final_task_war_exploded/controller?command=inittableuserscommand&page=${currentPage - 1}">${previous_button}</a>

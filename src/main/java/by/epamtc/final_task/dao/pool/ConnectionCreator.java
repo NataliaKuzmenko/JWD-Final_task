@@ -1,6 +1,5 @@
 package by.epamtc.final_task.dao.pool;
 
-import by.epamtc.final_task.dao.pool.exception.PoolException;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -8,10 +7,8 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
-import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Enumeration;
 import java.util.Properties;
 
 class ConnectionCreator {

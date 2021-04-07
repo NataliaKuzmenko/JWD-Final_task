@@ -45,7 +45,7 @@ ${profile}
     <input type="hidden" name="command" value="forward"/>
     <input type="hidden" name="page" value="/WEB-INF/jsp/user/edit_profile.jsp"/>
 </form>
-<br/>
+
 <c:if test="${role == 'STUDENT'}">
 <form class="form-inline my-2 my-lg-0" method="post" action="${request.getContextPath()}/final_task_war_exploded/controller">
     <input class="btn btn-outline-secondary" type="submit" value="${study}">
