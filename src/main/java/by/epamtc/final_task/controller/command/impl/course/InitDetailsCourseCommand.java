@@ -32,7 +32,7 @@ public class InitDetailsCourseCommand implements Command {
         String courseIdStr = request.getParameter(ParameterName.COURSE_ID) == null
                 ? (String) request.getSession().getAttribute(ParameterName.COURSE_ID)
                 : request.getParameter(ParameterName.COURSE_ID);
-
+        request.getSession().setAttribute(ParameterName.COURSE_ID, courseIdStr);
         String statusCourse = request.getParameter(ParameterName.STATUS_COURSE);
         String register = request.getParameter(ParameterName.REGISTER);
         String format = request.getParameter(ParameterName.FORMAT);
