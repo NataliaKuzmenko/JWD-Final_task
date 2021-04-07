@@ -16,6 +16,9 @@
     <fmt:message bundle="${locale}" key="course.End" var="courseEnd"/>
 
     <title>${editCourse}</title>
+    <style>
+        <%@include file="/css/style.css" %>
+    </style>
 </head>
 <c:import url="/WEB-INF/jsp/common/header.jsp"/>
 <jsp:useBean id="currentDate" class="java.util.Date"/>

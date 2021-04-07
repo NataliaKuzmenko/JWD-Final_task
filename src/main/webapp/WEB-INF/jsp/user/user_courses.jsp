@@ -15,8 +15,10 @@
     <fmt:message bundle="${locale}" key="course.ErrorLeaveCourse" var="cancelCourseError"/>
     <fmt:message bundle="${locale}" key="course.Cancel" var="cancelCourse"/>
 
-    <c:set var="currentPage" value="/WEB-INF/jsp/user/user_courses.jsp" scope="session"/>
     <title>${study}</title>
+    <style>
+        <%@include file="/css/style.css" %>
+    </style>
 </head>
 <c:import url="/WEB-INF/jsp/common/header.jsp"/>
 <body>

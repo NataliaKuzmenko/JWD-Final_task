@@ -21,6 +21,9 @@
     <fmt:message bundle="${locale}" key="button.AddResults" var="addResults"/>
     <fmt:message bundle="${locale}" key="message.ListEmpty" var="listEmpty"/>
         <title>${courses}</title>
+    <style>
+        <%@include file="/css/style.css" %>
+    </style>
 </head>
 <c:import url="/WEB-INF/jsp/common/header.jsp"/>
 <body>

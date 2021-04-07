@@ -55,7 +55,6 @@ public class RegistrationCommand implements Command {
                 request.setAttribute(ParameterName.LAST_NAME, user.getLastName());
                 request.setAttribute(ParameterName.PHOTO_PATH, user.getPhotoPath());
 
-               // request.getSession().setAttribute(ParameterName.REGISTRATION_OK, true);
                 request.setAttribute(ParameterName.LANG_CHANGE_PROCESS_COMMAND,ParameterName.FORWARD_WELCOME_COMMAND);
 
                 router = new Router(PageName.WELCOME_PAGE);

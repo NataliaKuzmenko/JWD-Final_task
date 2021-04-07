@@ -11,9 +11,10 @@
     <fmt:message bundle="${locale}" key="errorPage.Message" var="error"/>
     <fmt:message bundle="${locale}" key="error.ContactAdmin" var="contactAdmin"/>
 
-    <c:set var="currentPage" value="/WEB-INF/jsp/error.jsp" scope="session"/>
-
     <title>${error}</title></head>
+<style>
+    <%@include file="/css/style.css" %>
+</style>
 <c:import url="/WEB-INF/jsp/common/header.jsp"/>
 <body>
 

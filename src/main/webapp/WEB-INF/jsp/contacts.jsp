@@ -14,18 +14,31 @@
     <fmt:message bundle="${locale}" key="contacts.1.time" var="time_1"/>
     <fmt:message bundle="${locale}" key="contacts.2.time" var="time_2"/>
     <fmt:message bundle="${locale}" key="contacts.3.time" var="time_3"/>
+    <fmt:message bundle="${locale}" key="contacts.Address" var="address"/>
 
-    <c:set var="currentPage" value="/WEB-INF/jsp/contacts.jsp" scope="session"/>
     <title>${contacts}</title>
+    <style>
+        <%@include file="/css/style.css" %>
+    </style>
 </head>
 <c:import url="/WEB-INF/jsp/common/header.jsp"/>
 <body>
-
-<br/>${adress_1}
-<br/>${adress_2}
-<br/>${time_1}
-<br/>${time_2}
-<br/>${time_3}
-
+<br/>
+<br/>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-5"></div>
+        <div class="col-lg-3">
+            <h3 class="font-weight-normal" class="text-dark">${address}</h3>
+            <p class="font-italic" class="text-dark">${adress_1}</p>
+            <p class="font-italic" class="text-dark">${adress_2}</p>
+            <p class="font-italic" class="text-dark">${time_1}</p>
+            <p class="font-italic" class="text-dark">${time_2}</p>
+            <p class="font-italic" class="text-dark">${time_3}</p>
+        </div>
+        <div class="col-lg-4"></div>
+    </div>
+            <c:import url="/WEB-INF/jsp/common/footer.jsp"/>
+</div>
 </body>
-<c:import url="/WEB-INF/jsp/common/footer.jsp"/>
+

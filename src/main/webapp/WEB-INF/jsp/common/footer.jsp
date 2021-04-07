@@ -12,10 +12,14 @@
     <title>${footer}</title>
 </head>
 <body>
-<div class="app-footer">
-    <footer class="page-footer font-small blue">
-        <div class="footer-copyright text-center py-3">${FooterCopyright} <ctg:time/></div>
-    </footer>
+
+<div id="footer">
+    <div>
+        <p>${FooterCopyright}</p>
+    </div>
+</div>
+<div id="customTag">
+    <ctg:time/>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

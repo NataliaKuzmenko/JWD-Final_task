@@ -14,12 +14,16 @@
     <fmt:message bundle="${locale}" key="course.MyCourses" var="study"/>
     <fmt:message bundle="${locale}" key="profile.EditProfile" var="editProfile"/>
 
-    <c:set var="currentPage" value="/WEB-INF/jsp/user/profile.jsp" scope="session"/>
     <title>${profile}</title>
-
+    <style>
+        <%@include file="/css/style.css" %>
+    </style>
 </head>
 <c:import url="/WEB-INF/jsp/common/header.jsp"/>
-<body>
+<body><div class="container">
+    <div class="row">
+        <div class="col-lg-5"></div>
+        <div class="col-lg-3">
 ${profile}
 <br/>
 <c:out value="${first_name}"/>
@@ -34,7 +38,7 @@ ${profile}
 <c:out value="${email}"/>
 <br/>
 <br/>
-<c:out value="${role}"/>
+<c:out value="${role}"/><br/>
 <br/>
 <form class="form-inline my-2 my-lg-0" method="post" action="${request.getContextPath()}/final_task_war_exploded/controller">
     <input class="btn btn-outline-secondary" type="submit" value="${editProfile}">
@@ -47,7 +51,8 @@ ${profile}
     <input class="btn btn-outline-secondary" type="submit" value="${study}">
     <input type="hidden" name="command" value="viewcoursesuser"/>
 </form>
-</c:if>
-</html>
+</c:if></div><div class="col-lg-4"></div>
+    </div>
 <c:import url="/WEB-INF/jsp/common/footer.jsp"/>
-
+</div></body>
+</html>

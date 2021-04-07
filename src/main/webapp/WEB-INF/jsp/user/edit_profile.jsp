@@ -24,7 +24,9 @@
 
 
     <title>${profile}</title>
-
+    <style>
+        <%@include file="/css/style.css" %>
+    </style>
 </head>
 <c:import url="/WEB-INF/jsp/common/header.jsp"/>
 <body>

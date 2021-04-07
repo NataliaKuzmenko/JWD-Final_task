@@ -28,6 +28,9 @@
     <fmt:message bundle="${locale}" key="course.ChangeFormat" var="formatCourseChange"/>
 
     <title>${courses}</title>
+    <style>
+        <%@include file="/css/style.css" %>
+    </style>
 </head>
 <c:import url="/WEB-INF/jsp/common/header.jsp"/>
 <body>

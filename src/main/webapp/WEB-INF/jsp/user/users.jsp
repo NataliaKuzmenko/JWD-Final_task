@@ -14,9 +14,10 @@
     <fmt:message bundle="${locale}" key="user.RoleChanged" var="roleChanged"/>
     <fmt:message bundle="${locale}" key="user.RoleChangedError" var="roleChangeError"/>
 
-    <c:set var="currentPage" value="/WEB-INF/jsp/user/users.jsp" scope="session"/>
-
     <title>${users}</title>
+    <style>
+        <%@include file="/css/style.css" %>
+    </style>
 </head>
 <c:import url="/WEB-INF/jsp/common/header.jsp"/>
 <body>

@@ -22,6 +22,7 @@
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
     <title>${header}</title>
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -30,7 +31,7 @@
 
             <a class="navbar-brand">
                 <img src="images/Lion.png" width="45" height="45">
-                ${lion}
+                <h3 class="font-weight-normal" class="text-primary">${lion}</h3>
             </a>
 
         </div>
@@ -95,7 +96,7 @@
             </ul>
         </div>
 
-        <span class="navbar-brand mb-0 h1">${title}</span>
+        <span class="navbar-brand mb-0 h1"><h3 class="font-weight-normal" class="text-primary">${title}</h3></span>
 
         <c:choose>
             <c:when test="${role != null}">

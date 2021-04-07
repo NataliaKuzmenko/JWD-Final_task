@@ -17,48 +17,77 @@
     <fmt:message bundle="${locale}" key="label.RepeatPassword" var="repeatPassword"/>
     <fmt:message bundle="${locale}" key="label.CreateAnAccount" var="createAnAccount"/>
     <fmt:message bundle="${locale}" key="label.back" var="back"/>
-
-    <c:set var="currentPage" value="/WEB-INF/jsp/user/registration.jsp" scope="session"/>
+    <fmt:message bundle="${locale}" key="label.PlaceholderPassword" var="PlaceholderPassword"/>
+    <fmt:message bundle="${locale}" key="label.PlaceholderRepeatPassword" var="PlaceholderRepeatPassword"/>
+    <fmt:message bundle="${locale}" key="label.PlaceholderEmail" var="PlaceholderEmail"/>
 
     <title>${registration}</title>
-
+    <style>
+        <%@include file="/css/style.css" %>
+    </style>
 </head>
 <c:import url="/WEB-INF/jsp/common/header.jsp"/>
 <body>
 
 <c:if test="${registrationErrorPasswords == true}">
-    ${errorPassword}
+    <div class="alert alert-warning" role="alert">
+            ${errorPassword}</div>
 </c:if>
 
 <c:if test="${registrationErrorSymbols == true}">
-    ${errorSymbols}
+    <div class="alert alert-warning" role="alert">
+            ${errorSymbols}</div>
 </c:if>
 
 <c:if test="${registrationError == true}">
-    ${registration_error}
+    <div class="alert alert-warning" role="alert">
+            ${registration_error}</div>
 </c:if>
 <br/>
-
-<form action="${request.getContextPath()}/final_task_war_exploded/controller" method="post">
-    <input type="hidden" name="command" value="registration"/>
-
-    ${enterEmail}:<br/>
-    <input type="email" name="email" value=""/><br/>
-
-    ${enterPassword}:<br/>
-    <input type="password" name="password" value=""/><br/>
-
-    ${repeatPassword}:<br/>
-    <input type="password" name="repeat password" value=""/><br/>
-
-    <br/>
-    ${error}
-
-    <input type="submit" value="${createAnAccount}"/><br/>
-</form>
-
-<div class="col-sm-4"></div>
-
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+            <form action="${request.getContextPath()}/final_task_war_exploded/controller" method="post">
+                <input type="hidden" name="command" value="registration"/>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">${enterEmail}</span>
+                    </div>
+                    <input type="email" name="email" class="form-control" aria-label="Default"
+                           aria-describedby="inputGroup-sizing-default" value=""
+                           pattern="^[\w-\.]+@([\w-]+\.)+[\w]{2,4}$"
+                           placeholder="${PlaceholderEmail}"
+                           required/>
+                </div>
+                <br/>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="password">${enterPassword}</span>
+                    </div>
+                    <input type="password" name="password" class="form-control" aria-label="Default"
+                           aria-describedby="inputGroup-sizing-default" value=""
+                           pattern="^(?=.*[0-9])(?=.*[a-zа-я])(?=.*[A-ZА_Я]).{6,20}$"
+                           placeholder="${PlaceholderPassword}" required/>
+                </div>
+                <br/>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="repeatPassword">${repeatPassword}</span>
+                    </div>
+                    <input type="password" name="repeat password" class="form-control" aria-label="Default"
+                           aria-describedby="inputGroup-sizing-default" value=""
+                           pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,20}$"
+                           placeholder="${PlaceholderRepeatPassword}"
+                           required/>
+                </div>
+                <br/>
+                <input class="btn btn-outline-primary" type="submit" value="${createAnAccount}"/><br/>
+            </form>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+</div>
 </body>
 <c:import url="/WEB-INF/jsp/common/footer.jsp"/>
 </html>

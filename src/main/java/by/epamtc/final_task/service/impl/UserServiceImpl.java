@@ -44,12 +44,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean create(String enteredLogin, String enteredPassword) throws ServiceException {
-        boolean result = false;
+        boolean result;
         try {
-            if (userDao.isUserExist(enteredLogin)) {
+            if (!userDao.isUserExist(enteredLogin)) {
                 String hashPassword = HashPassword.hashPassword(enteredPassword);
 
                 result = userDao.create(enteredLogin, hashPassword);
+            } else {
+                result = false;
             }
 
         } catch (DaoException e) {

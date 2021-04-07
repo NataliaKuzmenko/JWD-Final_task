@@ -90,7 +90,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean isUserExist(String email) throws DaoException {
-        boolean result = true;
+        boolean result = false;
         try {
             Connection connection = ConnectionPool.getInstance().getConnection();
             PreparedStatement statement = connection.prepareStatement(SQL_SELECT_COUNT_USERS);
@@ -100,6 +100,8 @@ public class UserDaoImpl implements UserDao {
                     int countUsers = resultSet.getInt(1);
                     if (countUsers == 0) {
                         result = false;
+                    }else{
+                        result = true;
                     }
                 }
             }
