@@ -1,5 +1,6 @@
 package by.epamtc.final_task.dao.pool;
 
+import by.epamtc.final_task.dao.exception.DaoException;
 import by.epamtc.final_task.dao.pool.exception.PoolException;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -10,12 +11,20 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 
+/**
+ * The type Proxy connection.
+ */
 public class ProxyConnection implements Connection {
 
-    private Connection connection;
+    private final Connection connection;
 
     public static final Logger LOGGER = LogManager.getLogger();
 
+    /**
+     * Instantiates a new Proxy connection.
+     *
+     * @param connection the connection
+     */
     ProxyConnection(Connection connection) {
         this.connection = connection;
     }
@@ -69,9 +78,15 @@ public class ProxyConnection implements Connection {
         }
     }
 
-    void trueClose() throws SQLException {
-        connection.close();
-
+    /**
+     * True close.
+     */
+    void trueClose() throws DaoException {
+        try {
+            connection.close();
+        } catch (SQLException throwables) {
+            throw new DaoException("Close connection failed", throwables);
+        }
     }
 
     @Override

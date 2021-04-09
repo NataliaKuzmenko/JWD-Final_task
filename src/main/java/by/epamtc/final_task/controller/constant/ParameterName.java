@@ -1,5 +1,8 @@
 package by.epamtc.final_task.controller.constant;
 
+/**
+ * Constants for receiving and sending requests
+ */
 public final class ParameterName {
 
     public static final String ADD_FOR_PATH_AVATAR = "/";

@@ -18,6 +18,9 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Class implementing action of opening 'Course details' page
+ */
 public class InitDetailsCourseCommand implements Command {
     public static final Logger LOGGER = LogManager.getLogger();
     private final CourseService courseService = CourseServiceImpl.getInstance();

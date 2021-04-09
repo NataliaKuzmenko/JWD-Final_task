@@ -15,6 +15,9 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Command to initialize user profile
+ */
 public class InitProfileCommand implements Command {
 
     public static final Logger LOGGER = LogManager.getLogger();

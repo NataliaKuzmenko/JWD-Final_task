@@ -15,6 +15,9 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Command for user authorization
+ */
 public class Login implements Command {
 
     public static final Logger LOGGER = LogManager.getLogger();
@@ -28,17 +31,7 @@ public class Login implements Command {
         try {
             if (userService.isLoginExists(email)) {
                 if (userService.isLoginAndPasswordValid(email, password)) {
-
-                    User user = userService.findUserWithTheAllInfoByLogin(email);
-
-                    request.getSession().setAttribute(ParameterName.ROLE, user.getRole().name());
-                    request.getSession().setAttribute(ParameterName.EMAIL, user.getEmail());
-                    request.getSession().setAttribute(ParameterName.USER_ID, user.getUserId());
-
-                    request.setAttribute(ParameterName.FIRST_NAME, user.getFirstName());
-                    request.setAttribute(ParameterName.LAST_NAME, user.getLastName());
-                    request.setAttribute(ParameterName.PHOTO_PATH, user.getPhotoPath());
-
+                    findUser(request, email, userService);
                     page = PageName.WELCOME_PAGE;
                     request.setAttribute(ParameterName.LANG_CHANGE_PROCESS_COMMAND,
                             ParameterName.FORWARD_WELCOME_COMMAND);
@@ -55,6 +48,17 @@ public class Login implements Command {
             throw new CommandException("User is not exist", e);
         }
         return new Router(page);
+    }
+
+    static void findUser(HttpServletRequest request, String email, UserService userService) throws ServiceException {
+        User user = userService.findUserWithTheAllInfoByLogin(email);
+
+        request.getSession().setAttribute(ParameterName.ROLE, user.getRole().name());
+        request.getSession().setAttribute(ParameterName.EMAIL, user.getEmail());
+        request.getSession().setAttribute(ParameterName.USER_ID, user.getUserId());
+
+        request.setAttribute(ParameterName.FIRST_NAME, user.getFirstName());
+        request.setAttribute(ParameterName.LAST_NAME, user.getLastName());
     }
 }
 

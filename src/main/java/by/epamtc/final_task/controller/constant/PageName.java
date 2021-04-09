@@ -1,5 +1,8 @@
 package by.epamtc.final_task.controller.constant;
 
+/**
+ * Jsp page path
+ */
 public final class PageName {
     public static final String ADD_RESULT = "/WEB-INF/jsp/courses/add_result.jsp";
     public static final String COURSES_PAGE = "/WEB-INF/jsp/courses/courses.jsp";

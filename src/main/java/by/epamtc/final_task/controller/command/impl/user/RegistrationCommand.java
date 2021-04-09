@@ -5,7 +5,6 @@ import by.epamtc.final_task.controller.command.Router;
 import by.epamtc.final_task.controller.command.exception.CommandException;
 import by.epamtc.final_task.controller.constant.PageName;
 import by.epamtc.final_task.controller.constant.ParameterName;
-import by.epamtc.final_task.entity.User;
 import by.epamtc.final_task.service.UserService;
 import by.epamtc.final_task.service.exception.ServiceException;
 import by.epamtc.final_task.service.impl.UserServiceImpl;
@@ -16,6 +15,9 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Command for registering a new user
+ */
 public class RegistrationCommand implements Command {
     public static final Logger LOGGER = LogManager.getLogger();
 
@@ -43,17 +45,9 @@ public class RegistrationCommand implements Command {
             Router router;
             if (userService.create(email, password)) {
 
-                User user = userService.findUserWithTheAllInfoByLogin(email);
-                request.getSession().setAttribute(ParameterName.ROLE, user.getRole().name());
-                request.getSession().setAttribute(ParameterName.EMAIL, user.getEmail());
-                request.getSession().setAttribute(ParameterName.USER_ID, user.getUserId());
-
-                request.setAttribute(ParameterName.FIRST_NAME, user.getFirstName());
-                request.setAttribute(ParameterName.LAST_NAME, user.getLastName());
-                request.setAttribute(ParameterName.PHOTO_PATH, user.getPhotoPath());
+                Login.findUser(request, email, userService);
 
                 request.setAttribute(ParameterName.LANG_CHANGE_PROCESS_COMMAND, ParameterName.FORWARD_WELCOME_COMMAND);
-
                 router = new Router(PageName.WELCOME_PAGE);
                 router.setMessage(ParameterName.REGISTRATION_OK);
                 router.useRedirect();

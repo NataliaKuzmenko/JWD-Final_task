@@ -1,5 +1,8 @@
 package by.epamtc.final_task.controller.command;
 
+/**
+ * Use for servlet navigation
+ */
 public class Router {
     private String page;
     private String message;

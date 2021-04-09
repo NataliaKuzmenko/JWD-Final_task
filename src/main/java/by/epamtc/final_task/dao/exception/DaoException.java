@@ -1,23 +1,40 @@
 package by.epamtc.final_task.dao.exception;
 
+/**
+ * The type Dao exception.
+ */
 public class DaoException extends Exception {
-
-    private static final long serialVersionUID = -1889104346339773302L;
-
+    /**
+     * Instantiates a new Dao exception.
+     */
     public DaoException() {
-        super();
     }
 
+    /**
+     * Instantiates a new Dao exception.
+     *
+     * @param message the message
+     */
     public DaoException(String message) {
         super(message);
     }
 
-    public DaoException(Exception e) {
-        super(e);
+    /**
+     * Instantiates a new Dao exception.
+     *
+     * @param message the message
+     * @param cause   the cause
+     */
+    public DaoException(String message, Throwable cause) {
+        super(message, cause);
     }
 
-    public DaoException(String message, Exception e) {
-        super(message, e);
+    /**
+     * Instantiates a new Dao exception.
+     *
+     * @param cause the cause
+     */
+    public DaoException(Throwable cause) {
+        super(cause);
     }
-
 }

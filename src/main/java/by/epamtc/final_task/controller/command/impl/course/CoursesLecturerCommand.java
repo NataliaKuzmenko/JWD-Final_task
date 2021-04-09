@@ -19,6 +19,9 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * Command to initialize the courses table taught by the lecturer
+ */
 public class CoursesLecturerCommand implements Command {
     public static final Logger LOGGER = LogManager.getLogger();
     private final CourseService courseService = CourseServiceImpl.getInstance();

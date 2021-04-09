@@ -1,6 +1,9 @@
 package by.epamtc.final_task.dao;
 
-public class ColumnName {
+/**
+ * The class contains the names of the columns in the database
+ */
+public final class ColumnName {
 
     public static final String USER_ID = "user_id";
     public static final String PASSWORD = "password";

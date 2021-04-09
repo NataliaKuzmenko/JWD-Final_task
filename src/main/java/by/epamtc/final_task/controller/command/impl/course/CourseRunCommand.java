@@ -16,6 +16,10 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * Class implementing action of opening 'Courses list available for register' page
+ *
+ */
 public class CourseRunCommand implements Command {
     public static final Logger LOGGER = LogManager.getLogger();
 

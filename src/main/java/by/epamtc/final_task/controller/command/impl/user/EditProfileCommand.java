@@ -16,6 +16,9 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Class implementing editing of user's profile
+ */
 public class EditProfileCommand implements Command {
 
     public static final Logger LOGGER = LogManager.getLogger();

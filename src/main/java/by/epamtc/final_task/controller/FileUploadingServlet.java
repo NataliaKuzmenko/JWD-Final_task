@@ -22,6 +22,9 @@ import java.util.UUID;
 
 import static by.epamtc.final_task.controller.constant.ParameterName.*;
 
+/**
+ * Servlet for loading avatars
+ */
 @WebServlet(urlPatterns = {"/upload"})
 @MultipartConfig(fileSizeThreshold = 1024 * 1024
         , maxFileSize = 1024 * 1024 * 5
@@ -29,7 +32,7 @@ import static by.epamtc.final_task.controller.constant.ParameterName.*;
 
 public class FileUploadingServlet extends HttpServlet {
 
-    private UserService userService = UserServiceImpl.getInstance();
+    private final UserService userService = UserServiceImpl.getInstance();
     private static final String FILE_EXTENSION_REGEX = ".+\\.((png)|(jpg)|(jpeg))";
 
     @Override

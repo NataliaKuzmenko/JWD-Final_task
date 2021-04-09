@@ -21,6 +21,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Command to initialize users on course table
+ */
 public class InitTableUsersOnCourseCommand implements Command {
     public static final Logger LOGGER = LogManager.getLogger();
     private final ResultUserService resultUserService = ResultUserServiceImpl.getInstance();

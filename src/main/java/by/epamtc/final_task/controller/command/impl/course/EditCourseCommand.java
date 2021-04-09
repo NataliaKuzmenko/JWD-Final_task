@@ -16,6 +16,9 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 
+/**
+ * Course editing command
+ */
 public class EditCourseCommand implements Command {
     public static final Logger LOGGER = LogManager.getLogger();
     private final CourseValidator courseValidator = CourseValidator.getInstance();

@@ -19,6 +19,10 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 
+/**
+ * Class implementing course creating
+ *
+ */
 public class CreateCourseCommand implements Command {
     public static final Logger LOGGER = LogManager.getLogger();
     private final CourseValidator courseValidator = CourseValidator.getInstance();

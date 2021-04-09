@@ -12,6 +12,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The class contains query`s processing to the database for the course
+ */
 public class CourseDaoImpl implements CourseDao {
 
     private static CourseDaoImpl instance;

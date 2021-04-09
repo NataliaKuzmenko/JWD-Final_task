@@ -1,20 +1,28 @@
 package by.epamtc.final_task.controller.command;
 
 import by.epamtc.final_task.controller.command.exception.CommandException;
-import by.epamtc.final_task.controller.command.impl.ForwardCommand;
+import by.epamtc.final_task.controller.command.impl.page.ForwardCommand;
 import by.epamtc.final_task.controller.command.impl.LanguageCommand;
 import by.epamtc.final_task.controller.command.impl.admin.InitTableUsersCommand;
 import by.epamtc.final_task.controller.command.impl.course.*;
+import by.epamtc.final_task.controller.command.impl.page.*;
 import by.epamtc.final_task.controller.command.impl.user.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ * Class that provides access to command objects
+ */
 public class CommandProvider {
+    /**
+     * Map that matches the name of a command with an object that implements this command
+     */
+    private final Map<CommandName, Command> commands = new HashMap<>();
 
-    private Map<CommandName, Command> commands = new HashMap<>();
-
+    /**
+     * Construct a CommandProvider and put commands
+     */
     public CommandProvider() {
 
         commands.put(CommandName.FORWARD, new ForwardCommand());
@@ -42,12 +50,25 @@ public class CommandProvider {
 
     }
 
-    public Command takeCommand(String name) {
+    /**
+     * Finds and returns a command by name
+     *
+     * @param command name of command
+     * @return object that implements this command
+     */
+    public Command takeCommand(String command) {
         CommandName commandName;
-        commandName = CommandName.valueOf(name.toUpperCase());
+        commandName = CommandName.valueOf(command.toUpperCase());
         return commands.get(commandName);
     }
 
+    /**
+     * Finds and returns a command by name for change language
+     *
+     * @param current name of command
+     * @param action name of command
+     * @return object that implements this command
+     */
     public static Command getCommand(Command current, String action)
             throws CommandException {
         if (action == null || action.isEmpty()) {

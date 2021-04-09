@@ -10,6 +10,9 @@ import javax.servlet.ServletRequestListener;
 import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Simple request listener.
+ */
 @WebListener
 public class SimpleRequestListener implements ServletRequestListener {
 

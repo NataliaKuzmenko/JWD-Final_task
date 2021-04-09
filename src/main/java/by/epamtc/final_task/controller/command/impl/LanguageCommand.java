@@ -10,6 +10,9 @@ import by.epamtc.final_task.controller.constant.ParameterName;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * Command for changing the language in the application
+ */
 public class LanguageCommand implements Command {
 
     @Override

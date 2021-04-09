@@ -12,6 +12,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * The class contains query`s processing to the database for the user results
+ */
 public class ResultUserDaoImpl implements ResultUserDao {
     private static final String SQL_SELECT_RESULT_USER_BY_ID_ON_COURSE = "SELECT * FROM lists_students " +
             "WHERE user_id = ? AND course_run_id=?";

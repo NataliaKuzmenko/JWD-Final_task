@@ -1,5 +1,8 @@
 package by.epamtc.final_task.controller.command;
 
+/**
+ * The enum Command type.
+ */
 public enum CommandName {
 
     COURSERUNCOMMAND,
@@ -23,5 +26,5 @@ public enum CommandName {
     LOGOUT,
     REGISTRATION,
     SETCOURSERESULT,
-    VIEWCOURSESUSER;
+    VIEWCOURSESUSER
 }

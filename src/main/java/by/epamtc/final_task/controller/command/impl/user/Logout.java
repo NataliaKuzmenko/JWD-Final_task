@@ -10,6 +10,9 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Command where user can log out from their profile
+ */
 public class Logout implements Command {
     public static final Logger LOGGER = LogManager.getLogger();
 

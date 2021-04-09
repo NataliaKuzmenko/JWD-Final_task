@@ -8,6 +8,9 @@ import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;
 
+/**
+ * Session listener.
+ */
 @WebListener
 public class SessionListener implements HttpSessionAttributeListener {
     public static final Logger LOGGER = LogManager.getLogger();

@@ -14,6 +14,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The class contains query`s processing to the database for the user
+ */
 public class UserDaoImpl implements UserDao {
 
     private static UserDaoImpl instance;
@@ -98,11 +101,7 @@ public class UserDaoImpl implements UserDao {
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     int countUsers = resultSet.getInt(1);
-                    if (countUsers == 0) {
-                        result = false;
-                    } else {
-                        result = true;
-                    }
+                    result = countUsers != 0;
                 }
             }
         } catch (SQLException | PoolException e) {

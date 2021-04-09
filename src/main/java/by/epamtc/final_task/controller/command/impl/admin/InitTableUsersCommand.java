@@ -16,10 +16,13 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * Command to initialize the users table
+ */
 public class InitTableUsersCommand implements Command {
 
     public static final Logger LOGGER = LogManager.getLogger();
-    private UserService userService = UserServiceImpl.getInstance();
+    private final UserService userService = UserServiceImpl.getInstance();
 
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
@@ -33,7 +36,7 @@ public class InitTableUsersCommand implements Command {
         try {
             if (userIdStr != null && userRole != null) {
                 if (userRole.equals(String.valueOf(User.UserRole.STUDENT))) {
-                    Long userId = Long.parseLong(userIdStr);
+                    long userId = Long.parseLong(userIdStr);
                     User user = userService.findUserById(userId);
                     userService.updateUserRole(user);
                     request.setAttribute(ParameterName.CHANGE_ROLE, true);

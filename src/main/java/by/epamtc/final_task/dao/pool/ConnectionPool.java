@@ -1,5 +1,6 @@
 package by.epamtc.final_task.dao.pool;
 
+import by.epamtc.final_task.dao.exception.DaoException;
 import by.epamtc.final_task.dao.pool.exception.PoolException;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -13,13 +14,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-
+/**
+ * Connection pool which contains 32 connections and, if necessary, issues them to users
+ */
 public class ConnectionPool {
 
     public static final Logger LOGGER = LogManager.getLogger();
     private static ConnectionPool instance;
-    private static Lock lock = new ReentrantLock();
-    private static AtomicBoolean instanceWasCreated = new AtomicBoolean();
+    private final static Lock lock = new ReentrantLock();
+    private final static AtomicBoolean instanceWasCreated = new AtomicBoolean();
     private BlockingQueue<ProxyConnection> freeConnections;
     private BlockingQueue<ProxyConnection> givenAwayConnections;
     private static final int DEFAULT_POOL_SIZE = 32;
@@ -44,6 +47,11 @@ public class ConnectionPool {
         return freeConnections;
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static ConnectionPool getInstance() {
         if (!instanceWasCreated.get()) {
             try {
@@ -59,6 +67,11 @@ public class ConnectionPool {
         return instance;
     }
 
+    /**
+     * Gets connection.
+     *
+     * @return the connection
+     */
     public Connection getConnection() throws PoolException {
         ProxyConnection connection;
         try {
@@ -71,7 +84,12 @@ public class ConnectionPool {
         return connection;
     }
 
-
+    /**
+     * Release connection.
+     *
+     * @param connection the connection
+     * @throws PoolException the pool exception
+     */
     public void releaseConnection(Connection connection) throws PoolException {
         if (connection != null) {
             if (connection instanceof ProxyConnection && givenAwayConnections.remove(connection)) {
@@ -85,6 +103,11 @@ public class ConnectionPool {
         }
     }
 
+    /**
+     * Destroy pool.
+     *
+     * @throws PoolException the pool exception
+     */
     public void destroyPool() throws PoolException {
         try {
             for (int i = 0; i < DEFAULT_POOL_SIZE; i++) {
@@ -93,10 +116,10 @@ public class ConnectionPool {
                     connection.trueClose();
                 }
             }
-        } catch (InterruptedException | SQLException e) {
+        } catch (InterruptedException | DaoException e) {
             LOGGER.log(Level.ERROR, "Impossible to destroy pool", e);
             throw new PoolException("Impossible to destroy pool", e);
         }
-
+        ConnectionCreator.getInstance().deregisterDrivers();
     }
 }
