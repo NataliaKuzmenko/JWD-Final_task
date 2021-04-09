@@ -17,9 +17,7 @@
     <fmt:message bundle="${locale}" key="contacts.Address" var="address"/>
 
     <title>${contacts}</title>
-    <style>
-        <%@include file="/css/style.css" %>
-    </style>
+
 </head>
 <c:import url="/WEB-INF/jsp/common/header.jsp"/>
 <body>
@@ -28,17 +26,18 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-5"></div>
-        <div class="col-lg-3">
+        <div class="col-lg-4">
             <h3 class="font-weight-normal" class="text-dark">${address}</h3>
             <p class="font-italic" class="text-dark">${adress_1}</p>
             <p class="font-italic" class="text-dark">${adress_2}</p>
             <p class="font-italic" class="text-dark">${time_1}</p>
             <p class="font-italic" class="text-dark">${time_2}</p>
             <p class="font-italic" class="text-dark">${time_3}</p>
+            <p class="font-italic" class="text-dark">+375-44-793-80-56</p>
         </div>
-        <div class="col-lg-4"></div>
     </div>
-            <c:import url="/WEB-INF/jsp/common/footer.jsp"/>
 </div>
 </body>
+<c:import url="/WEB-INF/jsp/common/footer.jsp"/>
+</html>
 

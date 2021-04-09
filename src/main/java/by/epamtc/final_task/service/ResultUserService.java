@@ -10,5 +10,4 @@ public interface ResultUserService {
     ResultUser findResultUser(long userId, long courseId) throws ServiceException;
 
     boolean updateUserCourseStatus(long userId, long courseId, ResultUser.UserCourseStatus status) throws ServiceException;
-
 }

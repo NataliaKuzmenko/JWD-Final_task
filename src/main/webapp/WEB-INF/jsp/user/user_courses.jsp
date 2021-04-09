@@ -14,80 +14,96 @@
     <fmt:message bundle="${locale}" key="course.LeaveCourse" var="leaveCourse"/>
     <fmt:message bundle="${locale}" key="course.ErrorLeaveCourse" var="cancelCourseError"/>
     <fmt:message bundle="${locale}" key="course.Cancel" var="cancelCourse"/>
+    <fmt:message bundle="${locale}" key="label.back" var="back"/>
+    <fmt:message bundle="${locale}" key="course.Title" var="title"/>
+    <fmt:message bundle="${locale}" key="course.Start" var="start"/>
+    <fmt:message bundle="${locale}" key="course.End" var="end"/>
+    <fmt:message bundle="${locale}" key="course.Status" var="status"/>
+    <fmt:message bundle="${locale}" key="result.Mark" var="mark"/>
+    <fmt:message bundle="${locale}" key="result.Comment" var="comment"/>
+    <fmt:message bundle="${locale}" key="result.StatusStudent" var="statusStudent"/>
+    <fmt:message bundle="${locale}" key="user.StatusCancelCourse" var="cancel"/>
+    <fmt:message bundle="${locale}" key="user.StatusFinished" var="finished"/>
 
     <title>${study}</title>
-    <style>
-        <%@include file="/css/style.css" %>
-    </style>
+
 </head>
 <c:import url="/WEB-INF/jsp/common/header.jsp"/>
 <body>
-<c:if test="${errorCancelCourse ==true}">
-    ${cancelCourseError}
-</c:if>
+<div class="container">
+    <c:if test="${errorCancelCourse ==true}">
+        <div class="alert alert-warning" role="alert">
+                ${cancelCourseError}</div>
+    </c:if>
 
-<c:if test="${courseCancel == true}">
-    ${cancelCourse}
-</c:if>
+    <c:if test="${courseCancel == true}">
+        <div class="alert alert-success" role="alert">
+                ${cancelCourse}</div>
+    </c:if>
 
-<c:if test="${listCoursesIsEmpty ==true}">
-    ${notCourses}
-</c:if>
-<c:if test="${listCoursesIsEmpty ==false}">
-    <br/>
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th scope="col">Название курса</th>
-            <th scope="col">Начало курса</th>
-            <th scope="col">Завершение курса</th>
-            <th scope="col">Статус курса</th>
-            <th scope="col">Оценка студента</th>
-            <th scope="col">Отзыв студента</th>
-            <th scope="col">Статус студента</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach var="result" items="${courseList}">
+    <c:if test="${listCoursesIsEmpty ==true}">
+        <div class="alert alert-primary" role="alert">${notCourses}</div>
+    </c:if>
+    <c:if test="${listCoursesIsEmpty ==false}">
+        <br/>
+        <table class="table table-bordered">
+            <thead>
             <tr>
-                <td><c:out value="${result.key.title}"/></td>
-                <td><c:out value="${result.key.startDate}"/></td>
-                <td><c:out value="${result.key.endDate}"/></td>
-                <td><c:out value="${result.key.status}"/></td>
-                <td>
-                    <c:if test="${result.value.mark == 0}">
-                        -
-                    </c:if>
-                    <c:if test="${result.value.mark != 0}">
-                        <c:out value="${result.value.mark}"/>
-                    </c:if>
-                </td>
-                <td><c:out value="${result.value.comment}"/></td>
-                <td><c:out value="${result.value.status}"/></td>
-                <td>
-                    <c:choose>
-                        <c:when test="${result.value.status == 'DENIED'}">
-                           Курс отменен
-                        </c:when>
-                        <c:when test="${result.value.status == 'FINISHED'|| result.key.status =='FINISHED'}">
-                            Курс завершен
-                        </c:when>
-                        <c:otherwise>
-                            <form class="form-inline my-2 my-lg-0" method="post"
-                                  action="${request.getContextPath()}/final_task_war_exploded/controller">
-                                <input class="btn btn-outline-secondary" type="submit" value="${leaveCourse}">
-                                <input type="hidden" name="command" value="viewcoursesuser"/>
-                                <input type="hidden" name="courseId" value="${result.key.id}"/>
-                            </form>
-                        </c:otherwise>
-                    </c:choose>
-                </td>
+                <th scope="col">${title}</th>
+                <th scope="col">${start}</th>
+                <th scope="col">${end}</th>
+                <th scope="col">${status}</th>
+                <th scope="col">${mark}</th>
+                <th scope="col">${comment}</th>
+                <th scope="col">${statusStudent}</th>
             </tr>
-        </c:forEach>
-        </tbody>
-    </table>
-</c:if>
-
+            </thead>
+            <tbody>
+            <c:forEach var="result" items="${courseList}">
+                <tr>
+                    <td><c:out value="${result.key.title}"/></td>
+                    <td><c:out value="${result.key.startDate}"/></td>
+                    <td><c:out value="${result.key.endDate}"/></td>
+                    <td><c:out value="${result.key.status}"/></td>
+                    <td>
+                        <c:if test="${result.value.mark == 0}">
+                            -
+                        </c:if>
+                        <c:if test="${result.value.mark != 0}">
+                            <c:out value="${result.value.mark}"/>
+                        </c:if>
+                    </td>
+                    <td><c:out value="${result.value.comment}"/></td>
+                    <td><c:out value="${result.value.status}"/></td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${result.value.status == 'DENIED'}">
+                                ${cancel}
+                            </c:when>
+                            <c:when test="${result.value.status == 'FINISHED'|| result.key.status =='FINISHED'}">
+                                ${finished}
+                            </c:when>
+                            <c:otherwise>
+                                <form class="form-inline my-2 my-lg-0" method="post"
+                                      action="${request.getContextPath()}/final_task_war_exploded/controller">
+                                    <input class="btn btn-outline-secondary" type="submit" value="${leaveCourse}">
+                                    <input type="hidden" name="command" value="viewcoursesuser"/>
+                                    <input type="hidden" name="courseId" value="${result.key.id}"/>
+                                </form>
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </c:if>
+    <form class="form-inline my-2 my-lg-0" method="post"
+          action="${request.getContextPath()}/final_task_war_exploded/controller">
+        <input type="hidden" name="command" value="INITPROFILECOMMAND"/>
+        <input class="btn btn-outline-secondary" type="submit" value="${back}">
+    </form>
+</div>
 </body>
 <c:import url="/WEB-INF/jsp/common/footer.jsp"/>
 </html>

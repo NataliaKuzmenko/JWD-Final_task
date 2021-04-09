@@ -3,7 +3,6 @@ package by.epamtc.final_task.service.validation;
 public class UserValidator {
 
     private static final String EMAIL_PATTERN = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w]{2,4}$";
-   // private static final String PASSWORD_PATTERN = "\\w{3,15}";
     private static final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-zа-я])(?=.*[A-ZА-Я]).{6,20}$";
     private static final String NAME_PATTERN = "[A-Za-zА-Яа-яЁё]+(\\s+[A-Za-zА-Яа-яЁё]+)?";
     private static final String LAST_NAME_PATTERN = "[A-Za-zА-Яа-яЁё]{2,15}";

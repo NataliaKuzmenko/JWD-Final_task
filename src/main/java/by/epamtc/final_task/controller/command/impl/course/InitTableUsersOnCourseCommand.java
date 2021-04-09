@@ -23,8 +23,8 @@ import java.util.Map;
 
 public class InitTableUsersOnCourseCommand implements Command {
     public static final Logger LOGGER = LogManager.getLogger();
-    ResultUserService resultUserService = ResultUserServiceImpl.getInstance();
-    UserService userService = UserServiceImpl.getInstance();
+    private final ResultUserService resultUserService = ResultUserServiceImpl.getInstance();
+    private final UserService userService = UserServiceImpl.getInstance();
 
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
@@ -37,6 +37,7 @@ public class InitTableUsersOnCourseCommand implements Command {
         String statusUser = request.getParameter(ParameterName.STATUS_USER);
         String userIdStr = request.getParameter(ParameterName.USER_ID);
 
+
         try {
             long courseId = Long.parseLong(courseIdStr);
 
@@ -47,16 +48,17 @@ public class InitTableUsersOnCourseCommand implements Command {
 
             Map<User, ResultUser> result = new HashMap<>();
             List<User> userList = userService.findAllUsersOnCourse(courseId);
-            if(userList.isEmpty()){
-                request.getSession().setAttribute(ParameterName.ERROR_DATA,true);
-            }else{
-            for (User user : userList) {
-                ResultUser resultUser = resultUserService.findResultUser(user.getUserId(), courseId);
-                result.put(user, resultUser);
-            }
-            request.setAttribute(ParameterName.USER_LIST, result);
+            if (userList.isEmpty()) {
+                request.setAttribute(ParameterName.ERROR_DATA, true);
+            } else {
+                for (User user : userList) {
+                    ResultUser resultUser = resultUserService.findResultUser(user.getUserId(), courseId);
+                    result.put(user, resultUser);
+                }
+                request.setAttribute(ParameterName.USER_LIST, result);
             }
             page = PageName.USERS_ON_COURSE;
+            request.setAttribute(ParameterName.LANG_CHANGE_PROCESS_COMMAND, ParameterName.INIT_TABLE_USERS_ON_COURSE);
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Command  InitTableUsersOnCourseCommand invalid", e);
             throw new CommandException("Command  InitTableUsersOnCourseCommand invalid", e);

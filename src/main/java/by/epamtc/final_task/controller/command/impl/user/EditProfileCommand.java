@@ -19,36 +19,34 @@ import javax.servlet.http.HttpServletRequest;
 public class EditProfileCommand implements Command {
 
     public static final Logger LOGGER = LogManager.getLogger();
-    private UserService userService = UserServiceImpl.getInstance();
-    private UserValidator validationUser = UserValidator.getInstance();
+    private final UserService userService = UserServiceImpl.getInstance();
+    private final UserValidator validationUser = UserValidator.getInstance();
 
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
-        String page = null;
-        long userId = (Long) request.getSession().getAttribute(ParameterName.USER_ID);
 
+        String emailSession = (String) request.getSession().getAttribute(ParameterName.EMAIL);
         String name = request.getParameter(ParameterName.FIRST_NAME);
         String lastName = request.getParameter(ParameterName.LAST_NAME);
         String email = request.getParameter(ParameterName.EMAIL);
 
         try {
+            User user = userService.findUserWithTheAllInfoByLogin(emailSession);
             if (!email.trim().isEmpty() && !name.trim().isEmpty() && !lastName.trim().isEmpty()) {
-                updateNameAndSurnameAndEmail(userId, name, lastName, email, request);
-                page = PageName.EDIT_PROFILE_PAGE;
+                updateNameAndSurnameAndEmail(user.getUserId(), name, lastName, email, request);
             } else if (name.trim().isEmpty() && lastName.trim().isEmpty()) {
-                updateEmail(userId, email, request);
-                page = PageName.EDIT_PROFILE_PAGE;
+                updateEmail(user.getUserId(), email, request);
             } else {
-                updateNameAndSurname(userId, name, lastName, request);
-                page = PageName.EDIT_PROFILE_PAGE;
+                updateNameAndSurname(user.getUserId(), name, lastName, request);
             }
 
-            request.setAttribute(ParameterName.LANG_CHANGE_PROCESS_COMMAND, "forwardtoeditprofile");
+            request.setAttribute(ParameterName.LANG_CHANGE_PROCESS_COMMAND,
+                    ParameterName.FORWARD_EDIT_PROFILE_COMMAND);
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "User not found", e);
             throw new CommandException("User not found", e);
         }
-        return new Router(page);
+        return new Router(PageName.EDIT_PROFILE_PAGE);
     }
 
     private void updateNameAndSurnameAndEmail(long userId, String name, String lastName, String email, HttpServletRequest request) throws ServiceException {
@@ -60,9 +58,10 @@ public class EditProfileCommand implements Command {
                 user.setLastName(lastName);
                 user.setEmail(email);
                 userService.updateUser(user);
+                request.getSession().setAttribute(ParameterName.EMAIL, user.getEmail());
                 request.setAttribute(ParameterName.EDIT_PROFILE_RESULT, true);
             } else {
-                request.setAttribute(ParameterName.ERROR_DATA, true);
+                request.setAttribute(ParameterName.ERROR_DATA_PROFILE, true);
             }
         } else {
             request.setAttribute(ParameterName.USER_IS_EXIST, true);
@@ -77,7 +76,7 @@ public class EditProfileCommand implements Command {
             userService.updateNameAndSurname(user);
             request.setAttribute(ParameterName.EDIT_PROFILE_RESULT, true);
         } else {
-            request.setAttribute(ParameterName.ERROR_DATA, true);
+            request.setAttribute(ParameterName.ERROR_DATA_PROFILE, true);
         }
     }
 
@@ -87,9 +86,10 @@ public class EditProfileCommand implements Command {
                 User user = userService.findUserById(userId);
                 user.setEmail(email);
                 userService.updateEmail(user);
+                request.getSession().setAttribute(ParameterName.EMAIL, user.getEmail());
                 request.setAttribute(ParameterName.EDIT_PROFILE_RESULT, true);
             } else {
-                request.setAttribute(ParameterName.ERROR_DATA, true);
+                request.setAttribute(ParameterName.ERROR_DATA_PROFILE, true);
             }
         } else {
             request.setAttribute(ParameterName.USER_IS_EXIST, true);

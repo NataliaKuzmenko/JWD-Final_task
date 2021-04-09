@@ -18,70 +18,93 @@ import java.time.LocalDate;
 
 public class EditCourseCommand implements Command {
     public static final Logger LOGGER = LogManager.getLogger();
-    CourseValidator courseValidator = CourseValidator.getInstance();
-    CourseService courseService = CourseServiceImpl.getInstance();
+    private final CourseValidator courseValidator = CourseValidator.getInstance();
+    private final CourseService courseService = CourseServiceImpl.getInstance();
 
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
-        String page = PageName.EDIT_COURSE;
-        ;
+        Router router;
+
         String courseIdStr = (String) request.getSession().getAttribute(ParameterName.COURSE_ID);
         String parameter = (String) request.getSession().getAttribute(ParameterName.PARAMETER);
         try {
             long courseId = Long.parseLong(courseIdStr);
-
-            switch (parameter) {
-                case (ParameterName.TITLE):
-                    String title = request.getParameter(ParameterName.TITLE);
-                    if (!title.trim().isEmpty()) {
-                        if (courseValidator.isRightTitle(title)) {
-                            courseService.updateTitle(courseId, title);
-                            request.setAttribute(ParameterName.EDIT_COURSE_RESULT, true);
-                        } else {
-                            request.setAttribute(ParameterName.ERROR, true);
-                        }
-                    } else {
-                        request.setAttribute(ParameterName.ERROR_DATA, true);
-                    }
-                    break;
-                case (ParameterName.DESCRIPTION):
-                    String description = request.getParameter(ParameterName.DESCRIPTION);
-                    //if (!description.trim().isEmpty()) {
-                    if (description != null) {
-                        if (courseValidator.isRightDescription(description)) {
-                            courseService.updateDescription(courseId, description);
-                            System.out.println(courseId + " " + description);
-                            request.setAttribute(ParameterName.EDIT_COURSE_RESULT, true);
-                        } else {
-                            request.setAttribute(ParameterName.ERROR, true);
-                        }
-                    } else {
-                        request.setAttribute(ParameterName.ERROR_DATA, true);
-                    }
-                    break;
-                case (ParameterName.START):
-                    String startDateStr = request.getParameter(ParameterName.START);
-                    String endDateStr = request.getParameter(ParameterName.END);
-                    if (!startDateStr.trim().isEmpty() && !endDateStr.trim().isEmpty()) {
-                        LocalDate startDate = LocalDate.parse(startDateStr);
-                        LocalDate endDate = LocalDate.parse(endDateStr);
-                        if (courseValidator.isRightStartDate(startDate) &&
-                                courseValidator.isRightEndDate(startDate, endDate)) {
-                            courseService.updateDate(courseId, startDate, endDate);
-                            System.out.println(courseId + " " + startDate + " " + endDate);
-                            request.setAttribute(ParameterName.EDIT_COURSE_RESULT, true);
-                        } else {
-                            request.setAttribute(ParameterName.ERROR, true);
-                        }
-                    } else {
-                        request.setAttribute(ParameterName.ERROR_DATA, true);
-                    }
-                    break;
+            if (parameter.equalsIgnoreCase(ParameterName.TITLE)) {
+                router = resolveUpdateTitle(courseId, request);
+            } else if (parameter.equalsIgnoreCase(ParameterName.DESCRIPTION)) {
+                router = resolveUpdateDescription(courseId, request);
+            } else {
+                router = resolveUpdateDate(courseId, request);
             }
+
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Edit course failed", e);
             throw new CommandException("Edit course failed", e);
         }
-        return new Router(page);
+        return router;
+    }
+
+    private Router resolveUpdateTitle(Long courseId, HttpServletRequest request) throws ServiceException {
+        String title = request.getParameter(ParameterName.TITLE);
+        Router router;
+        if (!title.trim().isEmpty()) {
+            if (courseValidator.isRightTitle(title)) {
+                courseService.updateTitle(courseId, title);
+                router = new Router(PageName.EDIT_COURSE);
+                router.setMessage(ParameterName.EDIT_COURSE_RESULT);
+                router.useRedirect();
+            } else {
+                request.setAttribute(ParameterName.ERROR, true);
+                router = new Router(PageName.EDIT_COURSE);
+            }
+        } else {
+            request.setAttribute(ParameterName.ERROR_DATA, true);
+            router = new Router(PageName.EDIT_COURSE);
+        }
+        return router;
+    }
+
+    private Router resolveUpdateDescription(Long courseId, HttpServletRequest request) throws ServiceException {
+        String description = request.getParameter(ParameterName.DESCRIPTION);
+        Router router;
+        if (!description.trim().isEmpty()) {
+            if (courseValidator.isRightDescription(description)) {
+                courseService.updateDescription(courseId, description);
+                router = new Router(PageName.EDIT_COURSE);
+                router.setMessage(ParameterName.EDIT_COURSE_RESULT);
+                router.useRedirect();
+            } else {
+                request.setAttribute(ParameterName.ERROR, true);
+                router = new Router(PageName.EDIT_COURSE);
+            }
+        } else {
+            request.setAttribute(ParameterName.ERROR_DATA, true);
+            router = new Router(PageName.EDIT_COURSE);
+        }
+        return router;
+    }
+
+    private Router resolveUpdateDate(Long courseId, HttpServletRequest request) throws ServiceException {
+        String startDateStr = request.getParameter(ParameterName.START);
+        String endDateStr = request.getParameter(ParameterName.END);
+        Router router;
+        if (!startDateStr.trim().isEmpty() && !endDateStr.trim().isEmpty()) {
+            LocalDate startDate = LocalDate.parse(startDateStr);
+            LocalDate endDate = LocalDate.parse(endDateStr);
+            if (courseValidator.isRightStartDate(startDate) &&
+                    courseValidator.isRightEndDate(startDate, endDate)) {
+                courseService.updateDate(courseId, startDate, endDate);
+                router = new Router(PageName.EDIT_COURSE);
+                router.setMessage(ParameterName.EDIT_COURSE_RESULT);
+                router.useRedirect();
+            } else {
+                request.setAttribute(ParameterName.ERROR, true);
+                router = new Router(PageName.EDIT_COURSE);
+            }
+        } else {
+            request.setAttribute(ParameterName.ERROR_DATA, true);
+            router = new Router(PageName.EDIT_COURSE);
+        }
+        return router;
     }
 }

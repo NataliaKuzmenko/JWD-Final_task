@@ -13,9 +13,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ResultUserDaoImpl implements ResultUserDao {
-    private static final String SQL_SELECT_RESULT_USER_BY_ID_ON_COURSE = "SELECT * FROM lists_students WHERE user_id = ? AND course_run_id=?";
-    private static final String UPDATE_STATUS_USER = "UPDATE lists_students SET status_student_id=? WHERE user_id=? AND course_run_id=?";
-    private static final String ADD_COURSE_RESULT = "UPDATE lists_students SET mark=?,comment=? WHERE user_id = ? AND course_run_id = ?";
+    private static final String SQL_SELECT_RESULT_USER_BY_ID_ON_COURSE = "SELECT * FROM lists_students " +
+            "WHERE user_id = ? AND course_run_id=?";
+    private static final String UPDATE_STATUS_USER = "UPDATE lists_students SET status_student_id=? " +
+            "WHERE user_id=? AND course_run_id=?";
+    private static final String ADD_COURSE_RESULT = "UPDATE lists_students SET mark=?,comment=? " +
+            "WHERE user_id = ? AND course_run_id = ?";
     private static ResultUserDaoImpl instance;
 
     private ResultUserDaoImpl() {
@@ -37,9 +40,7 @@ public class ResultUserDaoImpl implements ResultUserDao {
             statement.setString(2, comment);
             statement.setLong(3, studentId);
             statement.setLong(4, courseId);
-
             statement.executeUpdate();
-
         } catch (SQLException | PoolException e) {
             throw new DaoException("Error while add course result", e);
         }
@@ -65,17 +66,15 @@ public class ResultUserDaoImpl implements ResultUserDao {
     }
 
     @Override
-    public void updateUserCourseStatus(long userId, long courseId, ResultUser.UserCourseStatus status) throws DaoException {
-
+    public void updateUserCourseStatus(long userId, long courseId,
+                                       ResultUser.UserCourseStatus status) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_STATUS_USER)
         ) {
             statement.setString(1, String.valueOf(status));
             statement.setLong(2, userId);
             statement.setLong(3, courseId);
-
             statement.executeUpdate();
-
         } catch (SQLException | PoolException e) {
             throw new DaoException("Error while get result user", e);
         }

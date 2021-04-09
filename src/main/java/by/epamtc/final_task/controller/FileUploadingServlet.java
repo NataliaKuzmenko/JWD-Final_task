@@ -8,7 +8,6 @@ import by.epamtc.final_task.service.UserService;
 import by.epamtc.final_task.service.exception.ServiceException;
 import by.epamtc.final_task.service.impl.UserServiceImpl;
 
-import javax.naming.SizeLimitExceededException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -36,8 +35,8 @@ public class FileUploadingServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getServletContext().getRealPath(ADD_FOR_PATH_AVATAR);
-        try{
-        for (Part part : request.getParts()) {
+        try {
+            for (Part part : request.getParts()) {
 
                 String path = part.getSubmittedFileName();
                 if (path == null || path.trim().isEmpty()) {
@@ -46,23 +45,23 @@ public class FileUploadingServlet extends HttpServlet {
                 } else if (!path.matches(FILE_EXTENSION_REGEX)) {
                     request.setAttribute(ParameterName.UPLOAD_RESULT, false);
                     request.getRequestDispatcher(PageName.EDIT_PROFILE_PAGE).forward(request, response);
-                }else{
-                String randFilename = UUID.randomUUID() + path.substring(path.lastIndexOf("."));
-                String avatar = request.getParameter(AVATAR);
-                if (avatar.equalsIgnoreCase(USER)) {
-                    initUserAvatar(request, part, randFilename);
-                    request.setAttribute(ParameterName.UPLOAD_RESULT, true);
-                    request.getRequestDispatcher(PageName.EDIT_PROFILE_PAGE).forward(request, response);
-                }}}
-            } catch (IOException | CommandException|IllegalStateException e) {
-                request.setAttribute(ParameterName.UPLOAD_RESULT, false);
-               // request.setAttribute(ParameterName.ERROR, e.getMessage());
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(PageName.EDIT_PROFILE_PAGE);
-                dispatcher.forward(request, response);
+                } else {
+                    String randFilename = UUID.randomUUID() + path.substring(path.lastIndexOf("."));
+                    String avatar = request.getParameter(AVATAR);
+                    if (avatar.equalsIgnoreCase(USER)) {
+                        initUserAvatar(request, part, randFilename);
+                        request.setAttribute(ParameterName.UPLOAD_RESULT, true);
+                        request.getRequestDispatcher(PageName.EDIT_PROFILE_PAGE).forward(request, response);
+                    }
+                }
             }
+        } catch (IOException | CommandException | IllegalStateException e) {
+            request.setAttribute(ParameterName.UPLOAD_RESULT, false);
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(PageName.EDIT_PROFILE_PAGE);
+            dispatcher.forward(request, response);
+        }
 
     }
-
 
     private void initUserAvatar(HttpServletRequest request, Part part, String randFilename) throws
             CommandException, IOException {
@@ -72,13 +71,14 @@ public class FileUploadingServlet extends HttpServlet {
             fileSaveDirForUserAvatar.mkdirs();
         }
 
-            part.write(UPLOAD_DIR_FOR_USER_AVATAR + randFilename);
-            String email = (String) request.getSession().getAttribute(EMAIL);
+        part.write(UPLOAD_DIR_FOR_USER_AVATAR + randFilename);
+        part.write(SERVER_UPLOAD_DIR + randFilename);
+        String email = (String) request.getSession().getAttribute(EMAIL);
 
         try {
             userService.updateAvatar(email, randFilename);
             User user = userService.findUserWithTheAllInfoByLogin(email);
-            request.setAttribute(PHOTO_PATH,user.getPhotoPath());
+            request.setAttribute(PHOTO_PATH, user.getPhotoPath());
         } catch (ServiceException e) {
             throw new CommandException("Failed photo upload attempt");
         }

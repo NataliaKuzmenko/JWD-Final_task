@@ -32,4 +32,6 @@ public interface CourseDao {
 
     void updateDate(long courseId, LocalDate startDate, LocalDate endDate) throws DaoException;
 
+    List<Course> findCoursesByLecturerId(Long lecturerId) throws DaoException;
+
 }

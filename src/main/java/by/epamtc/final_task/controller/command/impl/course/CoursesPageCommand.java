@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public class CoursesPageCommand implements Command {
+
     public static final Logger LOGGER = LogManager.getLogger();
     private final CourseService courseService = CourseServiceImpl.getInstance();
 
@@ -29,15 +30,10 @@ public class CoursesPageCommand implements Command {
             int page = (pageStr == null) ? 0 : Integer.parseInt(pageStr);
 
             List<Course> listCourse = courseService.findAllCourses(page);
-
-            request.setAttribute(ParameterName.COURSE_LIST, listCourse);
-
             int coursesCount = courseService.countAllCourses();
-
+            request.setAttribute(ParameterName.COURSE_LIST, listCourse);
             request.getSession().setAttribute(ParameterName.COURSES_COUNT, coursesCount);
-
-            request.setAttribute(ParameterName.LANG_CHANGE_PROCESS_COMMAND, "coursespage");
-
+            request.setAttribute(ParameterName.LANG_CHANGE_PROCESS_COMMAND, ParameterName.COURSES_PAGE_COMMAND);
             pageForRouter = PageName.COURSES_PAGE;
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Command  coursesPageCommand invalid", e);

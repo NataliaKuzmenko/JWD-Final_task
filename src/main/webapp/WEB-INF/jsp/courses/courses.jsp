@@ -10,20 +10,16 @@
       integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 <head>
 
-    <c:import url="/WEB-INF/jsp/common/header.jsp"/>
-
     <fmt:message bundle="${locale}" key="label.Courses" var="courses"/>
     <fmt:message bundle="${locale}" key="course.Programs" var="programs"/>
     <fmt:message bundle="${locale}" key="course.Details" var="details"/>
     <fmt:message bundle="${locale}" key="course.Create" var="createCourse"/>
 
+    <title>${courses}</title>
 </head>
 <body>
-<title>${courses}</title>
-<style>
-    <%@include file="/css/style.css" %>
-</style>
-<br/>
+<c:import url="/WEB-INF/jsp/common/header.jsp"/>
+<p></p>
 <div class="container">
     <div class="row">
         <div class="col-lg-2"></div>
@@ -39,24 +35,25 @@
                 </form>
             </c:if>
             <br/>
-        </div></div>
-        <br/>
+        </div>
+    </div>
+    <br/>
     <div class="row">
         <div class="col-lg-2"></div>
         <div class="col-lg-8">
-        <c:forEach var="course" items="${courseList}">
-            <ul class="list-group">
-                <li class="list-group-item"><c:out value="${ course.title }"/>
-                    <form class="form-inline my-2 my-lg-0" method="post"
-                          action="${request.getContextPath()}/final_task_war_exploded/controller">
-                        <input type="hidden" name="command" value="detailscourse"/>
-                        <input type="hidden" name="courseId" value="${course.id}"/>
-                        <input class="btn btn-outline-secondary" type="submit" value="${details}">
-                    </form>
-                </li>
-            </ul>
-        </c:forEach>
-        <br/>
+            <c:forEach var="course" items="${courseList}">
+                <ul class="list-group">
+                    <li class="list-group-item"><c:out value="${ course.title }"/>
+                        <form class="form-inline my-2 my-lg-0" method="post"
+                              action="${request.getContextPath()}/final_task_war_exploded/controller">
+                            <input type="hidden" name="command" value="detailscourse"/>
+                            <input type="hidden" name="courseId" value="${course.id}"/>
+                            <input class="btn btn-outline-secondary" type="submit" value="${details}">
+                        </form>
+                    </li>
+                </ul>
+            </c:forEach>
+            <br/>
             <fmt:message bundle="${locale}" key="button.previous" var="previous_button"/>
             <fmt:message bundle="${locale}" key="button.next" var="next_button"/>
 
@@ -128,12 +125,8 @@
             </c:if>
         </div>
         <div class="col-sm-2"></div>
-
     </div>
-
-
-<div class="row">
-    <c:import url="/WEB-INF/jsp/common/footer.jsp"/></div>
 </div>
 </body>
+<c:import url="/WEB-INF/jsp/common/footer.jsp"/>
 </html>

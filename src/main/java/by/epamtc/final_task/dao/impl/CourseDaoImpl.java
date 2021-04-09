@@ -16,33 +16,36 @@ public class CourseDaoImpl implements CourseDao {
 
     private static CourseDaoImpl instance;
     private static final String INSERT_COURSE = "INSERT INTO courses (course_title, description) VALUES (?, ?)";
-    private static final String INSERT_COURSE_RUN = "INSERT INTO course_run(course_id,start_course,end_course,lecturer_id,format) VALUES (?,?,?,?,?)";
-
-    private static final String SQL_SELET_COURSES_AVAILABLE_FOR_REGISTRATION = "SELECT * FROM course_run " +
-            "INNER JOIN courses ON course_run.course_id=courses.course_id " +
-            "LEFT JOIN users ON course_run.lecturer_id=users.user_id  " +
+    private static final String INSERT_COURSE_RUN = "INSERT INTO course_run(course_id,start_course,end_course, " +
+            "lecturer_id,format) VALUES (?,?,?,?,?)";
+    private static final String SQL_SELECT_COURSES_AVAILABLE_FOR_REGISTRATION = "SELECT * FROM course_run INNER JOIN " +
+            "courses ON course_run.course_id=courses.course_id LEFT JOIN users ON course_run.lecturer_id=users.user_id " +
             "WHERE status='NOT_STARTED' LIMIT ? OFFSET ?";
-
-    private static final String SQL_SELET_ALL_COURSES = "SELECT * FROM course_run " +
+    private static final String SQL_SELECT_ALL_COURSES = "SELECT * FROM course_run " +
             "INNER JOIN courses ON course_run.course_id=courses.course_id " +
             "LEFT JOIN users ON course_run.lecturer_id=users.user_id  " +
             "LIMIT ? OFFSET ?";
-
     private static final String SQL_SELECT_COUNT_COURSES_BY_STATUS = "SELECT * FROM course_run WHERE status=?";
-
     private static final String SQL_SELECT_COUNT_ALL_COURSES = "SELECT * FROM course_run";
-
     private static final String SQL_SELECT_INFO_BY_ID = "SELECT * FROM course_run " +
             "INNER JOIN courses ON course_run.course_id=courses.course_id " +
             "LEFT JOIN users ON course_run.lecturer_id=users.user_id " +
             "WHERE course_run.course_run_id=?";
-    private static final String SQL_SELET_COURSES_USER_BY_ID = "SELECT * FROM lists_students INNER JOIN course_run ON lists_students.course_run_id=course_run.course_run_id \n" +
+    private static final String SQL_SELECT_COURSES_USER_BY_ID = "SELECT * FROM lists_students INNER JOIN course_run " +
+            "ON lists_students.course_run_id=course_run.course_run_id \n" +
             "INNER JOIN courses ON course_run.course_id=courses.course_id WHERE user_id = ?";
     private static final String UPDATE_STATUS_COURSE = "UPDATE course_run SET status = ? WHERE course_run_id = ?";
     private static final String UPDATE_FORMAT_COURSE = "UPDATE course_run SET format = ? WHERE course_run_id = ?";
-    private static final String UPDATE_TITLE_COURSE = "UPDATE courses JOIN course_run ON courses.course_id=course_run.course_id SET course_title=? WHERE course_run_id =?";
-    private static final String UPDATE_DESCRIPTION_COURSE = "UPDATE courses JOIN course_run ON courses.course_id=course_run.course_id SET description=? WHERE course_run_id =?";
-private static final String UPDATE_DATE_COURSE="UPDATE course_run SET start_course=?, end_course=? WHERE course_run_id =?";
+    private static final String UPDATE_TITLE_COURSE = "UPDATE courses JOIN course_run ON " +
+            "courses.course_id=course_run.course_id SET course_title=? WHERE course_run_id =?";
+    private static final String UPDATE_DESCRIPTION_COURSE = "UPDATE courses JOIN course_run ON " +
+            "courses.course_id=course_run.course_id SET description=? WHERE course_run_id =?";
+
+    private static final String UPDATE_DATE_COURSE = "UPDATE course_run SET start_course=?, end_course=? " +
+            "WHERE course_run_id =?";
+
+    private static final String SQL_SELECT_COURSES_BY_LECTURER_ID = "SELECT * FROM course_run INNER JOIN " +
+            "courses ON course_run.course_id=courses.course_id WHERE lecturer_id = ?";
 
     private CourseDaoImpl() {
     }
@@ -55,9 +58,11 @@ private static final String UPDATE_DATE_COURSE="UPDATE course_run SET start_cour
     }
 
     @Override
-    public void create(String title, String description, long lecturerId, LocalDate startDate, LocalDate endDate, String format) throws DaoException {
+    public void create(String title, String description, long lecturerId, LocalDate startDate, LocalDate endDate,
+                       String format) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(INSERT_COURSE, Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement statement = connection.prepareStatement(INSERT_COURSE,
+                     Statement.RETURN_GENERATED_KEYS)) {
             connection.setAutoCommit(false);
             statement.setString(1, title);
             statement.setString(2, description);
@@ -85,7 +90,7 @@ private static final String UPDATE_DATE_COURSE="UPDATE course_run SET start_cour
         List<Course> listCourse = new ArrayList<>();
 
         try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQL_SELET_COURSES_AVAILABLE_FOR_REGISTRATION)) {
+             PreparedStatement statement = connection.prepareStatement(SQL_SELECT_COURSES_AVAILABLE_FOR_REGISTRATION)){
             statement.setInt(1, count);
             statement.setInt(2, offset);
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -105,7 +110,7 @@ private static final String UPDATE_DATE_COURSE="UPDATE course_run SET start_cour
         List<Course> listCourse = new ArrayList<>();
 
         try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQL_SELET_ALL_COURSES)) {
+             PreparedStatement statement = connection.prepareStatement(SQL_SELECT_ALL_COURSES)) {
             statement.setInt(1, count);
             statement.setInt(2, offset);
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -180,7 +185,7 @@ private static final String UPDATE_DATE_COURSE="UPDATE course_run SET start_cour
         List<Course> listCourse = new ArrayList<>();
 
         try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQL_SELET_COURSES_USER_BY_ID)) {
+             PreparedStatement statement = connection.prepareStatement(SQL_SELECT_COURSES_USER_BY_ID)) {
             statement.setLong(1, userId);
 
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -199,10 +204,8 @@ private static final String UPDATE_DATE_COURSE="UPDATE course_run SET start_cour
     public void updateStatusCourse(long courseId, Course.StatusCourse statusCourse) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_STATUS_COURSE)) {
-
             statement.setString(1, String.valueOf(statusCourse));
             statement.setLong(2, courseId);
-
             statement.executeUpdate();
         } catch (SQLException | PoolException e) {
             throw new DaoException("Error while update status course", e);
@@ -213,11 +216,9 @@ private static final String UPDATE_DATE_COURSE="UPDATE course_run SET start_cour
     public void updateFormat(long courseId, Course.FormatCourse format) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_FORMAT_COURSE)) {
-
             statement.setString(1, String.valueOf(format));
             statement.setLong(2, courseId);
-
-            statement.executeUpdate();
+           statement.executeUpdate();
         } catch (SQLException | PoolException e) {
             throw new DaoException("Error while update format course", e);
         }
@@ -227,10 +228,8 @@ private static final String UPDATE_DATE_COURSE="UPDATE course_run SET start_cour
     public void updateTitle(long courseId, String title) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_TITLE_COURSE)) {
-
             statement.setString(1, title);
             statement.setLong(2, courseId);
-
             statement.executeUpdate();
         } catch (SQLException | PoolException e) {
             throw new DaoException("Error while update title course", e);
@@ -241,10 +240,8 @@ private static final String UPDATE_DATE_COURSE="UPDATE course_run SET start_cour
     public void updateDescription(long courseId, String description) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_DESCRIPTION_COURSE)) {
-
             statement.setString(1, description);
             statement.setLong(2, courseId);
-
             statement.executeUpdate();
         } catch (SQLException | PoolException e) {
             throw new DaoException("Error while update title course", e);
@@ -255,15 +252,31 @@ private static final String UPDATE_DATE_COURSE="UPDATE course_run SET start_cour
     public void updateDate(long courseId, LocalDate startDate, LocalDate endDate) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_DATE_COURSE)) {
-
             statement.setDate(1, Date.valueOf(startDate));
             statement.setDate(2, Date.valueOf(endDate));
             statement.setLong(3, courseId);
-
             statement.executeUpdate();
         } catch (SQLException | PoolException e) {
             throw new DaoException("Error while update title course", e);
         }
+    }
+
+    @Override
+    public List<Course> findCoursesByLecturerId(Long lecturerId) throws DaoException {
+        List<Course> listCourse = new ArrayList<>();
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQL_SELECT_COURSES_BY_LECTURER_ID)) {
+            statement.setLong(1, lecturerId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Course course = createCourse(resultSet);
+                    listCourse.add(course);
+                }
+            }
+        } catch (SQLException | PoolException e) {
+            throw new DaoException("Courses not found", e);
+        }
+        return listCourse;
     }
 
     private Course createCourse(ResultSet resultSet) throws SQLException {
@@ -284,7 +297,8 @@ private static final String UPDATE_DATE_COURSE="UPDATE course_run SET start_cour
         return course;
     }
 
-    private void createCourseRun(LocalDate startDate, LocalDate endDate, long lecturerId, String format, long courseId) throws DaoException {
+    private void createCourseRun(LocalDate startDate, LocalDate endDate, long lecturerId, String format,
+                                 long courseId) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(INSERT_COURSE_RUN)) {
             statement.setLong(1, courseId);

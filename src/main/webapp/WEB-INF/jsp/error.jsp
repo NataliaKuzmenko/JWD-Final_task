@@ -12,9 +12,7 @@
     <fmt:message bundle="${locale}" key="error.ContactAdmin" var="contactAdmin"/>
 
     <title>${error}</title></head>
-<style>
-    <%@include file="/css/style.css" %>
-</style>
+
 <c:import url="/WEB-INF/jsp/common/header.jsp"/>
 <body>
 

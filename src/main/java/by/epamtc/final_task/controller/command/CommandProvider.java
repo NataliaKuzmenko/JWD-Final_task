@@ -2,7 +2,6 @@ package by.epamtc.final_task.controller.command;
 
 import by.epamtc.final_task.controller.command.exception.CommandException;
 import by.epamtc.final_task.controller.command.impl.ForwardCommand;
-import by.epamtc.final_task.controller.command.impl.user.ForwardToWelcomePageCommand;
 import by.epamtc.final_task.controller.command.impl.LanguageCommand;
 import by.epamtc.final_task.controller.command.impl.admin.InitTableUsersCommand;
 import by.epamtc.final_task.controller.command.impl.course.*;
@@ -35,10 +34,11 @@ public class CommandProvider {
         commands.put(CommandName.INITTABLEUSERSCOMMAND, new InitTableUsersCommand());
         commands.put(CommandName.COURSESPAGE, new CoursesPageCommand());
         commands.put(CommandName.SETCOURSERESULT, new SetCourseResultCommand());
-        commands.put(CommandName.FORWARDTOSETRESULT,new ForwardToSetResult());
+        commands.put(CommandName.FORWARDTOSETRESULT, new ForwardToSetResult());
         commands.put(CommandName.FORWARDTOEDITCOURSE, new ForwardToEditCourseCommand());
         commands.put(CommandName.FORWARDTOEDITPROFILE, new ForwardToEditProfileCommand());
         commands.put(CommandName.FORWARDTOCREATECOURSE, new ForwardToCreateCourseCommand());
+        commands.put(CommandName.COURSESLECTURER, new CoursesLecturerCommand());
 
     }
 

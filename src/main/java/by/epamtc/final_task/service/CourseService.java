@@ -23,12 +23,14 @@ public interface CourseService {
 
     void updateStatusCourse(long courseId, Course.StatusCourse statusCourse) throws ServiceException;
 
-    void updateFormat(long courseId,Course.FormatCourse format) throws ServiceException;
+    void updateFormat(long courseId, Course.FormatCourse format) throws ServiceException;
 
     void updateTitle(long courseId, String title) throws ServiceException;
 
     void updateDescription(long courseId, String description) throws ServiceException;
 
     void updateDate(long courseId, LocalDate startDate, LocalDate endDate) throws ServiceException;
+
+    List<Course> findCoursesByLecturerId(Long lecturerId) throws ServiceException;
 
 }

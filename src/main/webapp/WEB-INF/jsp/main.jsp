@@ -18,9 +18,7 @@
     <fmt:message bundle="${locale}" key="main.5.Description" var="main_5_Description"/>
 
     <title>${namePage} </title>
-    <style>
-        <%@include file="/css/style.css" %>
-    </style>
+
 </head>
 <c:import url="/WEB-INF/jsp/common/header.jsp"/>
 <body>
@@ -68,11 +66,8 @@
             </div>
             <div class="col-lg-3"></div>
         </div>
-
     </div>
-
-            <c:import url="/WEB-INF/jsp/common/footer.jsp"/>
-
 </div>
 </body>
+<c:import url="/WEB-INF/jsp/common/footer.jsp"/>
 </html>

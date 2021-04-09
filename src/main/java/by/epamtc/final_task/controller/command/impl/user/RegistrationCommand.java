@@ -1,7 +1,6 @@
 package by.epamtc.final_task.controller.command.impl.user;
 
 import by.epamtc.final_task.controller.command.Command;
-import by.epamtc.final_task.controller.command.CommandName;
 import by.epamtc.final_task.controller.command.Router;
 import by.epamtc.final_task.controller.command.exception.CommandException;
 import by.epamtc.final_task.controller.constant.PageName;
@@ -15,10 +14,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 public class RegistrationCommand implements Command {
     public static final Logger LOGGER = LogManager.getLogger();
@@ -26,7 +22,7 @@ public class RegistrationCommand implements Command {
     private final UserValidator validationUser = UserValidator.getInstance();
     private final UserService userService = UserServiceImpl.getInstance();
 
-   @Override
+    @Override
     public Router execute(HttpServletRequest request) throws CommandException {
         String page;
         String email = request.getParameter(ParameterName.EMAIL);
@@ -50,12 +46,13 @@ public class RegistrationCommand implements Command {
                 User user = userService.findUserWithTheAllInfoByLogin(email);
                 request.getSession().setAttribute(ParameterName.ROLE, user.getRole().name());
                 request.getSession().setAttribute(ParameterName.EMAIL, user.getEmail());
-                request.getSession().setAttribute(ParameterName.USER_ID,user.getUserId());
+                request.getSession().setAttribute(ParameterName.USER_ID, user.getUserId());
+
                 request.setAttribute(ParameterName.FIRST_NAME, user.getFirstName());
                 request.setAttribute(ParameterName.LAST_NAME, user.getLastName());
                 request.setAttribute(ParameterName.PHOTO_PATH, user.getPhotoPath());
 
-                request.setAttribute(ParameterName.LANG_CHANGE_PROCESS_COMMAND,ParameterName.FORWARD_WELCOME_COMMAND);
+                request.setAttribute(ParameterName.LANG_CHANGE_PROCESS_COMMAND, ParameterName.FORWARD_WELCOME_COMMAND);
 
                 router = new Router(PageName.WELCOME_PAGE);
                 router.setMessage(ParameterName.REGISTRATION_OK);

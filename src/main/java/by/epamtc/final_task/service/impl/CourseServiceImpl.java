@@ -4,7 +4,6 @@ import by.epamtc.final_task.dao.CourseDao;
 import by.epamtc.final_task.dao.exception.DaoException;
 import by.epamtc.final_task.dao.impl.CourseDaoImpl;
 import by.epamtc.final_task.entity.Course;
-import by.epamtc.final_task.entity.User;
 import by.epamtc.final_task.service.CourseService;
 import by.epamtc.final_task.service.exception.ServiceException;
 
@@ -29,7 +28,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public void create(String title, String description, long lecturerId, LocalDate startDate, LocalDate endDate, String format) throws ServiceException {
         try {
-            courseDao.create(title,description,lecturerId,startDate,endDate,format);
+            courseDao.create(title, description, lecturerId, startDate, endDate, format);
         } catch (DaoException e) {
             throw new ServiceException("Create course failed", e);
         }
@@ -98,7 +97,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public List<Course> findCoursesUser(long userId) throws ServiceException {
 
-        List<Course> courseList= null;
+        List<Course> courseList = null;
         try {
             courseList = courseDao.findCoursesUser(userId);
         } catch (DaoException e) {
@@ -110,45 +109,56 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public void updateStatusCourse(long courseId, Course.StatusCourse statusCourse) throws ServiceException {
         try {
-            courseDao.updateStatusCourse(courseId,statusCourse);
+            courseDao.updateStatusCourse(courseId, statusCourse);
         } catch (DaoException e) {
-            throw new ServiceException("Update course status failed",e);
+            throw new ServiceException("Update course status failed", e);
         }
     }
 
     @Override
     public void updateFormat(long courseId, Course.FormatCourse format) throws ServiceException {
         try {
-            courseDao.updateFormat(courseId,format);
+            courseDao.updateFormat(courseId, format);
         } catch (DaoException e) {
-            throw new ServiceException("Update course format failed",e);
+            throw new ServiceException("Update course format failed", e);
         }
     }
 
     @Override
     public void updateTitle(long courseId, String title) throws ServiceException {
         try {
-            courseDao.updateTitle(courseId,title);
+            courseDao.updateTitle(courseId, title);
         } catch (DaoException e) {
-            throw new ServiceException("Update course title failed",e);
+            throw new ServiceException("Update course title failed", e);
         }
     }
 
     @Override
     public void updateDescription(long courseId, String description) throws ServiceException {
         try {
-            courseDao.updateDescription(courseId,description);
+            courseDao.updateDescription(courseId, description);
         } catch (DaoException e) {
-            throw new ServiceException("Update course description failed",e);
+            throw new ServiceException("Update course description failed", e);
         }
     }
 
     @Override
     public void updateDate(long courseId, LocalDate startDate, LocalDate endDate) throws ServiceException {
         try {
-            courseDao.updateDate(courseId,startDate,endDate);
+            courseDao.updateDate(courseId, startDate, endDate);
         } catch (DaoException e) {
-            throw new ServiceException("Update course title failed",e);
+            throw new ServiceException("Update course title failed", e);
         }
+    }
+
+    @Override
+    public List<Course> findCoursesByLecturerId(Long lecturerId) throws ServiceException {
+        List<Course> courseList = null;
+        try {
+            courseList = courseDao.findCoursesByLecturerId(lecturerId);
+        } catch (DaoException e) {
+            throw new ServiceException("Courses not found", e);
+        }
+        return courseList;
     }
 }

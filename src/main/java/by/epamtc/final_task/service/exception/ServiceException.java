@@ -1,6 +1,6 @@
 package by.epamtc.final_task.service.exception;
 
-public class ServiceException extends Exception{
+public class ServiceException extends Exception {
     private static final long serialVersionUID = 5602354829649835348L;
 
     public ServiceException() {

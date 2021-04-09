@@ -23,7 +23,6 @@ public class UserServiceImpl implements UserService {
         return instance;
     }
 
-
     @Override
     public boolean isLoginAndPasswordValid(String enteredLogin, String enteredPassword) throws
             ServiceException {
@@ -33,7 +32,6 @@ public class UserServiceImpl implements UserService {
         boolean result = false;
         try {
             if (userDao.findUserByLoginAndPassword(enteredLogin, hashPassword)) {
-
                 result = true;
             }
         } catch (DaoException e) {
@@ -104,13 +102,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateAvatar(String email, String avatar) throws ServiceException {
 
-        User user = new User();
         if (isLoginExists(email)) {
-            user = findUserWithTheAllInfoByLogin(email);
+            User user = findUserWithTheAllInfoByLogin(email);
             user.setPhotoPath(avatar);
             try {
                 userDao.updateAvatar(user);
-                // userDao.updateUser(user);
             } catch (DaoException e) {
                 throw new ServiceException("Avatar has not been updated", e);
             }
@@ -122,9 +118,6 @@ public class UserServiceImpl implements UserService {
         boolean result;
         try {
             result = userDao.isUserExist(enteredLogin);
-            if (!result) {
-                throw new ServiceException("User not found. Please contact your system administrator");
-            }
         } catch (DaoException e) {
             throw new ServiceException("Select operation failed. Please contact your system administrator", e);
         }

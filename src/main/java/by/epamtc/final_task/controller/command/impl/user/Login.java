@@ -26,22 +26,28 @@ public class Login implements Command {
         String email = request.getParameter(ParameterName.EMAIL);
         String password = request.getParameter(ParameterName.PASSWORD);
         try {
-            if (userService.isLoginAndPasswordValid(email, password)) {
+            if (userService.isLoginExists(email)) {
+                if (userService.isLoginAndPasswordValid(email, password)) {
 
-                User user = userService.findUserWithTheAllInfoByLogin(email);
+                    User user = userService.findUserWithTheAllInfoByLogin(email);
 
-                request.getSession().setAttribute(ParameterName.ROLE, user.getRole().name());
-                request.getSession().setAttribute(ParameterName.EMAIL, user.getEmail());
-                request.getSession().setAttribute(ParameterName.USER_ID, user.getUserId());
+                    request.getSession().setAttribute(ParameterName.ROLE, user.getRole().name());
+                    request.getSession().setAttribute(ParameterName.EMAIL, user.getEmail());
+                    request.getSession().setAttribute(ParameterName.USER_ID, user.getUserId());
 
-                request.setAttribute(ParameterName.FIRST_NAME, user.getFirstName());
-                request.setAttribute(ParameterName.LAST_NAME, user.getLastName());
-                request.setAttribute(ParameterName.PHOTO_PATH, user.getPhotoPath());
-                request.setAttribute(ParameterName.WELCOME, true);
-                page = PageName.WELCOME_PAGE;
-                request.setAttribute(ParameterName.LANG_CHANGE_PROCESS_COMMAND, "forwardwelcome");
+                    request.setAttribute(ParameterName.FIRST_NAME, user.getFirstName());
+                    request.setAttribute(ParameterName.LAST_NAME, user.getLastName());
+                    request.setAttribute(ParameterName.PHOTO_PATH, user.getPhotoPath());
+
+                    page = PageName.WELCOME_PAGE;
+                    request.setAttribute(ParameterName.LANG_CHANGE_PROCESS_COMMAND,
+                            ParameterName.FORWARD_WELCOME_COMMAND);
+                } else {
+                    request.setAttribute(ParameterName.INCORRECT_LOGIN_AND_PASSWORD, true);
+                    page = PageName.LOGIN_PAGE;
+                }
             } else {
-                request.setAttribute(ParameterName.INCORRECT_LOGIN_AND_PASSWORD, true);
+                request.setAttribute(ParameterName.USER_IS_NOT_EXIST, true);
                 page = PageName.LOGIN_PAGE;
             }
         } catch (ServiceException e) {

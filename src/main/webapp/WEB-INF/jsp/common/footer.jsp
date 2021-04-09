@@ -12,15 +12,15 @@
     <title>${footer}</title>
 </head>
 <body>
-
-<div id="footer">
-    <div>
-        <p>${FooterCopyright}</p>
+<footer class="mt-5 pt-2 text-muted text-center text-small">
+    <div class="right-block">
+        ${FooterCopyright}
     </div>
-</div>
-<div id="customTag">
-    <ctg:time/>
-</div>
+    <div>
+        <ctg:time/>
+    </div>
+</footer>
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

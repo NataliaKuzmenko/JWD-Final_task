@@ -12,7 +12,6 @@ public class ResultUserServiceImpl implements ResultUserService {
     ResultUserDao resultUserDao = ResultUserDaoImpl.getInstance();
     private static final ResultUserServiceImpl instance = new ResultUserServiceImpl();
 
-
     private ResultUserServiceImpl() {
     }
 
@@ -20,11 +19,10 @@ public class ResultUserServiceImpl implements ResultUserService {
         return instance;
     }
 
-
     @Override
     public void addCourseResult(long studentId, long courseId, int mark, String comment) throws ServiceException {
         try {
-            resultUserDao.addCourseResult(studentId,courseId,mark,comment);
+            resultUserDao.addCourseResult(studentId, courseId, mark, comment);
         } catch (DaoException e) {
             throw new ServiceException("Fail to add course result", e);
         }

@@ -26,7 +26,6 @@ public class InitDetailsCourseCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
 
-        String page = PageName.DETAILS_COURSE_PAGE;
         Course course;
         User user;
         String courseIdStr = request.getParameter(ParameterName.COURSE_ID) == null
@@ -37,11 +36,6 @@ public class InitDetailsCourseCommand implements Command {
         String register = request.getParameter(ParameterName.REGISTER);
         String format = request.getParameter(ParameterName.FORMAT);
 
-        /*String courseIdStr = request.getParameter(ParameterName.COURSE_ID);
-        if (courseIdStr == null) {
-            courseIdStr = (String) request.getSession().getAttribute(ParameterName.COURSE_ID);
-        }
-        request.getSession().setAttribute(ParameterName.COURSE_ID, courseIdStr);*/
         try {
             long courseId = Long.parseLong(courseIdStr);
 
@@ -56,7 +50,6 @@ public class InitDetailsCourseCommand implements Command {
 
             if (register != null) {
                 Long userIdStr = (Long) request.getSession().getAttribute(ParameterName.USER_ID);
-                //long userId = Long.parseLong(userIdStr);
                 if (userService.addUserOnCourse(userIdStr, courseId)) {
                     request.setAttribute(ParameterName.REGISTER_COURSE_MESSAGE, true);
                 } else {
@@ -75,7 +68,7 @@ public class InitDetailsCourseCommand implements Command {
             LOGGER.log(Level.ERROR, "Course not found", e);
             throw new CommandException("Command  InitDetailsCourseCommand invalid", e);
         }
-        return new Router(page);
+        return new Router(PageName.DETAILS_COURSE_PAGE);
     }
 }
 

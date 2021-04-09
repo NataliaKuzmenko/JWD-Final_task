@@ -21,16 +21,16 @@
     <fmt:message bundle="${locale}" key="message.EditProfile" var="editProfile"/>
     <fmt:message bundle="${locale}" key="message.EditProfileError" var="checkData"/>
     <fmt:message bundle="${locale}" key="message.EmailExist" var="emailExist"/>
+    <fmt:message bundle="${locale}" key="label.back" var="back"/>
+    <fmt:message bundle="${locale}" key="label.PlaceholderEmail" var="PlaceholderEmail"/>
 
 
     <title>${profile}</title>
-    <style>
-        <%@include file="/css/style.css" %>
-    </style>
+
 </head>
 <c:import url="/WEB-INF/jsp/common/header.jsp"/>
 <body>
-<c:if test="${errorData == true}">
+<c:if test="${errorDataProfile == true}">
     <div class="alert alert-warning" role="alert">
             ${checkData}
     </div>
@@ -47,52 +47,71 @@
     </div>
 </c:if>
 <br/>
-<form method="POST" action="${pageContext.request.contextPath}/controller">
-    <input type="hidden" name="command" value="editProfileCommand"/>
-    <div class="input-group">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="">${firstName} ${lastName}</span>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <form method="POST" action="${pageContext.request.contextPath}/controller">
+                <input type="hidden" name="command" value="editProfileCommand"/>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="">${firstName} ${lastName}</span>
+                    </div>
+                    <input type="text" class="form-control" name="first_name">
+                    <input type="text" class="form-control" name="last_name">
+                </div>
+                <br/>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">${email}</span>
+                    </div>
+                    <input type="email" name="email" class="form-control" aria-label="Default"
+                           aria-describedby="inputGroup-sizing-default" pattern="^[\w-\.]+@([\w-]+\.)+[\w]{2,4}$">
+
+                </div>
+                <br/>
+                <input class="btn btn-outline-primary " type="submit" value="${save}"/>
+            </form>
         </div>
-        <input type="text" class="form-control" name="first_name">
-        <input type="text" class="form-control" name="last_name">
+        <div class="col-lg-6">
+            <h5 class="text-dark">${changePhoto}</h5>
+            <br/>
+            <form action="${pageContext.request.contextPath}/upload?avatar=user"
+                  enctype="multipart/form-data" method="post">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="content" id="validatedCustomFile"
+                           required>
+                    <label class="custom-file-label" for="validatedCustomFile">${choosePhoto}</label>
+                </div>
+                <br/>
+                <c:if test="${uploadResult == false}">
+                    <div class="alert alert-warning" role="alert">
+                            ${errorUploadPhoto}</div>
+                </c:if>
+                <br/>
+                <c:if test="${uploadResult == true}">
+                    <div class="alert alert-success" role="alert">
+                            ${uploadPhoto}</div>
+                </c:if>
+                <br/>
+                <button class="btn btn-outline-primary " type="submit">${save}</button>
+            </form>
+        </div>
     </div>
     <br/>
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-default">${email}</span>
+    <br/>
+    <br/>
+    <div class="row">
+        <div class="col-lg-5"></div>
+        <div class="col-lg-1">
+            <form class="form-inline my-2 my-lg-0" method="post"
+                  action="${request.getContextPath()}/final_task_war_exploded/controller">
+                <input type="hidden" name="command" value="INITPROFILECOMMAND"/>
+                <input class="btn btn-outline-secondary" type="submit" value="${back}">
+            </form>
         </div>
-        <input type="email" name="email" class="form-control" aria-label="Default"
-               aria-describedby="inputGroup-sizing-default">
     </div>
-    <br/>
-    <input class="btn btn-outline-primary " type="submit" value="${save}"/>
-</form>
-<br/>
-<div class="upload text-info">
-    ${changePhoto}
-    <br/>
-    <form action="${pageContext.request.contextPath}/upload?avatar=user"
-          enctype="multipart/form-data" method="post">
-        <div class="custom-file">
-            <input type="file" class="custom-file-input" name="content" id="validatedCustomFile"
-                   required>
-            <label class="custom-file-label" for="validatedCustomFile">${choosePhoto}</label>
-        </div>
-        <br/>
-        <c:if test="${uploadResult == false}">
-            ${errorUploadPhoto}
-        </c:if>
-        <br/>
-        <c:if test="${uploadResult == true}">
-            ${uploadPhoto}
-        </c:if>
-        <br/>
-        ${error}
-        <div class="button-save">
-            <button class="btn btn-outline-primary " type="submit">${save}</button>
-        </div>
-    </form>
 </div>
 </body>
-</html>
 <c:import url="/WEB-INF/jsp/common/footer.jsp"/>
+</html>
+
