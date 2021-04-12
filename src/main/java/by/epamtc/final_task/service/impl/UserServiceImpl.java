@@ -10,6 +10,9 @@ import by.epamtc.final_task.service.validation.HashPassword;
 
 import java.util.List;
 
+/**
+ * Service that works with user data
+ */
 public class UserServiceImpl implements UserService {
 
     private static final UserServiceImpl instance = new UserServiceImpl();
@@ -176,7 +179,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public int countAllUsers() throws ServiceException {
         try {
-            return userDao.countAllCourses();
+            return userDao.countAllUsers();
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

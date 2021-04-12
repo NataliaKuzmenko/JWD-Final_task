@@ -251,7 +251,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public int countAllCourses() throws DaoException {
+    public int countAllUsers() throws DaoException {
         int count = 0;
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(SQL_SELECT_COUNT_ALL_USERS)

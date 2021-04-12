@@ -10,6 +10,9 @@ import by.epamtc.final_task.service.exception.ServiceException;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Service that works with course data
+ */
 public class CourseServiceImpl implements CourseService {
 
     private static final int PAGE_ITEMS_COUNT = 5;

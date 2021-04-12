@@ -96,7 +96,7 @@
                                   action="${request.getContextPath()}/final_task_war_exploded/controller">
                                 <input class="btn btn-outline-secondary" type="submit" value="${addResults}">
                                 <input type="hidden" name="command" value="forwardtosetresult"/>
-                                <input type="hidden" name="user_id" value="${result.key.userId}"/>
+                                <input type="hidden" name="student_id" value="${result.key.userId}"/>
                             </form>
                         </td>
                     </tr>

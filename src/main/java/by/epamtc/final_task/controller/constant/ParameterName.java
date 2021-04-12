@@ -23,6 +23,7 @@ public final class ParameterName {
     public static final String COURSES_COUNT = "coursesCount";
     public static final String COURSES_LECTURER = "courseslecturer";
     public static final String CREATE_MESSAGE = "createMessage";
+    public static final String STUDENT_ID = "student_id";
     public static final String CURRENT_PAGE = "currentPage";
     public static final String DESCRIPTION = "description";
     public static final String EDIT_COURSE_RESULT="editCourseResult";

@@ -7,6 +7,9 @@ import by.epamtc.final_task.entity.ResultUser;
 import by.epamtc.final_task.service.ResultUserService;
 import by.epamtc.final_task.service.exception.ServiceException;
 
+/**
+ * Service that works with results user
+ */
 public class ResultUserServiceImpl implements ResultUserService {
 
     ResultUserDao resultUserDao = ResultUserDaoImpl.getInstance();

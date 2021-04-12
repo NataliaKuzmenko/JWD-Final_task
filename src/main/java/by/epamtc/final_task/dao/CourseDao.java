@@ -133,4 +133,11 @@ public interface CourseDao {
      */
     List<Course> findCoursesByLecturerId(Long lecturerId) throws DaoException;
 
+    /**
+     * Count number of all courses
+     *
+     * @return number of all courses
+     * @throws DaoException if an dao exception occurred while processing
+     */
+
 }

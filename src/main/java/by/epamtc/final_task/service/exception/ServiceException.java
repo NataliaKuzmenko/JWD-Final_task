@@ -1,22 +1,40 @@
 package by.epamtc.final_task.service.exception;
 
+/**
+ * The type Service exception.
+ */
 public class ServiceException extends Exception {
-    private static final long serialVersionUID = 5602354829649835348L;
-
+    /**
+     * Instantiates a new Service exception.
+     */
     public ServiceException() {
-        super();
     }
 
+    /**
+     * Instantiates a new Service exception.
+     *
+     * @param message the message
+     */
     public ServiceException(String message) {
         super(message);
     }
 
-    public ServiceException(Exception e) {
-        super(e);
+    /**
+     * Instantiates a new Service exception.
+     *
+     * @param message the message
+     * @param cause   the cause
+     */
+    public ServiceException(String message, Throwable cause) {
+        super(message, cause);
     }
 
-    public ServiceException(String message, Exception e) {
-        super(message, e);
+    /**
+     * Instantiates a new Service exception.
+     *
+     * @param cause the cause
+     */
+    public ServiceException(Throwable cause) {
+        super(cause);
     }
-
 }

@@ -8,6 +8,9 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * Algorithm for hash password
+ */
 public class HashPassword {
     public static final Logger LOGGER = LogManager.getLogger();
 
