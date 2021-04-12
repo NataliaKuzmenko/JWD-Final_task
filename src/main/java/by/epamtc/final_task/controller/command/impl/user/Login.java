@@ -33,8 +33,6 @@ public class Login implements Command {
                 if (userService.isLoginAndPasswordValid(email, password)) {
                     findUser(request, email, userService);
                     page = PageName.WELCOME_PAGE;
-                    request.setAttribute(ParameterName.LANG_CHANGE_PROCESS_COMMAND,
-                            ParameterName.FORWARD_WELCOME_COMMAND);
                 } else {
                     request.setAttribute(ParameterName.INCORRECT_LOGIN_AND_PASSWORD, true);
                     page = PageName.LOGIN_PAGE;

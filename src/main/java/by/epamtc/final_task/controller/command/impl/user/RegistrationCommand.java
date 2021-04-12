@@ -47,7 +47,6 @@ public class RegistrationCommand implements Command {
 
                 Login.findUser(request, email, userService);
 
-                request.setAttribute(ParameterName.LANG_CHANGE_PROCESS_COMMAND, ParameterName.FORWARD_WELCOME_COMMAND);
                 router = new Router(PageName.WELCOME_PAGE);
                 router.setMessage(ParameterName.REGISTRATION_OK);
                 router.useRedirect();

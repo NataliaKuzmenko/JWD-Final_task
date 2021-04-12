@@ -34,7 +34,7 @@ public class CommandProvider {
         commands.put(CommandName.COURSERUNCOMMAND, new CourseRunCommand());
         commands.put(CommandName.EDITPROFILECOMMAND, new EditProfileCommand());
         commands.put(CommandName.INITPROFILECOMMAND, new InitProfileCommand());
-        commands.put(CommandName.FORWARDWELCOME, new ForwardToWelcomePageCommand());
+      //  commands.put(CommandName.FORWARDWELCOME, new ForwardToWelcomePageCommand());
         commands.put(CommandName.CREATECOURSE, new CreateCourseCommand());
         commands.put(CommandName.EDITCOURSE, new EditCourseCommand());
         commands.put(CommandName.VIEWCOURSESUSER, new ViewCoursesUserCommand());
@@ -44,8 +44,8 @@ public class CommandProvider {
         commands.put(CommandName.SETCOURSERESULT, new SetCourseResultCommand());
         commands.put(CommandName.FORWARDTOSETRESULT, new ForwardToSetResult());
         commands.put(CommandName.FORWARDTOEDITCOURSE, new ForwardToEditCourseCommand());
-        commands.put(CommandName.FORWARDTOEDITPROFILE, new ForwardToEditProfileCommand());
-        commands.put(CommandName.FORWARDTOCREATECOURSE, new ForwardToCreateCourseCommand());
+        //commands.put(CommandName.FORWARDTOEDITPROFILE, new ForwardToEditProfileCommand());
+      //  commands.put(CommandName.FORWARDTOCREATECOURSE, new ForwardToCreateCourseCommand());
         commands.put(CommandName.COURSESLECTURER, new CoursesLecturerCommand());
 
     }

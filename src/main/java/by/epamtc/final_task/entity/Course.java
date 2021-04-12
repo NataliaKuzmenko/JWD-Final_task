@@ -19,7 +19,8 @@ public class Course {
     public Course() {
     }
 
-    public Course(long id, String title, String description, String materialsPath, LocalDate startDate, LocalDate endDate, long lecturerId, StatusCourse status, FormatCourse format, int limitStudents) {
+    public Course(long id, String title, String description, String materialsPath, LocalDate startDate,
+                  LocalDate endDate, long lecturerId, StatusCourse status, FormatCourse format, int limitStudents) {
         this.id = id;
         this.title = title;
         this.description = description;

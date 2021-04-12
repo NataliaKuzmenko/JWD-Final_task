@@ -43,8 +43,6 @@ public class EditProfileCommand implements Command {
                 updateNameAndSurname(user.getUserId(), name, lastName, request);
             }
 
-            request.setAttribute(ParameterName.LANG_CHANGE_PROCESS_COMMAND,
-                    ParameterName.FORWARD_EDIT_PROFILE_COMMAND);
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "User not found", e);
             throw new CommandException("User not found", e);

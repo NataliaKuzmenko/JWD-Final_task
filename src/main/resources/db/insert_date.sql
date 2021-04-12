@@ -1,3 +1,30 @@
+/*users*/
+INSERT INTO users (password,email,first_name,last_name,role_id)
+VALUES ('414fc215d37c26f2a5996a35664c42ff','nat.s.kuzmenko@gmail.com', 'Наталья','Кузьменко','ADMIN');
+INSERT INTO users (password,email,first_name,last_name,role_id)
+VALUES ('414fc215d37c26f2a5996a35664c42ff', 'makushka.nataha@gmail.com', 'Петр','Петрович','LECTURER');
+INSERT INTO users (password,email,first_name,last_name)
+VALUES ('414fc215d37c26f2a5996a35664c42ff', 'email1@mail.ru', 'Семен','Семенов');
+INSERT INTO users (password,email,first_name,last_name)
+VALUES ('414fc215d37c26f2a5996a35664c42ff', 'email2@mail.ru', 'Сергей','Сергеев');
+INSERT INTO users (password,email,first_name,last_name)
+VALUES ('414fc215d37c26f2a5996a35664c42ff', 'email3@mail.ru', 'Александр','Александров');
+INSERT INTO users (password,email,first_name,last_name)
+VALUES ('414fc215d37c26f2a5996a35664c42ff', 'email4@mail.ru', 'Игорь','Игорев');
+INSERT INTO users (password,email,first_name,last_name)
+VALUES ('414fc215d37c26f2a5996a35664c42ff', 'email5@mail.ru', 'Геннадий','Геннадьев');
+INSERT INTO users (password,email,first_name,last_name)
+VALUES ('414fc215d37c26f2a5996a35664c42ff', 'email6@mail.ru', 'Василиса','Васильевна');
+INSERT INTO users (password,email,first_name,last_name)
+VALUES ('414fc215d37c26f2a5996a35664c42ff', 'email7@mail.ru', 'Мария','Марьянова');
+INSERT INTO users (password,email,first_name,last_name)
+VALUES ('414fc215d37c26f2a5996a35664c42ff', 'email8@mail.ru', 'Ольга','Орлова');
+INSERT INTO users (password,email,first_name,last_name)
+VALUES ('414fc215d37c26f2a5996a35664c42ff', 'email9@mail.ru', 'Анна','Каренина');
+INSERT INTO users (password,email,first_name,last_name)
+VALUES ('414fc215d37c26f2a5996a35664c42ff', 'email10@mail.ru', 'Анастасия','Сидорова');
+
+/*courses*/
 INSERT INTO courses (course_title, description, materials_path)
 VALUES ('Общий курс английского языка',
         'ОБЩИЙ КУРС АНГЛИЙСКОГО ЯЗЫКА – иностранный язык «для жизни». Программа подходит для любого уровня подготовки, от Starter (A1) до Proficiency (C2). Направлена на практическое овладение английским языком в комплексе и преодоление психологического барьера при общении. Общий курс направлен на формирование и совершенствование всех языковых и коммуникативных навыков того уровня сложности, на котором вы занимаетесь. Мы проводим занятия по учебным материалам, разработанным совместно с BBC Worldwide и BBC Learning English. Обучаясь по материалам программ BBC, вы будете слышать живой английский язык и знать все последние новости. Темы курса расширяют кругозор, разные варианты произношения в видео- и аудиоматериалах помогают «настроить ухо». Вы научитесь воспринимать спикеров  на слух – носителей языка и тех, для кого английский не родной. Особое внимание уделяется освоению разговорных клише. Системный подход к обучению чтению и письму совершенствует навыки критического мышления. Следить за прогрессом и определять зоны развития вам помогут проверочные и тренировочные тесты. На уровнях Starter (A1) – Upper Intermediate (B2) мы занимаемся по интерактивному авторскому онлайн-пособию Compass New. Мы создали его для работы над грамотностью и лексическим разнообразием речи. На уровне Proficiency (C2) рассматриваем презентации выдающихся в своей области людей на TED Talk, всемирно известной платформе по обмену интересными идеями. Материалы на общую и бизнес-тематику используем как модели для обучения, источник аутентичного материала. Обсуждаем интересные факты и идеи.',
@@ -29,16 +56,86 @@ INSERT INTO courses (course_title, description, materials_path)
 VALUES ('Подготовиться к экзамену TOEFL',
         'Мы предлагаем комплексную программу подготовки ко всем аспектам международного экзамена TOEFL iBT® (Internet-based Version of the Test of English as a Foreign Language). Мы также помогаем своим клиентам при регистрации на экзамен. Для подготовки к экзамену TOEFL iBT® используются специализированные учебные материалы, как аутентичные, так и разработанные нашими методистами. На каждом занятии уделяется внимание развитию всех видов речевой деятельности, необходимых для успешной сдачи теста: чтения, восприятия речи на слух, устной речи и письма. Учащихся знакомят со спецификой экзамена, моделируя ситуации, максимально приближенные к условиям сдачи. Одновременно с совершенствованием навыков и умений, учащиеся усваивают материал, необходимый для свободного понимания лекций и семинаров, для общения на занятиях в зарубежных университетах и повседневной жизни. Для обучения на курсе подготовки к экзамену TOEFL iBT® необходимо владеть английским языком на высоком уровне (Upper Intermediate и выше). Определить свой уровень знаний можно на бесплатном предварительном тестировании. Подготовиться к TOEFL iBT® можно за 4-6 месяцев в зависимости от интенсивности графика занятий. Программа разбита на семестры по 8 недель в каждом.',
         'materials.pdf');
+INSERT INTO courses (course_title,description)
+VALUES ('Подготовиться к экзамену IELTS','IELTS (International English Language Testing System) — международная система оценки знания английского языка. Позволяет определить уровень и навыки владения английским языком у людей, для которых он не является родным. Мы предлагаем комплексную программу подготовки ко всем аспектам экзамена IELTS . Для того чтобы заниматься по этой программе необходимо владеть английским языком на продвинутом уровне - Upper Intermediate и выше. Определить свой уровень знаний можно на бесплатном предварительном тестировании. Занятия проходят 2 раза в неделю по 2 академических часа в течение 4-х месяцев.');
 
-INSERT INTO course_run (course_id,start_course,end_course,lecturer_id,format,status)
-VALUES (1,'2021-09-01', '2022-05-31',1,'OFFLINE','NOT_STARTED');
-INSERT INTO course_run (course_id,start_course,end_course,lecturer_id,format,status)
-VALUES (2,'2021-09-01', '2022-05-31',1,'OFFLINE','NOT_STARTED');
-INSERT INTO course_run (course_id,start_course,end_course,lecturer_id,format,status)
-VALUES (3,'2021-09-01', '2022-05-31',1,'OFFLINE','NOT_STARTED');
-INSERT INTO course_run (course_id,start_course,end_course,lecturer_id,format,status)
-VALUES (4,'2021-09-01', '2022-05-31',1,'OFFLINE','NOT_STARTED');
-INSERT INTO course_run (course_id,start_course,end_course,lecturer_id,format,status)
-VALUES (5,'2021-09-01', '2022-05-31',1,'OFFLINE','NOT_STARTED');
-INSERT INTO course_run (course_id,start_course,end_course,lecturer_id,format,status)
-VALUES (6,'2021-09-01', '2022-05-31',1,'OFFLINE','NOT_STARTED');
+/*course_run*/
+INSERT INTO course_run (course_id,start_course,end_course,lecturer_id,format)
+VALUES (1,'2021-09-01', '2022-05-31',2,'OFFLINE');
+INSERT INTO course_run (course_id,start_course,end_course,lecturer_id,format)
+VALUES (2,'2021-06-01', '2021-08-31',2,'OFFLINE');
+INSERT INTO course_run (course_id,start_course,end_course,lecturer_id,format)
+VALUES (3,'2021-06-01', '2021-08-31',2,'OFFLINE');
+INSERT INTO course_run (course_id,start_course,end_course,lecturer_id,format)
+VALUES (4,'2021-06-01', '2021-08-31',2,'OFFLINE');
+INSERT INTO course_run (course_id,start_course,end_course,lecturer_id,format)
+VALUES (5,'2021-09-01', '2022-05-31',2,'OFFLINE');
+INSERT INTO course_run (course_id,start_course,end_course,lecturer_id,format)
+VALUES (6,'2021-06-01', '2021-08-31',2,'OFFLINE');
+
+/*lists_students*/
+INSERT INTO lists_students (user_id, course_run_id,status_student_id)
+VALUES ('3','1','TRAINING_IN_PROGRESS');
+INSERT INTO lists_students (user_id, course_run_id,status_student_id)
+VALUES ('4','1','TRAINING_IN_PROGRESS');
+INSERT INTO lists_students (user_id, course_run_id,status_student_id)
+VALUES ('5','1','TRAINING_IN_PROGRESS');
+INSERT INTO lists_students (user_id, course_run_id,status_student_id)
+VALUES ('6','1','TRAINING_IN_PROGRESS');
+INSERT INTO lists_students (user_id, course_run_id,status_student_id)
+VALUES ('7','1','TRAINING_IN_PROGRESS');
+
+INSERT INTO lists_students (user_id, course_run_id,status_student_id)
+VALUES ('8','2','TRAINING_IN_PROGRESS');
+INSERT INTO lists_students (user_id, course_run_id,status_student_id)
+VALUES ('9','2','TRAINING_IN_PROGRESS');
+INSERT INTO lists_students (user_id, course_run_id,status_student_id)
+VALUES ('10','2','TRAINING_IN_PROGRESS');
+INSERT INTO lists_students (user_id, course_run_id,status_student_id)
+VALUES ('11','2','TRAINING_IN_PROGRESS');
+INSERT INTO lists_students (user_id, course_run_id,status_student_id)
+VALUES ('12','2','TRAINING_IN_PROGRESS');
+
+INSERT INTO lists_students (user_id, course_run_id,status_student_id)
+VALUES ('3','3','TRAINING_IN_PROGRESS');
+INSERT INTO lists_students (user_id, course_run_id,status_student_id)
+VALUES ('4','3','TRAINING_IN_PROGRESS');
+INSERT INTO lists_students (user_id, course_run_id,status_student_id)
+VALUES ('5','3','TRAINING_IN_PROGRESS');
+INSERT INTO lists_students (user_id, course_run_id,status_student_id)
+VALUES ('6','3','TRAINING_IN_PROGRESS');
+INSERT INTO lists_students (user_id, course_run_id,status_student_id)
+VALUES ('7','3','TRAINING_IN_PROGRESS');
+
+INSERT INTO lists_students (user_id, course_run_id,status_student_id)
+VALUES ('8','4','TRAINING_IN_PROGRESS');
+INSERT INTO lists_students (user_id, course_run_id,status_student_id)
+VALUES ('9','4','TRAINING_IN_PROGRESS');
+INSERT INTO lists_students (user_id, course_run_id,status_student_id)
+VALUES ('10','4','TRAINING_IN_PROGRESS');
+INSERT INTO lists_students (user_id, course_run_id,status_student_id)
+VALUES ('11','4','TRAINING_IN_PROGRESS');
+INSERT INTO lists_students (user_id, course_run_id,status_student_id)
+VALUES ('12','4','TRAINING_IN_PROGRESS');
+
+INSERT INTO lists_students (user_id, course_run_id,status_student_id)
+VALUES ('3','5','TRAINING_IN_PROGRESS');
+INSERT INTO lists_students (user_id, course_run_id,status_student_id)
+VALUES ('4','5','TRAINING_IN_PROGRESS');
+INSERT INTO lists_students (user_id, course_run_id,status_student_id)
+VALUES ('5','5','TRAINING_IN_PROGRESS');
+INSERT INTO lists_students (user_id, course_run_id,status_student_id)
+VALUES ('6','5','TRAINING_IN_PROGRESS');
+INSERT INTO lists_students (user_id, course_run_id,status_student_id)
+VALUES ('7','5','TRAINING_IN_PROGRESS');
+
+INSERT INTO lists_students (user_id, course_run_id,status_student_id)
+VALUES ('8','6','TRAINING_IN_PROGRESS');
+INSERT INTO lists_students (user_id, course_run_id,status_student_id)
+VALUES ('9','6','TRAINING_IN_PROGRESS');
+INSERT INTO lists_students (user_id, course_run_id,status_student_id)
+VALUES ('10','6','TRAINING_IN_PROGRESS');
+INSERT INTO lists_students (user_id, course_run_id,status_student_id)
+VALUES ('11','6','TRAINING_IN_PROGRESS');
+INSERT INTO lists_students (user_id, course_run_id,status_student_id)
+VALUES ('12','6','TRAINING_IN_PROGRESS');

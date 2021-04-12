@@ -21,7 +21,6 @@ import java.time.LocalDate;
 
 /**
  * Class implementing course creating
- *
  */
 public class CreateCourseCommand implements Command {
     public static final Logger LOGGER = LogManager.getLogger();
@@ -58,8 +57,6 @@ public class CreateCourseCommand implements Command {
                 request.setAttribute(ParameterName.ERROR_DATA, true);
                 router = new Router(PageName.CREATE_COURSE);
             }
-            request.setAttribute(ParameterName.LANG_CHANGE_PROCESS_COMMAND,
-                    ParameterName.FORWARD_CREATE_COURSE_COMMAND);
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, "Create course failed", e);
             throw new CommandException("Create course failed", e);
