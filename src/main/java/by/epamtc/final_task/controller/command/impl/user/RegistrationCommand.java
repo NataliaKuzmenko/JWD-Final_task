@@ -5,6 +5,7 @@ import by.epamtc.final_task.controller.command.Router;
 import by.epamtc.final_task.controller.command.exception.CommandException;
 import by.epamtc.final_task.controller.constant.PageName;
 import by.epamtc.final_task.controller.constant.ParameterName;
+import by.epamtc.final_task.entity.User;
 import by.epamtc.final_task.service.UserService;
 import by.epamtc.final_task.service.exception.ServiceException;
 import by.epamtc.final_task.service.impl.UserServiceImpl;
@@ -45,7 +46,14 @@ public class RegistrationCommand implements Command {
             Router router;
             if (userService.create(email, password)) {
 
-                Login.findUser(request, email, userService);
+                User user = userService.findUserWithTheAllInfoByLogin(email);
+
+                request.getSession().setAttribute(ParameterName.ROLE, user.getRole().name());
+                request.getSession().setAttribute(ParameterName.EMAIL, user.getEmail());
+                request.getSession().setAttribute(ParameterName.USER_ID, user.getUserId());
+
+                request.setAttribute(ParameterName.FIRST_NAME, user.getFirstName());
+                request.setAttribute(ParameterName.LAST_NAME, user.getLastName());
 
                 router = new Router(PageName.WELCOME_PAGE);
                 router.setMessage(ParameterName.REGISTRATION_OK);

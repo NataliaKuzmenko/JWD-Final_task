@@ -6,10 +6,8 @@ import by.epamtc.final_task.controller.command.exception.CommandException;
 import by.epamtc.final_task.controller.constant.PageName;
 import by.epamtc.final_task.controller.constant.ParameterName;
 import by.epamtc.final_task.service.ResultUserService;
-import by.epamtc.final_task.service.UserService;
 import by.epamtc.final_task.service.exception.ServiceException;
 import by.epamtc.final_task.service.impl.ResultUserServiceImpl;
-import by.epamtc.final_task.service.impl.UserServiceImpl;
 import by.epamtc.final_task.service.validation.ResultUserValidator;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -24,13 +22,11 @@ public class SetCourseResultCommand implements Command {
     public static final Logger LOGGER = LogManager.getLogger();
     private final ResultUserValidator resultUserValidator = ResultUserValidator.getInstance();
     private final ResultUserService resultUserService = ResultUserServiceImpl.getInstance();
-   // private final UserService userService = UserServiceImpl.getInstance();
-
 
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
 
-        Router router = new Router(PageName.ADD_RESULT);
+        Router router = new Router(PageName.SET_USER_RESULT_PAGE);
         String courseIdStr = (String) request.getSession().getAttribute(ParameterName.COURSE_ID);
         String markStr = request.getParameter(ParameterName.MARK);
         String comment = request.getParameter(ParameterName.COMMENT);

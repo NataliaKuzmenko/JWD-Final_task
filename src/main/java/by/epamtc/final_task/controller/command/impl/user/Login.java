@@ -31,7 +31,14 @@ public class Login implements Command {
         try {
             if (userService.isLoginExists(email)) {
                 if (userService.isLoginAndPasswordValid(email, password)) {
-                    findUser(request, email, userService);
+                    User user = userService.findUserWithTheAllInfoByLogin(email);
+
+                    request.getSession().setAttribute(ParameterName.ROLE, user.getRole().name());
+                    request.getSession().setAttribute(ParameterName.EMAIL, user.getEmail());
+                    request.getSession().setAttribute(ParameterName.USER_ID, user.getUserId());
+
+                    request.setAttribute(ParameterName.FIRST_NAME, user.getFirstName());
+                    request.setAttribute(ParameterName.LAST_NAME, user.getLastName());
                     page = PageName.WELCOME_PAGE;
                 } else {
                     request.setAttribute(ParameterName.INCORRECT_LOGIN_AND_PASSWORD, true);
@@ -46,17 +53,6 @@ public class Login implements Command {
             throw new CommandException("User is not exist", e);
         }
         return new Router(page);
-    }
-
-    static void findUser(HttpServletRequest request, String email, UserService userService) throws ServiceException {
-        User user = userService.findUserWithTheAllInfoByLogin(email);
-
-        request.getSession().setAttribute(ParameterName.ROLE, user.getRole().name());
-        request.getSession().setAttribute(ParameterName.EMAIL, user.getEmail());
-        request.getSession().setAttribute(ParameterName.USER_ID, user.getUserId());
-
-        request.setAttribute(ParameterName.FIRST_NAME, user.getFirstName());
-        request.setAttribute(ParameterName.LAST_NAME, user.getLastName());
     }
 }
 

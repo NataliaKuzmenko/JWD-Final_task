@@ -46,9 +46,15 @@
                 <input type="hidden" name="command" value="createCourse"/>
 
                 <p class="text-info"> ${courseTitle}:
-                    <input type="text" name="title" value=""/><br/></p>
+                    <input type="text" class="form-control" aria-label="Default"
+                           aria-describedby="inputGroup-sizing-default"
+                           name="title" value="" minlength="3" maxlength="100">
+                    <br/></p>
                 <p class="text-info">${courseDescription}:
-                    <input type="text" name="description" value=""/><br/></p>
+                    <input type="text" class="form-control" aria-label="Default"
+                           aria-describedby="inputGroup-sizing-default"
+                           name="description" value="" minlength="3" maxlength="1500">
+                    <br/></p>
         </div>
         <div class="col-lg-4">
             <p class="text-info">${courseStart}:

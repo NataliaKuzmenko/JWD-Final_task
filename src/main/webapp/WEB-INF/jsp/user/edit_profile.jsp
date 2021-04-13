@@ -56,8 +56,9 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="">${firstName} ${lastName}</span>
                     </div>
-                    <input type="text" class="form-control" name="first_name">
-                    <input type="text" class="form-control" name="last_name">
+                    <input type="text" class="form-control" name="first_name"
+                           minlength="2" maxlength="20">
+                    <input type="text" class="form-control" name="last_name" minlength="2" maxlength="15">
                 </div>
                 <br/>
                 <div class="input-group mb-3">

@@ -21,7 +21,7 @@ public class ForwardToSetResult implements Command {
         String page;
         String studentId = request.getParameter(ParameterName.STUDENT_ID);
         request.getSession().setAttribute(ParameterName.STUDENT_ID, studentId);
-        page = PageName.ADD_RESULT;
+        page = PageName.SET_USER_RESULT_PAGE;
         return new Router(page);
     }
 }
