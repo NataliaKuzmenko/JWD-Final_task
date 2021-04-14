@@ -41,10 +41,10 @@
                 ${cancelCourse}</div>
     </c:if>
 
-    <c:if test="${listCoursesIsEmpty ==true}">
+    <c:if test="${listCoursesIsEmpty == true}">
         <div class="alert alert-primary" role="alert">${notCourses}</div>
     </c:if>
-    <c:if test="${listCoursesIsEmpty ==false}">
+    <c:if test="${listCoursesIsEmpty == false}">
         <br/>
         <table class="table table-bordered">
             <thead>

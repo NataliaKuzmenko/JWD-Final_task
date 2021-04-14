@@ -10,7 +10,7 @@
     <fmt:setBundle basename="localization.pagecontent" var="locale"/>
 
     <fmt:message bundle="${locale}" key="course.MyCourses" var="study"/>
-    <fmt:message bundle="${locale}" key="course.NotCourses" var="notCourses"/>
+    <fmt:message bundle="${locale}" key="course.NotCourses" var="not_courses"/>
     <fmt:message bundle="${locale}" key="course.LeaveCourse" var="leaveCourse"/>
     <fmt:message bundle="${locale}" key="course.ErrorLeaveCourse" var="cancelCourseError"/>
     <fmt:message bundle="${locale}" key="course.Cancel" var="cancelCourse"/>
@@ -30,9 +30,8 @@
     <div class="row">
         <div class="col-lg-1"></div>
         <div class="col-lg-10">
-            <c:choose>
-                <c:when test="${notCourses ==false}">
-                    <br/>
+            <c:if test="${notCourses == false}">
+                <br/>
                     <table class="table table-bordered">
                         <thead>
                         <tr>
@@ -62,11 +61,10 @@
                         </c:forEach>
                         </tbody>
                     </table>
-                </c:when>
-                <c:otherwise>
-                    <div class="alert alert-primary" role="alert"> ${notCourses}</div>
-                </c:otherwise>
-            </c:choose>
+            </c:if>
+            <c:if test="${notCourses == true}">
+                    <div class="alert alert-primary" role="alert"> ${not_courses}</div>
+            </c:if>
             <br/>
             <form class="form-inline my-2 my-lg-0" method="post"
                   action="${request.getContextPath()}/final_task_war_exploded/controller">
