@@ -75,16 +75,16 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                     <a class="dropdown-item"
-                                       href="${request.getContextPath()}/final_task_war_exploded/controller?command=inittableusersoncourse&user_id=${result.key.userId}&statusUser=APPLIED">
+                                       href="${request.getContextPath()}/final_task_war/controller?command=inittableusersoncourse&user_id=${result.key.userId}&statusUser=APPLIED">
                                             ${applied}</a>
                                     <a class="dropdown-item"
-                                       href="${request.getContextPath()}/final_task_war_exploded/controller?command=inittableusersoncourse&user_id=${result.key.userId}&statusUser=TRAINING_IN_PROGRESS">
+                                       href="${request.getContextPath()}/final_task_war/controller?command=inittableusersoncourse&user_id=${result.key.userId}&statusUser=TRAINING_IN_PROGRESS">
                                             ${inProcess}</a>
                                     <a class="dropdown-item"
-                                       href="${request.getContextPath()}/final_task_war_exploded/controller?command=inittableusersoncourse&user_id=${result.key.userId}&statusUser=FINISHED">
+                                       href="${request.getContextPath()}/final_task_war/controller?command=inittableusersoncourse&user_id=${result.key.userId}&statusUser=FINISHED">
                                             ${finishedCourse}</a>
                                     <a class="dropdown-item"
-                                       href="${request.getContextPath()}/final_task_war_exploded/controller?command=inittableusersoncourse&user_id=${result.key.userId}&statusUser=DENIED">
+                                       href="${request.getContextPath()}/final_task_war/controller?command=inittableusersoncourse&user_id=${result.key.userId}&statusUser=DENIED">
                                             ${cancel}</a>
                                 </div>
                             </div>
@@ -93,7 +93,7 @@
                         <td><c:out value="${result.value.comment}"/></td>
                         <td>
                             <form class="form-inline my-2 my-lg-0" method="post"
-                                  action="${request.getContextPath()}/final_task_war_exploded/controller">
+                                  action="${request.getContextPath()}/final_task_war/controller">
                                 <input class="btn btn-outline-secondary" type="submit" value="${addResults}">
                                 <input type="hidden" name="command" value="forwardtosetresult"/>
                                 <input type="hidden" name="student_id" value="${result.key.userId}"/>
@@ -107,7 +107,7 @@
                 <div class="col-lg-5"></div>
                 <div class="col-lg-5">
                     <form class="form-inline my-2 my-lg-0" method="post"
-                          action="${request.getContextPath()}/final_task_war_exploded/controller">
+                          action="${request.getContextPath()}/final_task_war/controller">
                         <input type="hidden" name="command" value="detailscourse"/>
                         <input class="btn btn-outline-secondary" type="submit" value="${backDetailsCourse}">
                     </form>

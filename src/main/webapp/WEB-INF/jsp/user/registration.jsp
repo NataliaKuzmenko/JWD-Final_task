@@ -46,7 +46,7 @@
     <div class="row">
         <div class="col-lg-2"></div>
         <div class="col-lg-8">
-            <form action="${request.getContextPath()}/final_task_war_exploded/controller" method="post">
+            <form action="${request.getContextPath()}/final_task_war/controller" method="post">
                 <input type="hidden" name="command" value="registration"/>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">

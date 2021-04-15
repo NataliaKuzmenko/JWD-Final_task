@@ -42,7 +42,7 @@
         <div class="col-lg-1"></div>
         <div class="col-lg-6">
             <jsp:useBean id="currentDate" class="java.util.Date"/>
-            <form action="${request.getContextPath()}/final_task_war_exploded/controller" method="post">
+            <form action="${request.getContextPath()}/final_task_war/controller" method="post">
                 <input type="hidden" name="command" value="createCourse"/>
 
                 <p class="text-info"> ${courseTitle}:

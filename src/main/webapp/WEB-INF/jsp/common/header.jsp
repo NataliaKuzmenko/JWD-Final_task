@@ -41,7 +41,7 @@
                 <li class="nav-item">
                     <a class="nav-link">
                         <form class="form-inline my-2 my-lg-0" method="post"
-                              action="${request.getContextPath()}/final_task_war_exploded/controller">
+                              action="${request.getContextPath()}/final_task_war/controller">
                             <input class="btn btn-outline-secondary" type="submit" value="${main}">
                             <input type="hidden" name="command" value="forward"/>
                             <input type="hidden" name="page" value="/WEB-INF/jsp/main.jsp"/>
@@ -54,14 +54,14 @@
                         <c:choose>
                             <c:when test="${role == null || role=='STUDENT'}">
                                 <form class="form-inline my-2 my-lg-0" method="post"
-                                      action="${request.getContextPath()}/final_task_war_exploded/controller">
+                                      action="${request.getContextPath()}/final_task_war/controller">
                                     <input class="btn btn-outline-secondary" type="submit" value="${courses}">
                                     <input type="hidden" name="command" value="courseRunCommand"/>
                                 </form>
                             </c:when>
                             <c:otherwise>
                                 <form class="form-inline my-2 my-lg-0" method="post"
-                                      action="${request.getContextPath()}/final_task_war_exploded/controller">
+                                      action="${request.getContextPath()}/final_task_war/controller">
                                     <input class="btn btn-outline-secondary" type="submit" value="${courses}">
                                     <input type="hidden" name="command" value="coursesPage"/>
                                 </form>
@@ -74,7 +74,7 @@
                 <li class="nav-item">
                     <a class="nav-link">
                         <form class="form-inline my-2 my-lg-0" method="post"
-                              action="${request.getContextPath()}/final_task_war_exploded/controller">
+                              action="${request.getContextPath()}/final_task_war/controller">
                             <input class="btn btn-outline-secondary" type="submit" value="${contacts}">
                             <input type="hidden" name="command" value="forward"/>
                             <input type="hidden" name="page" value="/WEB-INF/jsp/contacts.jsp"/>
@@ -85,7 +85,7 @@
                     <li class="nav-item">
                         <a class="nav-link">
                             <form class="form-inline my-2 my-lg-0" method="post"
-                                  action="${request.getContextPath()}/final_task_war_exploded/controller">
+                                  action="${request.getContextPath()}/final_task_war/controller">
                                 <input class="btn btn-outline-secondary" type="submit" value="${users}">
                                 <input type="hidden" name="command" value="inittableuserscommand"/>
 
@@ -103,7 +103,7 @@
 
                 <a class="nav-link">
                     <form class="form-inline my-2 my-lg-0" method="post"
-                          action="${request.getContextPath()}/final_task_war_exploded/controller">
+                          action="${request.getContextPath()}/final_task_war/controller">
                         <input class="btn btn-outline-secondary" type="submit"
                                value="${profile}">
                         <input type="hidden" name="command" value="initprofilecommand"/>
@@ -114,7 +114,7 @@
 
                 <a class="nav-link">
                     <form class="form-inline my-2 my-lg-0" method="post"
-                          action="${request.getContextPath()}/final_task_war_exploded/controller">
+                          action="${request.getContextPath()}/final_task_war/controller">
                         <input class="btn btn-outline-secondary" type="submit"
                                value="${logout}">
                         <input type="hidden" name="command" value="logout"/>
@@ -126,7 +126,7 @@
 
                 <a class="nav-link">
                     <form class="form-inline my-2 my-lg-0" id="headerForm" method="post"
-                          action="${request.getContextPath()}/final_task_war_exploded/controller">
+                          action="${request.getContextPath()}/final_task_war/controller">
                         <input class="btn btn-outline-secondary" type="submit" value="${login}">
                         <input type="hidden" name="command" value="forward"/>
                         <input type="hidden" name="page" value="/WEB-INF/jsp/user/login.jsp"/>
@@ -136,7 +136,7 @@
 
                 <a class="nav-link">
                     <form class="form-inline my-2 my-lg-0" method="post"
-                          action="${request.getContextPath()}/final_task_war_exploded/controller">
+                          action="${request.getContextPath()}/final_task_war/controller">
                         <input type="hidden" name="command" value="forward"/>
                         <input type="hidden" name="page" value="/WEB-INF/jsp/user/registration.jsp"/>
                         <input class="btn btn-outline-secondary" type="submit" value="${CreateAnAccount}"/>
@@ -147,7 +147,7 @@
         </c:choose>
 
         <form class="form-inline my-2 my-lg-0" method="post"
-              action="${request.getContextPath()}/final_task_war_exploded/controller">
+              action="${request.getContextPath()}/final_task_war/controller">
             <input type="hidden" name="command" value="language"/>
             <input type="hidden" name="langChangeProcessCommand" value="${langChangeProcessCommand}"/>
             <input class="btn btn-outline-secondary" type="submit" name="language" value="${language}">

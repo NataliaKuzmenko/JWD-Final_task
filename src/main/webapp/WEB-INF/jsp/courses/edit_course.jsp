@@ -49,7 +49,7 @@
             <c:choose>
                 <c:when test="${parameter == 'title'}">
                     <form class="form-inline my-2 my-lg-0" method="post"
-                          action="${request.getContextPath()}/final_task_war_exploded/controller">
+                          action="${request.getContextPath()}/final_task_war/controller">
                         <input type="hidden" name="command" value="editcourse"/>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
@@ -64,7 +64,7 @@
                 </c:when>
                 <c:when test="${parameter == 'description'}">
                     <form class="form-inline my-2 my-lg-0" method="post"
-                          action="${request.getContextPath()}/final_task_war_exploded/controller">
+                          action="${request.getContextPath()}/final_task_war/controller">
                         <input type="hidden" name="command" value="editcourse"/>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
@@ -79,7 +79,7 @@
                 </c:when>
                 <c:otherwise>
                     <form class="form-inline my-2 my-lg-0" method="post"
-                          action="${request.getContextPath()}/final_task_war_exploded/controller">
+                          action="${request.getContextPath()}/final_task_war/controller">
                         <input type="hidden" name="command" value="editcourse"/>
                         <table class="table">
                             <tbody>
@@ -111,7 +111,7 @@
             </c:choose>
             <p>
             <form class="form-inline my-2 my-lg-0" method="post"
-                  action="${request.getContextPath()}/final_task_war_exploded/controller">
+                  action="${request.getContextPath()}/final_task_war/controller">
                 <input type="hidden" name="command" value="detailscourse"/>
                 <input class="btn btn-outline-secondary" type="submit" value="${back}">
             </form>

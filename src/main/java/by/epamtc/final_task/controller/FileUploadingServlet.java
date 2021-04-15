@@ -80,8 +80,8 @@ public class FileUploadingServlet extends HttpServlet {
 
         try {
             userService.updateAvatar(email, randFilename);
-            User user = userService.findUserWithTheAllInfoByLogin(email);
-            request.setAttribute(PHOTO_PATH, user.getPhotoPath());
+           // User user = userService.findUserWithTheAllInfoByLogin(email);
+           // request.setAttribute(PHOTO_PATH, user.getPhotoPath());
         } catch (ServiceException e) {
             throw new CommandException("Failed photo upload attempt");
         }

@@ -85,7 +85,7 @@
                             </c:when>
                             <c:otherwise>
                                 <form class="form-inline my-2 my-lg-0" method="post"
-                                      action="${request.getContextPath()}/final_task_war_exploded/controller">
+                                      action="${request.getContextPath()}/final_task_war/controller">
                                     <input class="btn btn-outline-secondary" type="submit" value="${leaveCourse}">
                                     <input type="hidden" name="command" value="viewcoursesuser"/>
                                     <input type="hidden" name="courseId" value="${result.key.id}"/>
@@ -99,7 +99,7 @@
         </table>
     </c:if>
     <form class="form-inline my-2 my-lg-0" method="post"
-          action="${request.getContextPath()}/final_task_war_exploded/controller">
+          action="${request.getContextPath()}/final_task_war/controller">
         <input type="hidden" name="command" value="INITPROFILECOMMAND"/>
         <input class="btn btn-outline-secondary" type="submit" value="${back}">
     </form>

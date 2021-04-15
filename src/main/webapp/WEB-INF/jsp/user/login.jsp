@@ -28,7 +28,7 @@
         <div class="col-lg-5"></div>
         <div class="col-lg-3">
             <form name="loginForm" method="post"
-                  action="${request.getContextPath()}/final_task_war_exploded/controller">
+                  action="${request.getContextPath()}/final_task_war/controller">
                 <input type="hidden" name="command" value="login"/>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">

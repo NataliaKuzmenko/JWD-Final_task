@@ -63,7 +63,7 @@
         <div class="col-lg-2">
             <br/>
             <form class="form-inline my-2 my-lg-0" method="post"
-                  action="${request.getContextPath()}/final_task_war_exploded/controller">
+                  action="${request.getContextPath()}/final_task_war/controller">
                 <input class="btn btn-outline-secondary" type="submit" value="${editProfile}">
                 <input type="hidden" name="command" value="forward"/>
                 <input type="hidden" name="page" value="/WEB-INF/jsp/user/edit_profile.jsp"/>
@@ -71,14 +71,14 @@
             <br/><br/>
             <c:if test="${role == 'STUDENT'}">
                 <form class="form-inline my-2 my-lg-0" method="post"
-                      action="${request.getContextPath()}/final_task_war_exploded/controller">
+                      action="${request.getContextPath()}/final_task_war/controller">
                     <input class="btn btn-outline-secondary" type="submit" value="${study}">
                     <input type="hidden" name="command" value="viewcoursesuser"/>
                 </form>
             </c:if>
             <c:if test="${role == 'LECTURER'}">
                 <form class="form-inline my-2 my-lg-0" method="post"
-                      action="${request.getContextPath()}/final_task_war_exploded/controller">
+                      action="${request.getContextPath()}/final_task_war/controller">
                     <input class="btn btn-outline-secondary" type="submit" value="${myCourses}">
                     <input type="hidden" name="command" value="courseslecturer"/>
                 </form>

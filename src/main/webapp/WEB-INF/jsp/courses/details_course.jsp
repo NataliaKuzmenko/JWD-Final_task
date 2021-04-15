@@ -54,7 +54,7 @@
             <h4 class="text-primary"><c:out value="${course.title}"/></h4>
             <c:if test="${user_id == course.lecturerId}">
                 <form class="form-inline my-2 my-lg-0" method="post"
-                      action="${request.getContextPath()}/final_task_war_exploded/controller">
+                      action="${request.getContextPath()}/final_task_war/controller">
                     <input class="btn btn-outline-secondary" type="submit" value="${changeTitle}">
                     <input type="hidden" name="command" value="forwardtoeditcourse"/>
                     <input type="hidden" name="courseId" value="${course.id}"/>
@@ -66,7 +66,7 @@
                 <c:out value="${course.description}"/></p>
             <c:if test="${user_id == course.lecturerId}">
                 <form class="form-inline my-2 my-lg-0" method="post"
-                      action="${request.getContextPath()}/final_task_war_exploded/controller">
+                      action="${request.getContextPath()}/final_task_war/controller">
                     <input class="btn btn-outline-secondary" type="submit" value="${changeDescription}">
                     <input type="hidden" name="command" value="forwardtoeditcourse"/>
                     <input type="hidden" name="courseId" value="${course.id}"/>
@@ -99,7 +99,7 @@
                     <td>
                         <c:if test="${user_id == course.lecturerId}">
                             <form class="form-inline my-2 my-lg-0" method="post"
-                                  action="${request.getContextPath()}/final_task_war_exploded/controller">
+                                  action="${request.getContextPath()}/final_task_war/controller">
                                 <input class="btn btn-outline-secondary" type="submit" value="${changeDate}">
                                 <input type="hidden" name="command" value="forwardtoeditcourse"/>
                                 <input type="hidden" name="courseId" value="${course.id}"/>
@@ -120,10 +120,10 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <a class="dropdown-item"
-                                   href="${request.getContextPath()}/final_task_war_exploded/controller?command=detailscourse&format=ONLINE">
+                                   href="${request.getContextPath()}/final_task_war/controller?command=detailscourse&format=ONLINE">
                                     Online</a>
                                 <a class="dropdown-item"
-                                   href="${request.getContextPath()}/final_task_war_exploded/controller?command=detailscourse&format=OFFLINE">
+                                   href="${request.getContextPath()}/final_task_war/controller?command=detailscourse&format=OFFLINE">
                                     Offline</a>
                             </div>
                         </div>
@@ -142,13 +142,13 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <a class="dropdown-item"
-                                   href="${request.getContextPath()}/final_task_war_exploded/controller?command=detailscourse&statusCourse=NOT_STARTED">
+                                   href="${request.getContextPath()}/final_task_war/controller?command=detailscourse&statusCourse=NOT_STARTED">
                                         ${groupRecruitment}</a>
                                 <a class="dropdown-item"
-                                   href="${request.getContextPath()}/final_task_war_exploded/controller?command=detailscourse&statusCourse=IN_PROGRESS">
+                                   href="${request.getContextPath()}/final_task_war/controller?command=detailscourse&statusCourse=IN_PROGRESS">
                                         ${courseStart}</a>
                                 <a class="dropdown-item"
-                                   href="${request.getContextPath()}/final_task_war_exploded/controller?command=detailscourse&statusCourse=FINISHED">
+                                   href="${request.getContextPath()}/final_task_war/controller?command=detailscourse&statusCourse=FINISHED">
                                         ${courseFinished}</a>
                             </div>
                         </div>
@@ -171,7 +171,7 @@
                 <c:when test="${role == 'STUDENT'}">
                     <br/>
                     <form class="form-inline my-2 my-lg-0" method="post"
-                          action="${request.getContextPath()}/final_task_war_exploded/controller">
+                          action="${request.getContextPath()}/final_task_war/controller">
                         <input type="hidden" name="command" value="detailscourse"/>
                         <input class="btn btn-outline-secondary" type="submit" value="${register}">
                         <input type="hidden" name="courseId" value="${course.id}">
@@ -180,7 +180,7 @@
                 </c:when>
                 <c:when test="${role == 'LECTURER' || role == 'ADMIN'}">
                     <form class="form-inline my-2 my-lg-0" method="post"
-                          action="${request.getContextPath()}/final_task_war_exploded/controller">
+                          action="${request.getContextPath()}/final_task_war/controller">
                         <input type="hidden" name="command" value="inittableusersoncourse"/>
                         <input type="hidden" name="courseId" value="${course.id}">
                         <input class="btn btn-outline-secondary" type="submit" value="${usersOnCourse}"/>

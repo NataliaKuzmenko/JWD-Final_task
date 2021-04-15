@@ -50,7 +50,7 @@
                                 <td><c:out value="${result.status}"/></td>
                                 <td>
                                     <form class="form-inline my-2 my-lg-0" method="post"
-                                          action="${request.getContextPath()}/final_task_war_exploded/controller">
+                                          action="${request.getContextPath()}/final_task_war/controller">
                                         <input type="hidden" name="command" value="inittableusersoncourse"/>
                                         <input type="hidden" name="courseId" value="${result.id}">
                                         <input class="btn btn-outline-secondary" type="submit"
@@ -67,7 +67,7 @@
             </c:if>
             <br/>
             <form class="form-inline my-2 my-lg-0" method="post"
-                  action="${request.getContextPath()}/final_task_war_exploded/controller">
+                  action="${request.getContextPath()}/final_task_war/controller">
                 <input type="hidden" name="command" value="INITPROFILECOMMAND"/>
                 <input class="btn btn-outline-secondary" type="submit" value="${back}">
             </form>

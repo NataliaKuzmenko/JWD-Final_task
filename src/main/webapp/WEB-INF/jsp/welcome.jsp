@@ -43,14 +43,14 @@
             <c:choose>
                 <c:when test="${role=='STUDENT' ||role== null}">
                     <form class="form-inline my-2 my-lg-0" method="post"
-                          action="${request.getContextPath()}/final_task_war_exploded/controller">
+                          action="${request.getContextPath()}/final_task_war/controller">
                         <input type="hidden" name="command" value="courseruncommand"/>
                         <input class="btn btn-outline-secondary" type="submit" value="${forwardPageCourses}"/>
                     </form>
                 </c:when>
                 <c:otherwise>
                     <form class="form-inline my-2 my-lg-0" method="post"
-                          action="${request.getContextPath()}/final_task_war_exploded/controller">
+                          action="${request.getContextPath()}/final_task_war/controller">
                         <input type="hidden" name="command" value="coursespage"/>
                         <input class="btn btn-outline-secondary" type="submit" value="${forwardPageCourses}"/>
                     </form>

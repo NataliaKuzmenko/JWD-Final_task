@@ -28,7 +28,7 @@
         <div class="col-sm-2">
             <c:if test="${role == 'LECTURER'}">
                 <form class="form-inline my-2 my-lg-0" method="post"
-                      action="${request.getContextPath()}/final_task_war_exploded/controller">
+                      action="${request.getContextPath()}/final_task_war/controller">
                     <input type="hidden" name="command" value="forward"/>
                     <input type="hidden" name="page" value="/WEB-INF/jsp/courses/create_course.jsp"/>
                     <input class="btn btn-outline-secondary" type="submit" value="${createCourse}">
@@ -45,7 +45,7 @@
                 <ul class="list-group">
                     <li class="list-group-item"><c:out value="${ course.title }"/>
                         <form class="form-inline my-2 my-lg-0" method="post"
-                              action="${request.getContextPath()}/final_task_war_exploded/controller">
+                              action="${request.getContextPath()}/final_task_war/controller">
                             <input type="hidden" name="command" value="detailscourse"/>
                             <input type="hidden" name="courseId" value="${course.id}"/>
                             <input class="btn btn-outline-secondary" type="submit" value="${details}">
@@ -65,7 +65,7 @@
                     <div class="row align-text-bottom justify-content-start">
                         <c:if test="${currentPage > 0}">
                             <a class="pr-3 text-info"
-                               href="${request.getContextPath()}/final_task_war_exploded/controller?command=courseruncommand&page=${currentPage - 1}">${previous_button}</a>
+                               href="${request.getContextPath()}/final_task_war/controller?command=courseruncommand&page=${currentPage - 1}">${previous_button}</a>
                         </c:if>
 
                         <c:set var="pageCounter" value="${0}"/>
@@ -74,18 +74,18 @@
                             <c:choose>
                                 <c:when test="${currentPage == pageCounter || (currentPage == null && pageCounter == 0)}">
                                     <a class="mx-1 h5 text-secondary"
-                                       href="${request.getContextPath()}/final_task_war_exploded/controller?command=courseruncommand&page=${pageCounter}">${pageCounter = pageCounter + 1}</a>
+                                       href="${request.getContextPath()}/final_task_war/controller?command=courseruncommand&page=${pageCounter}">${pageCounter = pageCounter + 1}</a>
                                 </c:when>
                                 <c:otherwise>
                                     <a class="mx-1 text-info"
-                                       href="${request.getContextPath()}/final_task_war_exploded/controller?command=courseruncommand&page=${pageCounter}">${pageCounter = pageCounter + 1}</a>
+                                       href="${request.getContextPath()}/final_task_war/controller?command=courseruncommand&page=${pageCounter}">${pageCounter = pageCounter + 1}</a>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
 
                         <c:if test="${currentPage != pageCounter - 1}">
                             <a class="pl-3 text-info"
-                               href="${request.getContextPath()}/final_task_war_exploded/controller?command=courseruncommand&page=${currentPage + 1}">${next_button}</a>
+                               href="${request.getContextPath()}/final_task_war/controller?command=courseruncommand&page=${currentPage + 1}">${next_button}</a>
                         </c:if>
                     </div>
                 </c:if>
@@ -98,7 +98,7 @@
                     <div class="row align-text-bottom justify-content-start">
                         <c:if test="${currentPage > 0}">
                             <a class="pr-3 text-info"
-                               href="${request.getContextPath()}/final_task_war_exploded/controller?command=coursespage&page=${currentPage - 1}">${previous_button}</a>
+                               href="${request.getContextPath()}/final_task_war/controller?command=coursespage&page=${currentPage - 1}">${previous_button}</a>
                         </c:if>
 
                         <c:set var="pageCounter" value="${0}"/>
@@ -107,18 +107,18 @@
                             <c:choose>
                                 <c:when test="${currentPage == pageCounter || (currentPage == null && pageCounter == 0)}">
                                     <a class="mx-1 h5 text-secondary"
-                                       href="${request.getContextPath()}/final_task_war_exploded/controller?command=coursespage&page=${pageCounter}">${pageCounter = pageCounter + 1}</a>
+                                       href="${request.getContextPath()}/final_task_war/controller?command=coursespage&page=${pageCounter}">${pageCounter = pageCounter + 1}</a>
                                 </c:when>
                                 <c:otherwise>
                                     <a class="mx-1 text-info"
-                                       href="${request.getContextPath()}/final_task_war_exploded/controller?command=coursespage&page=${pageCounter}">${pageCounter = pageCounter + 1}</a>
+                                       href="${request.getContextPath()}/final_task_war/controller?command=coursespage&page=${pageCounter}">${pageCounter = pageCounter + 1}</a>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
 
                         <c:if test="${currentPage != pageCounter - 1}">
                             <a class="pl-3 text-info"
-                               href="${request.getContextPath()}/final_task_war_exploded/controller?command=coursespage&page=${currentPage + 1}">${next_button}</a>
+                               href="${request.getContextPath()}/final_task_war/controller?command=coursespage&page=${currentPage + 1}">${next_button}</a>
                         </c:if>
                     </div>
                 </c:if>

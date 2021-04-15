@@ -73,7 +73,7 @@ public final class ParameterName {
     public static final String STATUS_USER = "statusUser";
     public static final String TITLE = "title";
     public static final String UPLOAD_DIR_FOR_USER_AVATAR = "C:\\Users\\Кузьменко\\IdeaProjects\\final-task\\src\\main\\webapp\\images\\picturesForAvatar\\";
-    public static final String SERVER_UPLOAD_DIR = "C:\\tomcat\\apache-tomcat-9.0.43\\webapps\\final-task-1.0-SNAPSHOT\\images\\picturesForAvatar\\";
+    public static final String SERVER_UPLOAD_DIR = "C:\\tomcat\\apache-tomcat-9.0.43\\webapps\\final_task_war\\images\\picturesForAvatar\\";
     public static final String UPLOAD_RESULT = "uploadResult";
     public static final String USER = "user";
     public static final String USERS_COUNT = "usersCount";

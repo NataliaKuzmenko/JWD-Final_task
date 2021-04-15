@@ -33,7 +33,7 @@
     <div class="row">
         <div class="col-lg-4"></div>
         <div class="col-lg-7">
-            <form action="${request.getContextPath()}/final_task_war_exploded/controller" method="post">
+            <form action="${request.getContextPath()}/final_task_war/controller" method="post">
                 <input type="hidden" name="command" value="setcourseresult"/>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -61,7 +61,7 @@
             </form>
             <br/>
             <form class="form-inline my-2 my-lg-0" method="post"
-                  action="${request.getContextPath()}/final_task_war_exploded/controller">
+                  action="${request.getContextPath()}/final_task_war/controller">
                 <input type="hidden" name="command" value="inittableusersoncourse"/>
                 <input class="btn btn-outline-secondary" type="submit" value="${back}">
             </form>

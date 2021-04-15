@@ -54,7 +54,7 @@
                         <td><c:out value="${ user.role }"/></td>
                         <td>
                             <form class="form-inline my-2 my-lg-0" method="post"
-                                  action="${request.getContextPath()}/final_task_war_exploded/controller">
+                                  action="${request.getContextPath()}/final_task_war/controller">
                                 <input class="btn btn-outline-secondary" type="submit" value="${change_role}">
                                 <input type="hidden" name="command" value="inittableuserscommand"/>
                                 <input type="hidden" name="user_id" value="${user.userId}"/>
@@ -73,7 +73,7 @@
                 <div class="row align-text-bottom justify-content-start">
                     <c:if test="${currentPage > 0}">
                         <a class="pr-3 text-info"
-                           href="${request.getContextPath()}/final_task_war_exploded/controller?command=inittableuserscommand&page=${currentPage - 1}">${previous_button}</a>
+                           href="${request.getContextPath()}/final_task_war/controller?command=inittableuserscommand&page=${currentPage - 1}">${previous_button}</a>
                     </c:if>
 
                     <c:set var="pageCounter" value="${0}"/>
@@ -82,18 +82,18 @@
                         <c:choose>
                             <c:when test="${currentPage == pageCounter || (currentPage == null && pageCounter == 0)}">
                                 <a class="mx-1 h5 text-secondary"
-                                   href="${request.getContextPath()}/final_task_war_exploded/controller?command=inittableuserscommand&page=${pageCounter}">${pageCounter = pageCounter + 1}</a>
+                                   href="${request.getContextPath()}/final_task_war/controller?command=inittableuserscommand&page=${pageCounter}">${pageCounter = pageCounter + 1}</a>
                             </c:when>
                             <c:otherwise>
                                 <a class="mx-1 text-info"
-                                   href="${request.getContextPath()}/final_task_war_exploded/controller?command=inittableuserscommand&page=${pageCounter}">${pageCounter = pageCounter + 1}</a>
+                                   href="${request.getContextPath()}/final_task_war/controller?command=inittableuserscommand&page=${pageCounter}">${pageCounter = pageCounter + 1}</a>
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
 
                     <c:if test="${currentPage != pageCounter - 1}">
                         <a class="pl-3 text-info"
-                           href="${request.getContextPath()}/final_task_war_exploded/controller?command=inittableuserscommand&page=${currentPage + 1}">${next_button}</a>
+                           href="${request.getContextPath()}/final_task_war/controller?command=inittableuserscommand&page=${currentPage + 1}">${next_button}</a>
                     </c:if>
                 </div>
             </c:if>
