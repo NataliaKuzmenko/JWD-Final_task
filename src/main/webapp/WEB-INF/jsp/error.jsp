@@ -10,6 +10,7 @@
 <head>
     <fmt:message bundle="${locale}" key="errorPage.Message" var="error"/>
     <fmt:message bundle="${locale}" key="error.ContactAdmin" var="contactAdmin"/>
+    <fmt:message bundle="${locale}" key="message.ErrorMarkOrComment" var="errorMarkOrComment"/>
 
     <title>${error}</title></head>
 
@@ -17,10 +18,19 @@
 <body>
 
 <br/>
-${error}
+<div class="alert alert-warning" role="alert">
+    ${error}
+</div>
 <br/>
+<c:if test="${incorrectMarkOrComment ==true}">
+    <div class="alert alert-warning" role="alert">
+            ${errorMarkOrComment}
+    </div>
+</c:if>
 <c:if test="${viewUsersError == true}">
-    ${contactAdmin}
+    <div class="alert alert-warning" role="alert">
+            ${contactAdmin}
+    </div>
 </c:if>
 
 <br/>

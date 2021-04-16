@@ -47,7 +47,8 @@ public class SetCourseResultCommand implements Command {
                 request.setAttribute(ParameterName.INCORRECT_MARK_OR_COMMENT, true);
             }
             return router;
-        } catch (ServiceException e) {
+        } catch (ServiceException | NumberFormatException e) {
+            request.setAttribute(ParameterName.INCORRECT_MARK_OR_COMMENT, true);
             LOGGER.log(Level.ERROR, "Set course result failed", e);
             throw new CommandException("Set course result failed", e);
         }

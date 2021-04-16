@@ -27,6 +27,11 @@
             ${addResult}
     </div>
 </c:if>
+<c:if test="${incorrectMarkOrComment ==true}">
+    <div class="alert alert-warning" role="alert">
+            ${errorMarkOrComment}
+    </div>
+</c:if>
 
 <br/>
 <div class="container">

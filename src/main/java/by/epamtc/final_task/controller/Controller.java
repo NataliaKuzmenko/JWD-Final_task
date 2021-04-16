@@ -43,7 +43,12 @@ public class Controller extends HttpServlet {
             , HttpServletResponse response) throws ServletException, IOException {
         try {
             String commandName = request.getParameter(ParameterName.COMMAND);
-            Command command = provider.takeCommand(commandName);
+            Command command;
+            if (commandName == null) {
+                command = provider.takeCommand(String.valueOf(CommandName.EMPTY));
+            } else {
+                command = provider.takeCommand(commandName);
+            }
             Router router = command.execute(request);
             String currentPage = router.getPage();
             if (currentPage == null) {
