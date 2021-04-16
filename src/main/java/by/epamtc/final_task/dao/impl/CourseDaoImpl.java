@@ -21,7 +21,9 @@ public class CourseDaoImpl implements CourseDao {
     private static final String INSERT_COURSE = "INSERT INTO courses (course_title, description) VALUES (?, ?)";
     private static final String INSERT_COURSE_RUN = "INSERT INTO course_run(course_id,start_course,end_course, " +
             "lecturer_id,format) VALUES (?,?,?,?,?)";
-    private static final String SQL_SELECT_COURSES_AVAILABLE_FOR_REGISTRATION = "SELECT * FROM course_run INNER JOIN " +
+    private static final String SQL_SELECT_COURSES_AVAILABLE_FOR_REGISTRATION = "SELECT course_run_id,course_title," +
+            "description,materials_path,start_course,end_course,limit_students,lecturer_id,status,format FROM course_run " +
+            "INNER JOIN " +
             "courses ON course_run.course_id=courses.course_id LEFT JOIN users ON course_run.lecturer_id=users.user_id " +
             "WHERE status='NOT_STARTED' LIMIT ? OFFSET ?";
     private static final String SQL_SELECT_ALL_COURSES = "SELECT * FROM course_run " +
@@ -93,7 +95,7 @@ public class CourseDaoImpl implements CourseDao {
         List<Course> listCourse = new ArrayList<>();
 
         try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQL_SELECT_COURSES_AVAILABLE_FOR_REGISTRATION)){
+             PreparedStatement statement = connection.prepareStatement(SQL_SELECT_COURSES_AVAILABLE_FOR_REGISTRATION)) {
             statement.setInt(1, count);
             statement.setInt(2, offset);
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -221,7 +223,7 @@ public class CourseDaoImpl implements CourseDao {
              PreparedStatement statement = connection.prepareStatement(UPDATE_FORMAT_COURSE)) {
             statement.setString(1, String.valueOf(format));
             statement.setLong(2, courseId);
-           statement.executeUpdate();
+            statement.executeUpdate();
         } catch (SQLException | PoolException e) {
             throw new DaoException("Error while update format course", e);
         }

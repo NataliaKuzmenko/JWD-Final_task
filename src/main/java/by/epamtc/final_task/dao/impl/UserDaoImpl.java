@@ -24,7 +24,7 @@ public class UserDaoImpl implements UserDao {
     private static final String INSERT_NEW_USER = "INSERT INTO users(email,password) VALUES(?,?)";
     private static final String SQL_SELECT_BY_LOGIN = "SELECT email, password FROM users WHERE email = ?";
     private static final String SQL_SELECT_COUNT_USERS = "SELECT count(*) FROM users WHERE email = ?";
-    private static final String SQL_SELECT_THE_ALL_INFO_BY_LOGIN = "SELECT * FROM users WHERE email = ?";
+    private static final String SQL_SELECT_THE_ALL_INFO_BY_LOGIN = "SELECT user_id,first_name,last_name,email,role_id,photo_path FROM users WHERE email = ?";
     private static final String UPDATE_USER = "UPDATE users SET first_name=?, last_name=?, email=? WHERE user_id=?";
     private static final String UPDATE_EMAIL = "UPDATE users SET email=? WHERE user_id = ?";
     private static final String UPDATE_NAME_AND_SURNAME = "UPDATE users SET first_name=?, last_name=? WHERE user_id=?";
@@ -34,11 +34,11 @@ public class UserDaoImpl implements UserDao {
             "VALUES (?, ?)";
     private static final String SQL_SELECT_USER_ON_COURSE = "SELECT count(*) FROM lists_students " +
             "WHERE course_run_id=? AND user_id=?";
-    private static final String SQL_SELET_ALL_USERS = "SELECT * FROM users LIMIT ? OFFSET ?";
-    private static final String SQL_SELECT_COUNT_ALL_USERS = "SELECT * FROM users";
+    private static final String SQL_SELET_ALL_USERS = "SELECT user_id,first_name,last_name,email,role_id,photo_path FROM users LIMIT ? OFFSET ?";
+    private static final String SQL_SELECT_COUNT_ALL_USERS = "SELECT user_id,first_name,last_name,email,role_id,photo_path FROM users";
     private static final String SQL_UPDATE_AVATAR_USER = "UPDATE users SET photo_path = ? WHERE email = ?";
     private static final String UPDATE_USER_ROLE = "UPDATE users SET role_id = ? WHERE user_id = ?";
-    private static final String SQL_SELET_ALL_USERS_ON_COURSE = "SELECT * FROM lists_students " +
+    private static final String SQL_SELET_ALL_USERS_ON_COURSE = "SELECT users.user_id,first_name,last_name,email,role_id,photo_path FROM lists_students " +
             "INNER JOIN users ON lists_students.user_id=users.user_id WHERE course_run_id=?";
 
     private UserDaoImpl() {

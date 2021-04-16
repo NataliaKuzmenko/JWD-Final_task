@@ -3,7 +3,6 @@ package by.epamtc.final_task.controller;
 import by.epamtc.final_task.controller.command.exception.CommandException;
 import by.epamtc.final_task.controller.constant.PageName;
 import by.epamtc.final_task.controller.constant.ParameterName;
-import by.epamtc.final_task.entity.User;
 import by.epamtc.final_task.service.UserService;
 import by.epamtc.final_task.service.exception.ServiceException;
 import by.epamtc.final_task.service.impl.UserServiceImpl;
@@ -80,8 +79,6 @@ public class FileUploadingServlet extends HttpServlet {
 
         try {
             userService.updateAvatar(email, randFilename);
-           // User user = userService.findUserWithTheAllInfoByLogin(email);
-           // request.setAttribute(PHOTO_PATH, user.getPhotoPath());
         } catch (ServiceException e) {
             throw new CommandException("Failed photo upload attempt");
         }

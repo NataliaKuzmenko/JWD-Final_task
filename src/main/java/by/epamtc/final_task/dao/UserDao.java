@@ -138,8 +138,8 @@ public interface UserDao {
     /**
      * Count number of all users
      *
-     * @return
-     * @throws DaoException
+     * @return count all users
+     * @throws DaoException if an dao exception occurred while processing
      */
     int countAllUsers() throws DaoException;
 }
