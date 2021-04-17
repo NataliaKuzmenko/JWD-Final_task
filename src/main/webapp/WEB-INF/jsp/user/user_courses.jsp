@@ -24,6 +24,12 @@
     <fmt:message bundle="${locale}" key="result.StatusStudent" var="statusStudent"/>
     <fmt:message bundle="${locale}" key="user.StatusCancelCourse" var="cancel"/>
     <fmt:message bundle="${locale}" key="user.StatusFinished" var="finished"/>
+    <fmt:message bundle="${locale}" key="user.StatusApplied" var="applied"/>
+    <fmt:message bundle="${locale}" key="user.StatusInProcess" var="inProcess"/>
+    <fmt:message bundle="${locale}" key="course.GroupRecruitment" var="groupRecruitment"/>
+    <fmt:message bundle="${locale}" key="course.CourseStart" var="courseStart"/>
+    <fmt:message bundle="${locale}" key="course.CourseFinished" var="courseFinished"/>
+
 
     <title>${study}</title>
 
@@ -64,7 +70,17 @@
                     <td><c:out value="${result.key.title}"/></td>
                     <td><c:out value="${result.key.startDate}"/></td>
                     <td><c:out value="${result.key.endDate}"/></td>
-                    <td><c:out value="${result.key.status}"/></td>
+                    <td>
+                        <c:if test="${result.key.status == 'NOT_STARTED'}">
+                            ${groupRecruitment}
+                        </c:if>
+                        <c:if test="${result.key.status == 'IN_PROGRESS'}">
+                            ${courseStart}
+                        </c:if>
+                        <c:if test="${result.key.status == 'FINISHED'}">
+                            ${courseFinished}
+                        </c:if>
+                    </td>
                     <td>
                         <c:if test="${result.value.mark == 0}">
                             -
@@ -74,7 +90,19 @@
                         </c:if>
                     </td>
                     <td><c:out value="${result.value.comment}"/></td>
-                    <td><c:out value="${result.value.status}"/></td>
+                    <td>
+                        <c:if test="${result.value.status == 'APPLIED'}">
+                            ${applied}
+                        </c:if>
+                        <c:if test="${result.value.status =='TRAINING_IN_PROGRESS'}">
+                            ${inProcess}
+                        </c:if>
+                        <c:if test="${result.value.status =='FINISHED'}">
+                            ${finished}
+                        </c:if>
+                        <c:if test="${result.value.status == 'DENIED'}">
+                            ${cancel}
+                        </c:if>
                     <td>
                         <c:choose>
                             <c:when test="${result.value.status == 'DENIED'}">

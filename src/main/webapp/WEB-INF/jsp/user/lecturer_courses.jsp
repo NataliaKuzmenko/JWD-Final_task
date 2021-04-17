@@ -20,6 +20,9 @@
     <fmt:message bundle="${locale}" key="course.Start" var="start"/>
     <fmt:message bundle="${locale}" key="course.End" var="end"/>
     <fmt:message bundle="${locale}" key="course.Status" var="status"/>
+    <fmt:message bundle="${locale}" key="course.GroupRecruitment" var="groupRecruitment"/>
+    <fmt:message bundle="${locale}" key="course.CourseStart" var="courseStart"/>
+    <fmt:message bundle="${locale}" key="course.CourseFinished" var="courseFinished"/>
 
     <title>${study}</title>
 
@@ -32,38 +35,48 @@
         <div class="col-lg-10">
             <c:if test="${notCourses == false}">
                 <br/>
-                    <table class="table table-bordered">
-                        <thead>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th scope="col">${title}</th>
+                        <th scope="col">${start}</th>
+                        <th scope="col">${end}</th>
+                        <th scope="col">${status}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="result" items="${courseList}">
                         <tr>
-                            <th scope="col">${title}</th>
-                            <th scope="col">${start}</th>
-                            <th scope="col">${end}</th>
-                            <th scope="col">${status}</th>
+                            <td><c:out value="${result.title}"/></td>
+                            <td><c:out value="${result.startDate}"/></td>
+                            <td><c:out value="${result.endDate}"/></td>
+                            <td>
+                                <c:if test="${result.status == 'NOT_STARTED'}">
+                                    ${groupRecruitment}
+                                </c:if>
+                                <c:if test="${result.status == 'IN_PROGRESS'}">
+                                    ${courseStart}
+                                </c:if>
+                                <c:if test="${result.status == 'FINISHED'}">
+                                    ${courseFinished}
+                                </c:if>
+                            </td>
+                            <td>
+                                <form class="form-inline my-2 my-lg-0" method="post"
+                                      action="${request.getContextPath()}/final_task_war/controller">
+                                    <input type="hidden" name="command" value="inittableusersoncourse"/>
+                                    <input type="hidden" name="courseId" value="${result.id}">
+                                    <input class="btn btn-outline-secondary" type="submit"
+                                           value="${usersOnCourse}"/>
+                                </form>
+                            </td>
                         </tr>
-                        </thead>
-                        <tbody>
-                        <c:forEach var="result" items="${courseList}">
-                            <tr>
-                                <td><c:out value="${result.title}"/></td>
-                                <td><c:out value="${result.startDate}"/></td>
-                                <td><c:out value="${result.endDate}"/></td>
-                                <td><c:out value="${result.status}"/></td>
-                                <td>
-                                    <form class="form-inline my-2 my-lg-0" method="post"
-                                          action="${request.getContextPath()}/final_task_war/controller">
-                                        <input type="hidden" name="command" value="inittableusersoncourse"/>
-                                        <input type="hidden" name="courseId" value="${result.id}">
-                                        <input class="btn btn-outline-secondary" type="submit"
-                                               value="${usersOnCourse}"/>
-                                    </form>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
+                    </c:forEach>
+                    </tbody>
+                </table>
             </c:if>
             <c:if test="${notCourses == true}">
-                    <div class="alert alert-primary" role="alert"> ${not_courses}</div>
+                <div class="alert alert-primary" role="alert"> ${not_courses}</div>
             </c:if>
             <br/>
             <form class="form-inline my-2 my-lg-0" method="post"

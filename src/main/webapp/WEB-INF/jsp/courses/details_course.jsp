@@ -132,7 +132,17 @@
                 </tr>
                 <tr>
                     <td><p class="font-weight-normal">${courseStatus}:</p></td>
-                    <td><p class="font-italic"><c:out value="${course.status}"/></p></td>
+                    <td><p class="font-italic">
+                    <c:if test="${course.status == 'NOT_STARTED'}">
+                        ${groupRecruitment}
+                    </c:if>
+                        <c:if test="${course.status == 'IN_PROGRESS'}">
+                            ${courseStart}
+                        </c:if>
+                        <c:if test="${course.status == 'FINISHED'}">
+                            ${courseFinished}
+                        </c:if>
+                    </p></td>
                     <td><c:if test="${user_id == course.lecturerId}">
                         <div class="dropdown show">
                             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"

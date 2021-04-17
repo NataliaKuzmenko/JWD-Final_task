@@ -18,6 +18,9 @@
     <fmt:message bundle="${locale}" key="user.Email" var="Email"/>
     <fmt:message bundle="${locale}" key="user.User" var="user"/>
     <fmt:message bundle="${locale}" key="course.LecturerCourses" var="myCourses"/>
+    <fmt:message bundle="${locale}" key="user.Admin" var="admin"/>
+    <fmt:message bundle="${locale}" key="user.Student" var="student"/>
+    <fmt:message bundle="${locale}" key="user.Lecturer" var="lecturer"/>
 
     <title>${profile}</title>
 
@@ -54,7 +57,15 @@
                 </tr>
                 <tr>
                     <th scope="row">${user}</th>
-                    <td><c:out value="${role}"/></td>
+                    <td><c:if test="${role == 'ADMIN'}">
+                        ${admin}
+                    </c:if>
+                        <c:if test="${role == 'STUDENT'}">
+                            ${student}
+                        </c:if>
+                        <c:if test="${role == 'LECTURER'}">
+                            ${lecturer}
+                        </c:if></td>
                 </tr>
                 </tbody>
             </table>

@@ -65,7 +65,19 @@
                         <td><c:out value="${result.key.email}"/></td>
                         <td><c:out value="${result.key.firstName}"/></td>
                         <td><c:out value="${result.key.lastName}"/></td>
-                        <td><c:out value="${result.value.status}"/>
+                        <td><c:if test="${result.value.status == 'APPLIED'}">
+                            ${applied}
+                        </c:if>
+                            <c:if test="${result.value.status =='TRAINING_IN_PROGRESS'}">
+                                ${inProcess}
+                            </c:if>
+                            <c:if test="${result.value.status =='FINISHED'}">
+                                ${finishedCourse}
+                            </c:if>
+                            <c:if test="${result.value.status == 'DENIED'}">
+                                ${cancel}
+                            </c:if>
+                            <br/>
                             <div class="dropdown show">
                                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
                                    id="dropdownMenuLink"
