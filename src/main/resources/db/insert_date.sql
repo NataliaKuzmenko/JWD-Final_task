@@ -1,28 +1,28 @@
 /*users*/
 INSERT INTO users (password,email,first_name,last_name,role_id)
-VALUES ('414fc215d37c26f2a5996a35664c42ff','nat.s.kuzmenko@gmail.com', 'Наталья','Кузьменко','ADMIN');
+VALUES ('ec2014daa771869ad5dc6c3de318468e52d0bc6ab0451b89ccda2d696f826fe8315559b8ded96ccabb79db0a0a2232b9d63171c0eb6ea953823d28efdabd53c1','nat.s.kuzmenko@gmail.com', 'Наталья','Кузьменко','ADMIN');
 INSERT INTO users (password,email,first_name,last_name,role_id)
-VALUES ('414fc215d37c26f2a5996a35664c42ff', 'makushka.nataha@gmail.com', 'Петр','Петрович','LECTURER');
+VALUES ('ec2014daa771869ad5dc6c3de318468e52d0bc6ab0451b89ccda2d696f826fe8315559b8ded96ccabb79db0a0a2232b9d63171c0eb6ea953823d28efdabd53c1', 'makushka.nataha@gmail.com', 'Петр','Петрович','LECTURER');
 INSERT INTO users (password,email,first_name,last_name)
-VALUES ('414fc215d37c26f2a5996a35664c42ff', 'email1@mail.ru', 'Семен','Семенов');
+VALUES ('ec2014daa771869ad5dc6c3de318468e52d0bc6ab0451b89ccda2d696f826fe8315559b8ded96ccabb79db0a0a2232b9d63171c0eb6ea953823d28efdabd53c1', 'email1@mail.ru', 'Семен','Семенов');
 INSERT INTO users (password,email,first_name,last_name)
-VALUES ('414fc215d37c26f2a5996a35664c42ff', 'email2@mail.ru', 'Сергей','Сергеев');
+VALUES ('ec2014daa771869ad5dc6c3de318468e52d0bc6ab0451b89ccda2d696f826fe8315559b8ded96ccabb79db0a0a2232b9d63171c0eb6ea953823d28efdabd53c1', 'email2@mail.ru', 'Сергей','Сергеев');
 INSERT INTO users (password,email,first_name,last_name)
-VALUES ('414fc215d37c26f2a5996a35664c42ff', 'email3@mail.ru', 'Александр','Александров');
+VALUES ('ec2014daa771869ad5dc6c3de318468e52d0bc6ab0451b89ccda2d696f826fe8315559b8ded96ccabb79db0a0a2232b9d63171c0eb6ea953823d28efdabd53c1', 'email3@mail.ru', 'Александр','Александров');
 INSERT INTO users (password,email,first_name,last_name)
-VALUES ('414fc215d37c26f2a5996a35664c42ff', 'email4@mail.ru', 'Игорь','Игорев');
+VALUES ('ec2014daa771869ad5dc6c3de318468e52d0bc6ab0451b89ccda2d696f826fe8315559b8ded96ccabb79db0a0a2232b9d63171c0eb6ea953823d28efdabd53c1', 'email4@mail.ru', 'Игорь','Игорев');
 INSERT INTO users (password,email,first_name,last_name)
-VALUES ('414fc215d37c26f2a5996a35664c42ff', 'email5@mail.ru', 'Геннадий','Геннадьев');
+VALUES ('ec2014daa771869ad5dc6c3de318468e52d0bc6ab0451b89ccda2d696f826fe8315559b8ded96ccabb79db0a0a2232b9d63171c0eb6ea953823d28efdabd53c1', 'email5@mail.ru', 'Геннадий','Геннадьев');
 INSERT INTO users (password,email,first_name,last_name)
-VALUES ('414fc215d37c26f2a5996a35664c42ff', 'email6@mail.ru', 'Василиса','Васильевна');
+VALUES ('ec2014daa771869ad5dc6c3de318468e52d0bc6ab0451b89ccda2d696f826fe8315559b8ded96ccabb79db0a0a2232b9d63171c0eb6ea953823d28efdabd53c1', 'email6@mail.ru', 'Василиса','Васильевна');
 INSERT INTO users (password,email,first_name,last_name)
-VALUES ('414fc215d37c26f2a5996a35664c42ff', 'email7@mail.ru', 'Мария','Марьянова');
+VALUES ('ec2014daa771869ad5dc6c3de318468e52d0bc6ab0451b89ccda2d696f826fe8315559b8ded96ccabb79db0a0a2232b9d63171c0eb6ea953823d28efdabd53c1', 'email7@mail.ru', 'Мария','Марьянова');
 INSERT INTO users (password,email,first_name,last_name)
-VALUES ('414fc215d37c26f2a5996a35664c42ff', 'email8@mail.ru', 'Ольга','Орлова');
+VALUES ('ec2014daa771869ad5dc6c3de318468e52d0bc6ab0451b89ccda2d696f826fe8315559b8ded96ccabb79db0a0a2232b9d63171c0eb6ea953823d28efdabd53c1', 'email8@mail.ru', 'Ольга','Орлова');
 INSERT INTO users (password,email,first_name,last_name)
-VALUES ('414fc215d37c26f2a5996a35664c42ff', 'email9@mail.ru', 'Анна','Каренина');
+VALUES ('ec2014daa771869ad5dc6c3de318468e52d0bc6ab0451b89ccda2d696f826fe8315559b8ded96ccabb79db0a0a2232b9d63171c0eb6ea953823d28efdabd53c1', 'email9@mail.ru', 'Анна','Каренина');
 INSERT INTO users (password,email,first_name,last_name)
-VALUES ('414fc215d37c26f2a5996a35664c42ff', 'email10@mail.ru', 'Анастасия','Сидорова');
+VALUES ('ec2014daa771869ad5dc6c3de318468e52d0bc6ab0451b89ccda2d696f826fe8315559b8ded96ccabb79db0a0a2232b9d63171c0eb6ea953823d28efdabd53c1', 'email10@mail.ru', 'Анастасия','Сидорова');
 
 /*courses*/
 INSERT INTO courses (course_title, description, materials_path)

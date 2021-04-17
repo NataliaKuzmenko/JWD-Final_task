@@ -26,18 +26,21 @@ public class CourseDaoImpl implements CourseDao {
             "INNER JOIN " +
             "courses ON course_run.course_id=courses.course_id LEFT JOIN users ON course_run.lecturer_id=users.user_id " +
             "WHERE status='NOT_STARTED' LIMIT ? OFFSET ?";
-    private static final String SQL_SELECT_ALL_COURSES = "SELECT * FROM course_run " +
+    private static final String SQL_SELECT_ALL_COURSES = "SELECT course_run_id,course_title, " +
+            "description,materials_path,start_course,end_course,limit_students,lecturer_id,status,format FROM course_run " +
             "INNER JOIN courses ON course_run.course_id=courses.course_id " +
             "LEFT JOIN users ON course_run.lecturer_id=users.user_id  " +
             "LIMIT ? OFFSET ?";
-    private static final String SQL_SELECT_COUNT_COURSES_BY_STATUS = "SELECT * FROM course_run WHERE status=?";
-    private static final String SQL_SELECT_COUNT_ALL_COURSES = "SELECT * FROM course_run";
-    private static final String SQL_SELECT_INFO_BY_ID = "SELECT * FROM course_run " +
+    private static final String SQL_SELECT_COUNT_COURSES_BY_STATUS = "SELECT course_run_id FROM course_run WHERE status=?";
+    private static final String SQL_SELECT_COUNT_ALL_COURSES = "SELECT course_run_id FROM course_run";
+    private static final String SQL_SELECT_INFO_BY_ID = "SELECT course_run_id,course_title, " +
+            "description,materials_path,start_course,end_course,limit_students,lecturer_id,status,format FROM course_run " +
             "INNER JOIN courses ON course_run.course_id=courses.course_id " +
             "LEFT JOIN users ON course_run.lecturer_id=users.user_id " +
             "WHERE course_run.course_run_id=?";
-    private static final String SQL_SELECT_COURSES_USER_BY_ID = "SELECT * FROM lists_students INNER JOIN course_run " +
-            "ON lists_students.course_run_id=course_run.course_run_id \n" +
+    private static final String SQL_SELECT_COURSES_USER_BY_ID = "SELECT  lists_students.course_run_id,course_title, "+
+          "description,materials_path,start_course,end_course,limit_students,lecturer_id,status,format FROM lists_students INNER JOIN course_run " +
+            "ON lists_students.course_run_id=course_run.course_run_id " +
             "INNER JOIN courses ON course_run.course_id=courses.course_id WHERE user_id = ?";
     private static final String UPDATE_STATUS_COURSE = "UPDATE course_run SET status = ? WHERE course_run_id = ?";
     private static final String UPDATE_FORMAT_COURSE = "UPDATE course_run SET format = ? WHERE course_run_id = ?";
@@ -49,7 +52,8 @@ public class CourseDaoImpl implements CourseDao {
     private static final String UPDATE_DATE_COURSE = "UPDATE course_run SET start_course=?, end_course=? " +
             "WHERE course_run_id =?";
 
-    private static final String SQL_SELECT_COURSES_BY_LECTURER_ID = "SELECT * FROM course_run INNER JOIN " +
+    private static final String SQL_SELECT_COURSES_BY_LECTURER_ID = "SELECT course_run_id,course_title," +
+            "description,materials_path,start_course,end_course,limit_students,lecturer_id,status,format FROM course_run INNER JOIN " +
             "courses ON course_run.course_id=courses.course_id WHERE lecturer_id = ?";
 
     private CourseDaoImpl() {

@@ -16,7 +16,8 @@ import java.sql.SQLException;
  * The class contains query`s processing to the database for the user results
  */
 public class ResultUserDaoImpl implements ResultUserDao {
-    private static final String SQL_SELECT_RESULT_USER_BY_ID_ON_COURSE = "SELECT * FROM lists_students " +
+    private static final String SQL_SELECT_RESULT_USER_BY_ID_ON_COURSE = "SELECT result_course_id,mark,comment, "+
+            "status_student_id FROM lists_students " +
             "WHERE user_id = ? AND course_run_id=?";
     private static final String UPDATE_STATUS_USER = "UPDATE lists_students SET status_student_id=? " +
             "WHERE user_id=? AND course_run_id=?";

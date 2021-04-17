@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
     public boolean isLoginAndPasswordValid(String enteredLogin, String enteredPassword) throws
             ServiceException {
 
-        String hashPassword = HashPassword.hashPassword(enteredPassword);
+        String hashPassword = HashPassword.hash(enteredPassword);
 
         boolean result = false;
         try {
@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
         boolean result;
         try {
             if (!userDao.isUserExist(enteredLogin)) {
-                String hashPassword = HashPassword.hashPassword(enteredPassword);
+                String hashPassword = HashPassword.hash(enteredPassword);
 
                 result = userDao.create(enteredLogin, hashPassword);
             } else {
