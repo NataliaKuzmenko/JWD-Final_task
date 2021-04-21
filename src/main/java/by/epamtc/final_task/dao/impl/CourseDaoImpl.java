@@ -38,8 +38,8 @@ public class CourseDaoImpl implements CourseDao {
             "INNER JOIN courses ON course_run.course_id=courses.course_id " +
             "LEFT JOIN users ON course_run.lecturer_id=users.user_id " +
             "WHERE course_run.course_run_id=?";
-    private static final String SQL_SELECT_COURSES_USER_BY_ID = "SELECT  lists_students.course_run_id,course_title, "+
-          "description,materials_path,start_course,end_course,limit_students,lecturer_id,status,format FROM lists_students INNER JOIN course_run " +
+    private static final String SQL_SELECT_COURSES_USER_BY_ID = "SELECT  lists_students.course_run_id,course_title, " +
+            "description,materials_path,start_course,end_course,limit_students,lecturer_id,status,format FROM lists_students INNER JOIN course_run " +
             "ON lists_students.course_run_id=course_run.course_run_id " +
             "INNER JOIN courses ON course_run.course_id=courses.course_id WHERE user_id = ?";
     private static final String UPDATE_STATUS_COURSE = "UPDATE course_run SET status = ? WHERE course_run_id = ?";
@@ -69,27 +69,31 @@ public class CourseDaoImpl implements CourseDao {
     @Override
     public void create(String title, String description, long lecturerId, LocalDate startDate, LocalDate endDate,
                        String format) throws DaoException {
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(INSERT_COURSE,
-                     Statement.RETURN_GENERATED_KEYS)) {
-            connection.setAutoCommit(false);
-            statement.setString(1, title);
-            statement.setString(2, description);
-            statement.executeUpdate();
-            ResultSet generatedKeys = statement.getGeneratedKeys();
-            if (!generatedKeys.next()) {
-                throw new DaoException("Error of creation course, no ID obtained");
+        try (Connection connection = ConnectionPool.getInstance().getConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement(INSERT_COURSE, Statement.RETURN_GENERATED_KEYS)) {
+
+                connection.setAutoCommit(false);
+                statement.setString(1, title);
+                statement.setString(2, description);
+                statement.executeUpdate();
+                ResultSet generatedKeys = statement.getGeneratedKeys();
+                if (!generatedKeys.next()) {
+                    throw new DaoException("Error of creation course, no ID obtained");
+                }
+                int idNewCourse = generatedKeys.getInt(1);
+                Course course = new Course();
+                course.setId(idNewCourse);
+
+                createCourseRun(startDate, endDate, lecturerId, format, course.getId());
+                connection.commit();
+            } catch (SQLException e) {
+                connection.rollback();
+                throw new DaoException("Course creation is failed", e);
+            } finally {
+                connection.setAutoCommit(true);
             }
-
-            int idNewCourse = generatedKeys.getInt(1);
-            Course course = new Course();
-            course.setId(idNewCourse);
-
-            createCourseRun(startDate, endDate, lecturerId, format, course.getId());
-            connection.commit();
-
         } catch (SQLException | PoolException e) {
-            throw new DaoException("Create course failed", e);
+            throw new DaoException("Connection issues", e);
         }
     }
 
