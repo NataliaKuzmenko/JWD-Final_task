@@ -10,12 +10,12 @@ ____
 ____
 __- Unauthorized user:__
 
-    - view general information about the company (sections 'Main', 'Contacts')
-    - view available for register the list of courses (list has pagination)
-    - view detail of some course
-    - register
-    - log in
-    - localization
+- view general information about the company (sections 'Main', 'Contacts')
+- view available for register the list of courses (list has pagination)
+- view detail of some course
+- register
+- log in
+- localization
     
 __- Admin:__
 
