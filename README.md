@@ -9,13 +9,16 @@ ____
 ## User capabilities depending on the role:
 ____
 __- Unauthorized user:__
+
     * view general information about the company (sections 'Main', 'Contacts')
     * view available for register the list of courses (list has pagination)
     * view detail of some course
     * register
     * log in
     * localization
+    
 __- Admin:__
+
     * view general information about the company (sections 'Main', 'Contacts')
     * view the list of all courses (list has pagination)
     * view detail of some course
@@ -26,7 +29,9 @@ __- Admin:__
     * edit profile( add/change name and surname, change email, upload photo)
     * localization
     * logout
+    
 __- Student:__
+
     * view general information about the company (sections 'Main', 'Contacts')
     * view available for register the list of courses (list has pagination)
     * view detail of some course
@@ -37,7 +42,9 @@ __- Student:__
     * cancel course
     * localization
     * logout
+    
 __- Teacher:__
+
     * view general information about the company (sections 'Main', 'Contacts')
     * view the list of all courses (list has pagination)
     * create a course
