@@ -35,7 +35,7 @@ public class ResultUserServiceImplTest {
     }
 
     @Test
-    public void findResultUserThrowServiceExceptionTest() throws ServiceException, DaoException {
+    public void findResultUserNegativeTest() throws ServiceException, DaoException {
         ResultUser expected = new ResultUser(2, 7, "Отличный студент.", ResultUser.UserCourseStatus.TRAINING_IN_PROGRESS);
         when(resultUserDao.findResultUser(4, 1)).thenReturn(expected);
         ResultUser actual = resultUserService.findResultUser(15, 1);

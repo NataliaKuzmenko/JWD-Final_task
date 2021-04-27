@@ -53,6 +53,15 @@ public class UserServiceImplTest {
         boolean actual = userService.isLoginAndPasswordValid(email, password);
         assertEquals(actual, expected);
     }
+    @Test
+    public void isLoginAndPasswordValidNegativeTest() throws ServiceException, DaoException {
+        String email = "email1@mail.ru";
+        String password = "Qwer11";
+        boolean expected = true;
+        when(userDao.findUserByLoginAndPassword(email, HashPassword.hash(password))).thenReturn(expected);
+        boolean actual = userService.isLoginAndPasswordValid("email@mail.ru", password);
+        assertNotEquals(actual, expected);
+    }
 
     @Test
     public void findUserByIdPositiveTest() throws ServiceException, DaoException {
@@ -61,5 +70,26 @@ public class UserServiceImplTest {
         User actual = userService.findUserById(5);
         assertEquals(expected, actual);
     }
+    @Test
+    public void findUserByIdNegativeTest() throws ServiceException, DaoException {
+        User expected = new User(5, "email3@mail.ru", "Александр", "Александров", User.UserRole.valueOf("STUDENT"), "defaultPhoto.png");
+        when(userDao.findUserById(5)).thenReturn(expected);
+        User actual = userService.findUserById(6);
+        assertNotEquals(expected, actual);
+    }
 
+    @Test
+    public void isLoginExistsPositiveTest() throws DaoException, ServiceException {
+        boolean expected = false;
+        when(userDao.isUserExist("email@mail.ru")).thenReturn(expected);
+        boolean actual = userService.isLoginExists("email@mail.ru");
+        assertEquals(actual,expected);
+    }
+    @Test
+    public void isLoginExistsNegativeTest() throws DaoException, ServiceException {
+        boolean expected = true;
+        when(userDao.isUserExist("email1@mail.ru")).thenReturn(expected);
+        boolean actual = userService.isLoginExists("email@mail.ru");
+        assertNotEquals(actual,expected);
+    }
 }
